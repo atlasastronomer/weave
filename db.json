@@ -1,0 +1,32 @@
+{
+  "blogs": [
+    {
+      "id": "1",
+      "date": "Sat Mar 22 2025 11:07:18 GMT-0400 (Eastern Daylight Time)",
+      "title": "Why the Armored Titan Rocks",
+      "author": "Reiner Braun",
+      "content": "It's OP. It protects. It attacks. It smashes through titan's backs."
+    },
+    {
+      "id": "2",
+      "date": "Sat Mar 22 2025 11:25:36 GMT-0400 (Eastern Daylight Time)",
+      "title": "Why the Attack Titan Sucks",
+      "author": "Reiner Braun",
+      "content": "If we're being real, Eren is such an emo. All he does is scream about freedom. 'Tatakae'. 'Tatakae'. Please be quiet before I justify the killing of Eldians."
+    },
+    {
+      "id": "3",
+      "date": "Sat Mar 22 2025 11:30:20 GMT-0400 (Eastern Daylight Time)",
+      "title": "RIP Berutoruto",
+      "author": "Reiner Braun",
+      "content": "My comrade got eaten by that pipsqueak Armin Arlert. Why him. Why couldn't it be me... Just let me die already..."
+    },
+    {
+      "id": "4",
+      "date": "Sun Mar 23 2025 08:44:13 GMT-0400 (Eastern Daylight Time)",
+      "title": "We need to Talk...",
+      "author": "Reiner Braun",
+      "content": "Eren Yaeger has gone too far. Yesterday, he showed up to Marley and proceeded to kill random, innocent people enjoying their day. Who shifts into their titan form and does a belly flop on people in stands? Of course, it was up to me to save the day. Again..."
+    }
+  ]
+}
