@@ -35,3 +35,11 @@ body {
   align-items: center;
   margin-bottom: 10px;
 }
+
+.profile-picture {
+  vertical-align: middle;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
