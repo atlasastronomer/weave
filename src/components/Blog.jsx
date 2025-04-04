@@ -13,7 +13,7 @@ const Blog = () => {
   const [content, setContent] = useState('Content')
 
   useEffect(() => {
-    blogService.getAll()
+    blogService.getAll('http://localhost:3001/api/blogs/')
     .then(res => {
       setBlogs(res.data)
     })
@@ -29,7 +29,7 @@ const Blog = () => {
       content: content,
     }
 
-    blogService.create(blogObject)
+    blogService.create(blogObject, 'http://localhost:3001/api/blogs/')
     .then(res => {
       setBlogs(blogs.concat(res.data))
       setDate('')
@@ -40,7 +40,7 @@ const Blog = () => {
   }
 
   const deleteBlog = (id) => {
-    const url = `http://localhost:3001/blogs/${id}`
+    const url = `http://localhost:3001/api/blogs/${id}`
     axios.delete(url)
     .then(res => {
       setBlogs(blogs.filter(b => b.id !== id))

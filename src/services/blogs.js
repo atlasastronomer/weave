@@ -1,12 +1,11 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/blogs'
 
-const getAll = () => {
-  return axios.get(baseUrl)
+const getAll = (url) => {
+  return axios.get(url)
 }
 
-const create = newObject => {
-  return axios.post(baseUrl, newObject)
+const create = (newObject, url) => {
+  return axios.post(url, newObject)
 }
 
 export default {getAll, create}
