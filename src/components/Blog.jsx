@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Blogpost } from './Blogpost.jsx'
-import blogService from '/src/services/blogs'
+import axiosService from '/src/services/axios'
 
 const Blog = () => {
   
@@ -13,13 +13,13 @@ const Blog = () => {
   const [content, setContent] = useState('Content')
 
   useEffect(() => {
-    blogService.getAll('http://localhost:3001/api/blogs/')
+    axiosService.getAll('http://localhost:3001/api/blogs/')
     .then(res => {
       setBlogs(res.data)
     })
   },[])
 
-  const postBlog = (e) => {
+  const postBlog = async (e) => {
     e.preventDefault()
 
     const blogObject = {
@@ -29,25 +29,24 @@ const Blog = () => {
       content: content,
     }
 
-    blogService.create(blogObject, 'http://localhost:3001/api/blogs/')
-    .then(res => {
-      setBlogs(blogs.concat(res.data))
-      setDate('')
+    const res = await axiosService.create(blogObject, 'http://localhost:3001/api/blogs/')
+
+    setBlogs(blogs.concat(res.data))
+    setDate('')
       setTitle('Title')
       setAuthor('Author')
       setContent('Content')
-    })
   }
 
-  const deleteBlog = (id) => {
-    const url = `http://localhost:3001/api/blogs/${id}`
-    axios.delete(url)
-    .then(res => {
+  const deleteBlog = async (id) => {
+    try {
+      const url = `http://localhost:3001/api/blogs/${id}`
+      const res = await axios.delete(url)
       setBlogs(blogs.filter(b => b.id !== id))
-    })
-    .catch(err => {
-      console.log('Failed to Delete Blog')
-    })
+    }
+    catch (err) {
+      console.log(err, 'Failed to Delete Blog')
+    }
   }
 
   return (

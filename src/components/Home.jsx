@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
-
+import axiosService from '/src/services/axios'
 
 const MediaLink = ({link, handleDeleteLink}) => {
   return(
@@ -17,7 +17,7 @@ const Home = () => {
   const [links, setLinks] = useState([])
 
   const [linkTitle, setLinkTitle] = useState('Title')
-  const [linkUrl, setLinkUrl] = useState('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+  const [linkUrl, setLinkUrl] = useState('Link')
 
   const profilePicRef = useRef(null)
   const backgroundImageRef = useRef(null)
@@ -48,6 +48,13 @@ const Home = () => {
     }
   }
 
+  useEffect(() => {
+    axiosService.getAll('http://localhost:3001/api/links/')
+    .then(res => {
+      setLinks(res.data)
+    })
+  },[])
+
   const addLink = (e) => {
     e.preventDefault()
 
@@ -59,7 +66,23 @@ const Home = () => {
       mediaLink: linkUrl
     }
   
-    setLinks(links.concat(linkObject))
+    axiosService.create(linkObject, 'http://localhost:3001/api/links/')
+    .then(res => {
+      setLinks(links.concat(res.data))
+      setLinkTitle('Title')
+      setLinkUrl('Link')
+    })
+  }
+
+  const deleteLink = (id) => {
+    const url = `http://localhost:3001/api/links/${id}`
+    axios.delete(url)
+    .then(res => {
+      setLinks(links.filter(l => l.id !== id))
+    })
+    .catch(err => {
+      console.log('Failed to Delete Link')
+    })
   }
   
   return (
