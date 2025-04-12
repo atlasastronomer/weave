@@ -1,3 +1,6 @@
+import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
+import './NavBar.css'
+
 const NavButton = ({name, onClick}) => {
   return (
     <div className='nav-button' onClick={onClick}>
@@ -6,13 +9,14 @@ const NavButton = ({name, onClick}) => {
   )
 }
 
-const NavBar = ({setPage}) => {
+const NavBar = () => {
   return (
     <div className='nav-bar'>
-      <NavButton name='Home' onClick={() => setPage(0)}/>
-      <NavButton name='About' onClick={() => setPage(1)}/>
-      <NavButton name='Blog' onClick={() => setPage(2)}/>
-      <NavButton name='O.C.' onClick={() => setPage(3)}/>
+      <Link to='/'><NavButton name='Home'/></Link>
+      <Link to='/about'><NavButton name='About'/></Link>
+      <Link to='/blogs'><NavButton name='Blog'/></Link>
+      <Link to='/gallery'><NavButton name='Gallery'/></Link>
+      <Link to='/login'><NavButton name='Login'/></Link>
     </div>
   )
 }

@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
+
 import axios from 'axios'
 import axiosService from '/src/services/axios'
+
+import './Home.css'
 
 const MediaLink = ({link, handleDeleteLink}) => {
   return(
@@ -58,9 +61,6 @@ const Home = () => {
   const addLink = (e) => {
     e.preventDefault()
 
-    console.log(linkTitle)
-    console.log(linkUrl)
-
     const linkObject = {
       title: linkTitle,
       mediaLink: linkUrl
@@ -117,7 +117,7 @@ const Home = () => {
 
       <div className='lower-container'>
         {links.map(link => 
-          <MediaLink key={Math.floor(Math.random() * 100000) + 1}link={link} handleDeleteBlog={() => addLink}/>
+          <MediaLink key={Math.floor(Math.random() * 100000) + 1} link={link}/>
         )}
       </div>
     </>

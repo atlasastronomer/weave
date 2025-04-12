@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Blogpost } from './Blogpost.jsx'
 import axiosService from '/src/services/axios'
+import './Blog.css'
 
 const Blog = () => {
   
