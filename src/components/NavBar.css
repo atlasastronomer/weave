@@ -1,15 +1,63 @@
+:root{
+  --nav-bar-color: rgba(73, 157, 232, 0.25);
+  --wrapper-color: rgba(73, 157, 232, 0.25);
+  --btn-hover-color: rgba(114, 142, 221, 0.59);
+}
+
 .nav-bar {
   display: flex;
-  width: 500px;
+  width: 100%;
   flex-direction: row;
   justify-content: space-between;
   background-color: transparent;
   transition: hover, 0.15s;
+  background-color: var(--nav-bar-color);
 }
 
-.nav-button {
+.nav-button-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 50px;
+  width: 75px;
+  padding-left: 20px;
+  padding-right: 20px;
   cursor: pointer;
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
 }
-.nav-button:hover {
-  background-color: gray;
+
+.nav-button-wrapper:active {
+  opacity: 0.75;
+}
+
+.nav-button-wrapper:hover {
+  background-color: var(--btn-hover-color)
+}
+
+.nav-button-label {
+  flex: 5;
+  text-align: left;
+  font-family: "Open Sans";
+  font-weight: 350;
+  font-size: 15px;
+  color: white;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.nav-button-icon {
+  flex: 2;
+  color: white;
+  text-align: right;
+  text-align: right;
+  margin: 0px;
+}
+
+.span {
+  all: unset;
 }

@@ -14,4 +14,9 @@ const login = async (url, credentials) => {
   return res.data
 }
 
-export default {getAll, create, login}
+const signup = async (url, credentials) => {
+  const res = await axios.post(url, credentials)
+  return res.data
+}
+
+export default {getAll, create, login, signup}

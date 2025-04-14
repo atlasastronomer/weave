@@ -8,6 +8,7 @@ const Blog = () => {
   
   const [blogs, setBlogs] = useState([])
 
+  const [user, setUser] = useState('')
   const [date, setDate] = useState('')
   const [title, setTitle] = useState('Title')
   const [author, setAuthor] = useState('Author')
@@ -18,6 +19,7 @@ const Blog = () => {
     .then(res => {
       setBlogs(res.data)
     })
+    setUser(localStorage.getItem('token'))
   },[])
 
   const postBlog = async (e) => {
@@ -52,7 +54,7 @@ const Blog = () => {
 
   return (
     <div>
-      <p> Blogs </p>
+      <p className='blog-page-title'> My Blogs </p>
       <div>
         {blogs.map(blog => 
           <Blogpost key={blog.id} blog={blog} handleDeleteBlog={() => deleteBlog(blog.id)}/>

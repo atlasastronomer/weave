@@ -1,8 +1,50 @@
+:root{
+  --wrapper-color: rgba(255, 255, 255, 0.25);
+  --title-color: rgba(255, 255, 255, 1);
+  --text-color: rgba(255, 255, 255, 1);
+  --link-color: rgb(255, 255, 255);
+  --btn-hover-color: rgba(228, 228, 228, 0.59);
+}
+
+.blog-page-title {
+  font-family: 'Poiret One';
+  font-size: 35px;
+  text-align: center;
+  margin: none;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  color: white;
+}
+
 .blog-container {
-  background-color: rgba(0,0,0,0.25);
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
+  display: flex;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 5px;
+  background-color: var(--wrapper-color);
+}
+
+.blog-header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.blog-title {
+  font-family: 'Open Sans';
+  font-size: 20px;
+  color: white;
+  text-align: center;
+}
+
+.blog-body {
+  font-family: 'Open Sans';
+  color: white;
+  text-align: center;
 }

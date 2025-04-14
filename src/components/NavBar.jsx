@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
 import './NavBar.css'
 
-const NavButton = ({name, onClick}) => {
+const NavButton = ({name, style, icon}) => {
   return (
-    <div className='nav-button' onClick={onClick}>
-      <p> {name} </p>
+    <div className='nav-button-wrapper' >
+      <p className='nav-button-label'> {name} </p>
+      <p className={`fa-${style} ${icon} fa-sm nav-button-icon`} style={{margin: '0px'}}></p>
     </div>
   )
 }
@@ -12,11 +13,11 @@ const NavButton = ({name, onClick}) => {
 const NavBar = () => {
   return (
     <div className='nav-bar'>
-      <Link to='/'><NavButton name='Home'/></Link>
-      <Link to='/about'><NavButton name='About'/></Link>
-      <Link to='/blogs'><NavButton name='Blog'/></Link>
-      <Link to='/gallery'><NavButton name='Gallery'/></Link>
-      <Link to='/login'><NavButton name='Login'/></Link>
+      <Link to='/' className='span'><NavButton name='Home' style='solid' icon='fa-home'/></Link>
+      <Link to='/about' className='span'><NavButton name='About' style='regular' icon='fa-address-card'/></Link>
+      <Link to='/blogs' className='span'><NavButton name='Blog' style='solid' icon='fa-blog'/></Link>
+      <Link to='/gallery' className='span'><NavButton name='Gallery' style='solid' icon='fa-paintbrush'/></Link>
+      <Link to='/login' className='span'><NavButton name='Login' style='solid' icon='fa-arrow-right-to-bracket'/></Link>
     </div>
   )
 }

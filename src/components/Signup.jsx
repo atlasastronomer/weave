@@ -4,11 +4,17 @@ import axios from 'axios'
 import axiosService from '/src/services/axios'
 import './Login.css'
 
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate()
+  const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [credentialsError, setCredentialsError] = useState('')
+
+  const handleNameChange = (target) => {
+    setName(target.value)
+    setCredentialsError('')
+  }
 
   const handleUsernameChange = (target) => {
     setUsername(target.value)
@@ -20,23 +26,39 @@ const Login = () => {
     setCredentialsError('')
   }
 
-  const handleLogin = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault()
     try {
-      const user = await axiosService.login('http://localhost:3001/api/login', {username, password})
-      localStorage.setItem("token", user.token)
+      const newUser = await axiosService.signup('http://localhost:3001/api/signup', {name, username, password})
+      localStorage.setItem("token", newUser.token)
       navigate('/')
     }
     catch (error) {
-      setCredentialsError('* Your username and password do not match. Try again.')
+      console.log(error)
     }
   }
 
   return(
-    <div className='login-container-wrapper'>
+    <>
       <div className='login-container'>
-        <form onSubmit={handleLogin}>
-          <p className='login-title'> Sign in </p>
+        <form onSubmit={handleSignup}>
+          <p className='login-title'> Sign Up </p>
+
+          <div className='button-wrapper'>
+            <div className='input-box'>
+              <input
+                placeholder='Name'
+                type='text'
+                value={name}
+                name='Username'
+                onChange={({ target }) => handleNameChange(target)}
+              />
+              <span className='icon-label'>
+                <p className='fa-regular fa-user fa-sm' style={{margin: '0px'}}></p>
+              </span>
+            </div>
+          </div>
+
           <div className='button-wrapper'>
             <div className='input-box'>
               <input
@@ -68,15 +90,15 @@ const Login = () => {
           <div className='error-container'>
             {credentialsError ? credentialsError : ''}
           </div>
-          <button type='submit' className='login-btn'>Sign In</button>
+          <button type='submit' className='login-btn'>Sign Up</button>
         </form>
         <div className='register-info'>
           <label className='register-label'> Not a Member? &nbsp; </label>
-          <label className='register-link' onClick={() => navigate('/signup')}> Register Here </label>
+          <label className='register-link' onClick={() => navigate('/')}> Register Here </label>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
-export { Login }
+export { Signup }

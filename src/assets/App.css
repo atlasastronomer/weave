@@ -1,7 +1,7 @@
 body {
   display: flex;
   flex-direction: column;
-  background-image: url('./bg4.jpeg');
+  background-image: url('./bg1.jpeg');
   background-size: cover;
 }
 

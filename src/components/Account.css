@@ -1,0 +1,53 @@
+:root{
+  --wrapper-color: rgba(73, 157, 232, 0.25);
+  --title-color: rgba(255, 255, 255, 1);
+  --text-color: rgba(255, 255, 255, 1);
+  --link-color: rgb(255, 255, 255);
+  --btn-hover-color: rgba(228, 228, 228, 0.59);
+}
+
+.account-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 40px;
+  width: max-content;
+  background-color: var(--wrapper-color);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 5px;
+  box-shadow: rgba(33, 27, 38, 0.59) 0px 10px 30px 0px;
+}
+
+.logout-title {
+  font-family: 'Open Sans';
+  font-weight: 600;
+  text-align: center;
+  font-stretch: condensed;
+  font-size: 40px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  color: var(--text-color);
+}
+
+.logout-btn {
+  font-family: 'Open Sans';
+  font-size: 14.5px;
+  width: 200px;
+  height: 45px;
+  background:white;
+  border: none;
+  outline: none;
+  margin-bottom: 20px;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0 0 0 .1);
+  cursor: pointer;
+  transition: hover, 0.2s;
+}
+
+.logout-btn:hover {
+  background: var(--btn-hover-color);
+}
