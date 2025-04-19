@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import axiosService from '/src/services/axios'
 import './Login.css'
 
@@ -24,8 +23,10 @@ const Login = () => {
     e.preventDefault()
     try {
       const user = await axiosService.login('http://localhost:3001/api/login', {username, password})
+      axiosService.setToken(user.token)
       localStorage.setItem("token", user.token)
       navigate('/')
+      window.location.reload()
     }
     catch (error) {
       setCredentialsError('* Your username and password do not match. Try again.')

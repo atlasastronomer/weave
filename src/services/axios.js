@@ -1,12 +1,31 @@
 import axios from 'axios'
-import axiosService from '/src/services/axios'
+
+let token = null
+
+const setToken = (newToken) => {
+  token = `Bearer ${newToken}`
+}
 
 const getAll = (url) => {
   return axios.get(url)
 }
 
-const create = (newObject, url) => {
-  return axios.post(url, newObject)
+const getMyBlogs = async (url) => {
+  const config = {
+    headers: {Authorization: token},
+  }
+
+  const res = await axios.post(url, token, config)
+  return res
+}
+
+const createBlog = async (url, newObject) => {
+  const config = {
+    headers: {Authorization: token},
+  }
+
+  const res = await axios.post(url, newObject, config)
+  return res
 }
 
 const login = async (url, credentials) => {
@@ -19,4 +38,5 @@ const signup = async (url, credentials) => {
   return res.data
 }
 
-export default {getAll, create, login, signup}
+
+export default {getAll, createBlog, login, signup, setToken, getMyBlogs}

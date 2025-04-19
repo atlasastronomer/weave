@@ -1,3 +1,22 @@
+:root{
+  /* Root */
+  --title-color: rgba(255, 255, 255, 1);
+  --text-color: rgb(0, 0, 0);
+  --link-color: rgb(255, 255, 255);
+  
+  /* Login */
+  --login-wrapper-color: rgb(255, 255, 255);
+  --login-btn-hover-color: #ccd1db;
+  
+  /* NavBar */
+  --nav-bar-color: rgba(73, 157, 232, 0.25);
+  --nav-wrapper-color: rgba(73, 157, 232, 0.25);
+  --nav-btn-hover-color: rgba(228, 228, 228, 0.59);
+
+  /* Login */
+  --blog-wrapper-color: rgba(73, 157, 232, 0.25);
+}
+
 body {
   display: flex;
   flex-direction: column;

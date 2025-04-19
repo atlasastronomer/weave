@@ -10,6 +10,7 @@ const Account = () => {
   const handleLogout = () => {
     localStorage.removeItem("token")
     navigate('/login')
+    window.location.reload()
   }
   return(
     <>
