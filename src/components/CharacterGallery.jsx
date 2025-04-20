@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Image } from 'cloudinary-react'
 import axios from 'axios'
 import axiosService from '/src/services/axios'
 
