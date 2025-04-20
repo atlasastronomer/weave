@@ -28,6 +28,11 @@ const createBlog = async (url, newObject) => {
   return res
 }
 
+const uploadToGallery = async (url, body, config) => {
+  const res = await axios.post(url, body, config)
+  return res
+}
+
 const login = async (url, credentials) => {
   const res = await axios.post(url, credentials)
   return res.data
@@ -38,5 +43,4 @@ const signup = async (url, credentials) => {
   return res.data
 }
 
-
-export default {getAll, createBlog, login, signup, setToken, getMyBlogs}
+export default {getAll, createBlog, login, signup, setToken, getMyBlogs, uploadToGallery}

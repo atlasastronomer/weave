@@ -18,6 +18,7 @@ const Blog = () => {
   useEffect(() => {
     axiosService.setToken(localStorage.getItem('token'))
     setToken(localStorage.getItem('token'))
+    setAuthor(localStorage.getItem('name'))
 
     axiosService.getMyBlogs('http://localhost:3001/api/my-blogs/')
     .then(res => {
@@ -45,7 +46,6 @@ const Blog = () => {
     setBlogs(blogs.concat(res.data))
     console.log(res.data)
     setTitle('Title')
-    setAuthor('Author')
     setContent('Content')
   }
 
@@ -70,20 +70,20 @@ const Blog = () => {
             <Blogpost key={blog.id} blog={blog} handleDeleteBlog={() => deleteBlog(blog.id)}/>
           )}
         </div>
-        <form onSubmit={postBlog}>
+        <form onSubmit={postBlog} className='blog-input-container'>
           <input
+            className='blog-title-input-box'
+            placeholder='Title'
             value={title}
             onChange = {e => setTitle(e.target.value)}
           />
           <input
-            value={author}
-            onChange = {e => setAuthor(e.target.value)}
-          />
-          <input
+            className='blog-content-input-box'
+            placeholder='Content'
             value={content}
             onChange = {e => setContent(e.target.value)}
           />
-          <button type='submit'>post</button>
+          <button className='blog-post-button' type='submit'>Post Blog</button>
         </form>
       </div>
       :

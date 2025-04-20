@@ -25,6 +25,8 @@ const Login = () => {
       const user = await axiosService.login('http://localhost:3001/api/login', {username, password})
       axiosService.setToken(user.token)
       localStorage.setItem("token", user.token)
+      localStorage.setItem("username",user.username)
+      localStorage.setItem("name",user.name)
       navigate('/')
       window.location.reload()
     }

@@ -9,28 +9,46 @@ const Signup = () => {
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [credentialsError, setCredentialsError] = useState('')
+  const [emptyFieldError, setEmptyFieldError] = useState('')
+  const [usernameError, setUserNameError] = useState('')
 
   const handleNameChange = (target) => {
     setName(target.value)
-    setCredentialsError('')
+    setEmptyFieldError('')
+    setUserNameError('')
   }
 
   const handleUsernameChange = (target) => {
     setUsername(target.value)
-    setCredentialsError('')
+    setEmptyFieldError('')
+    setUserNameError('')
   }
 
   const handlePasswordChange = (target) => {
     setPassword(target.value)
-    setCredentialsError('')
+    setEmptyFieldError('')
+    setUserNameError('')
   }
 
   const handleSignup = async (e) => {
     e.preventDefault()
+
+    if (!name || !username || !password) {
+      setUserNameError('')
+      setEmptyFieldError('* Please fill out all fields')
+      return
+    }
+
+    if (username.length < 3) {
+      setUserNameError('* Username must be at least 3 characters long')
+      return
+    }
+
     try {
       const newUser = await axiosService.signup('http://localhost:3001/api/signup', {name, username, password})
       localStorage.setItem("token", newUser.token)
+      localStorage.setItem("username",user.username)
+      localStorage.setItem("name",user.name)
       navigate('/')
       window.location.reload()
     }
@@ -89,7 +107,8 @@ const Signup = () => {
             </div>
           </div>
           <div className='error-container'>
-            {credentialsError ? credentialsError : ''}
+            {emptyFieldError ? emptyFieldError : ''}
+            {usernameError ? usernameError : ''}
           </div>
           <button type='submit' className='login-btn'>Sign Up</button>
         </form>

@@ -114,3 +114,52 @@
 .delete-blog-btn:hover {
   background-color: #ccd1db;
 }
+
+.blog-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.blog-title-input-box {
+  font-family: 'Open Sans';
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 25px;
+  border: none;
+  outline: none;
+}
+
+.blog-content-input-box {
+  font-family: 'Open Sans';
+  font-size: 15px;
+  text-align: center;
+  width: 500px;
+  border: none;
+  outline: none;
+  margin-bottom: 25px;
+}
+
+.blog-post-button {
+  font-family: 'Open Sans';
+  font-size: 15px;
+  font-weight: 600;
+  color: black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #f2f3f5;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: hover, 0.2s;
+}
+
+.blog-post-button:hover {
+  background-color: #ccd1db;
+}

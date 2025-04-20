@@ -9,6 +9,9 @@ const Account = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token")
+    localStorage.removeItem("name")
+    localStorage.removeItem("username")
+
     navigate('/login')
     window.location.reload()
   }
