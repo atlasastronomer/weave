@@ -28,8 +28,22 @@ const createBlog = async (url, newObject) => {
   return res
 }
 
-const uploadToGallery = async (url, body, config) => {
+const uploadToGallery = async (url, body) => {
+  const config = {
+    headers: {Authorization: token,
+      'Content-type': 'application/json',
+    }
+  }
   const res = await axios.post(url, body, config)
+  return res
+}
+
+const getMyGallery = async (url) => {
+  const config = {
+    headers: {Authorization: token},
+  }
+
+  const res = await axios.post(url, {}, config)
   return res
 }
 
@@ -43,4 +57,4 @@ const signup = async (url, credentials) => {
   return res.data
 }
 
-export default {getAll, createBlog, login, signup, setToken, getMyBlogs, uploadToGallery}
+export default {getAll, createBlog, login, signup, setToken, getMyBlogs, uploadToGallery, getMyGallery}
