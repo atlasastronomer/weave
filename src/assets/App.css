@@ -20,8 +20,9 @@
 body {
   display: flex;
   flex-direction: column;
-  background-image: url('./bg1.jpeg');
   background-size: cover;
+  background-image: url('./bg1.jpeg');
+  background-attachment: fixed;
 }
 
 .wrapper {

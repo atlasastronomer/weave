@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axiosService from '/src/services/axios'
+import authService from '/src/services/authService'
+import galleryService from '/src/services/galleryService'
 import './Login.css'
 
 const Login = () => {
@@ -22,8 +23,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const user = await axiosService.login('http://localhost:3001/api/login', {username, password})
-      axiosService.setToken(user.token)
+      const user = await authService.login('http://localhost:3001/api/login', {username, password})
       localStorage.setItem("token", user.token)
       localStorage.setItem("username",user.username)
       localStorage.setItem("name",user.name)

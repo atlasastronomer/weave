@@ -1,3 +1,24 @@
+.gallery-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 15px;
+  padding: 5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.gallery-page-title {
+  font-family: 'Open Sans';
+  font-size: 25px;
+  text-align: center;
+  margin: none;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  color: black;
+}
+
 .gallery-upload-container {
   padding-top: 25px;
   padding-bottom: 25px;
@@ -7,10 +28,29 @@
   flex-direction: column;
   background-color: white;
   border-radius: 15px;
-  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.plus-minus {
+  background-color: #f2f3f5;
+  padding: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  transition: hover, 0.3s;
+}
+
+.plus-minus:hover {
+  cursor: pointer;
+  background-color: #ccd1db;
+}
+
+.fa-icon {
+  color: black;
 }
 
 .gallery-board {
+  border-radius: 15px;
   display: grid;
   flex-wrap: wrap;
   flex-direction: column;
@@ -19,13 +59,14 @@
   column-gap: 20px;
 }
 
-.gallery-upload-title {
-  font-family: 'Open Sans';
-  font-size: 25px;
-  text-align: center;
-  margin: none;
-  color: black;
-  margin-top: 0px;
+.post-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding: 15px;
+  border-radius: 15px;
 }
 
 .upload-post-btn {
@@ -81,10 +122,23 @@ input[type="file"]::file-selector-button:hover {
 
 .post-title-input-box {
   font-family: 'Open Sans';
-  font-size: 20px;
+  font-size: 30px;
   text-align: center;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   border: none;
   outline: none;
+}
+
+.post-title {
+  font-family: 'Open Sans';
+  font-size: 25px;
+  color: black;
+}
+
+.post-info {
+  font-family: 'Open Sans';
+  font-size: 15px;
+  color: gray;
+  margin-bottom: 15px;
 }

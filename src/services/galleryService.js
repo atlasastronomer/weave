@@ -21,7 +21,7 @@ const getMyGallery = async (url) => {
     headers: {Authorization: token},
   }
 
-  const res = await axios.post(url, token, config)
+  const res = await axios.post(url, {}, config)
   return res
 }
 
