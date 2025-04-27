@@ -26,7 +26,7 @@ const Blog = () => {
     if (storedToken) {
       blogService.setToken(storedToken)
       
-      blogService.getBlogs('http://localhost:3001/api/blogs/')
+      blogService.getBlogs()
       .then(res => {
         setBlogs(res.data)
       })
@@ -47,7 +47,7 @@ const Blog = () => {
       content: content,
     }
 
-    const res = await blogService.createBlog('http://localhost:3001/api/blogs', blogObject)
+    const res = await blogService.createBlog(blogObject)
 
     setBlogs(blogs.concat(res.data))
     console.log(res.data)
@@ -58,8 +58,7 @@ const Blog = () => {
 
   const deleteBlog = async (id) => {
     try {
-      const url = `http://localhost:3001/api/blogs/${id}`
-      const res = await axios.delete(url)
+      blogService.deleteBlog(id)
       setBlogs(blogs.filter(b => b.id !== id))
     }
     catch (err) {

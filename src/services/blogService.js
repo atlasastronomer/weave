@@ -1,5 +1,6 @@
 import axios from 'axios'
-const VITE_PORT = import.meta.env.VITE_PORT
+const VITE_PORT = import.meta.env.VITE_PORT || 3001
+const baseUrl = `http://localhost:${VITE_PORT}/api/blogs`
 
 let token = null
 
@@ -7,22 +8,31 @@ const setToken = (newToken) => {
   token = `Bearer ${newToken}`
 }
 
-const getBlogs = async (url) => {
+const getBlogs = async () => {
+
   const config = {
     headers: {Authorization: token},
   }
 
-  const res = await axios.get(url, config)
+  const res = await axios.get(baseUrl, config)
   return res
 }
 
-const createBlog = async (url, newObject) => {
+const createBlog = async (newObject) => {
   const config = {
     headers: {Authorization: token},
   }
 
-  const res = await axios.post(url, newObject, config)
+  const res = await axios.post(baseUrl, newObject, config)
   return res
 }
 
-export default { getBlogs, createBlog, setToken}
+const deleteBlog = async (id) => {
+  const config = {
+    headers: {Authorization: token},
+  }
+
+  const res = await axios.delete(`${baseUrl}/${id}`)
+}
+
+export default { getBlogs, createBlog, deleteBlog, setToken}
