@@ -1,4 +1,5 @@
 import axios from 'axios'
+const VITE_PORT = import.meta.env.VITE_PORT
 
 let token = null
 
@@ -6,12 +7,12 @@ const setToken = (newToken) => {
   token = `Bearer ${newToken}`
 }
 
-const getMyBlogs = async (url) => {
+const getBlogs = async (url) => {
   const config = {
     headers: {Authorization: token},
   }
 
-  const res = await axios.post(url, token, config)
+  const res = await axios.get(url, config)
   return res
 }
 
@@ -24,4 +25,4 @@ const createBlog = async (url, newObject) => {
   return res
 }
 
-export default { getMyBlogs, createBlog, setToken}
+export default { getBlogs, createBlog, setToken}

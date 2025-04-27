@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Blogpost } from './Blogpost.jsx'
-import axiosService from '/src/services/axios'
+import blogService from '/src/services/blogService'
 import { Link } from 'react-router-dom'
 import './Blog.css'
 
@@ -17,19 +17,24 @@ const Blog = () => {
   const [show, setShow] = useState(false)
 
   useEffect(() => {
-    axiosService.setToken(localStorage.getItem('token'))
-    setToken(localStorage.getItem('token'))
-    setAuthor(localStorage.getItem('name'))
+    const storedToken = localStorage.getItem('token')
+    const storedName = localStorage.getItem('name')
 
-    axiosService.getMyBlogs('http://localhost:3001/api/my-blogs/')
-    .then(res => {
-      setBlogs(res.data)
-    })
+    setToken(storedToken)
+    setAuthor(storedName)
 
-    if (blogs) {
-      setHasBlogs(true)
+    if (storedToken) {
+      blogService.setToken(storedToken)
+      
+      blogService.getBlogs('http://localhost:3001/api/blogs/')
+      .then(res => {
+        setBlogs(res.data)
+      })
+  
+      if (blogs) {
+        setHasBlogs(true)
+      }
     }
-
   },[])
 
   const postBlog = async (e) => {
@@ -42,7 +47,7 @@ const Blog = () => {
       content: content,
     }
 
-    const res = await axiosService.createBlog('http://localhost:3001/api/blogs', blogObject)
+    const res = await blogService.createBlog('http://localhost:3001/api/blogs', blogObject)
 
     setBlogs(blogs.concat(res.data))
     console.log(res.data)
