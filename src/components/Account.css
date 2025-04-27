@@ -13,7 +13,7 @@
   align-items: center;
   margin: 40px;
   width: max-content;
-  background-color: var(--wrapper-color);
+  background-color: var(--login-wrapper-color);
   padding-top: 15px;
   padding-bottom: 15px;
   padding-left: 30px;
@@ -30,7 +30,7 @@
   font-size: 40px;
   margin-top: 15px;
   margin-bottom: 30px;
-  color: white;
+  color: var(--text-color);
 }
 
 .logout-btn {
@@ -43,11 +43,12 @@
   outline: none;
   margin-bottom: 20px;
   border-radius: 40px;
+  background-color: #f2f3f5;  
   box-shadow: 0 0 10px rgba(0 0 0 .1);
   cursor: pointer;
   transition: hover, 0.2s;
 }
 
 .logout-btn:hover {
-  background: var(--btn-hover-color);
+  background: var(--login-btn-hover-color);
 }

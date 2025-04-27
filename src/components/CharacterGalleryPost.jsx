@@ -6,7 +6,7 @@ import galleryService from '/src/services/galleryService'
 import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
 import './CharacterGallery.css'
 
-const GalleryPost = ({post, handleDeleteBlog}) => {
+const GalleryPost = ({post, handleDeletePost}) => {
 
   const cld = new Cloudinary({
     cloud: {
@@ -25,6 +25,7 @@ const GalleryPost = ({post, handleDeleteBlog}) => {
       <AdvancedImage
         cldImg={cld.image(post.publicId).resize(scale().width(500)).roundCorners(byRadius(20)).format('png')}
       />
+      <button className='delete-post-btn' onClick={handleDeletePost}>Delete Post</button>
     </div>
   )
 }

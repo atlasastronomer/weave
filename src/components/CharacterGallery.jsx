@@ -7,28 +7,30 @@ import galleryService from '/src/services/galleryService'
 import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
 
 import { GalleryPost } from './CharacterGalleryPost';
+import { Link } from 'react-router-dom';
 import './CharacterGallery.css'
+import axios from 'axios';
 
 const CharacterGallery = () => {
 
   const [token, setToken] = useState('')
-
   const [title, setTitle] = useState('Title')
   const [author, setAuthor] = useState('Author')
-
   const [fileInputState, setFileInputState] = useState('')
   const [previewSource, setPreviewSource] = useState('')
-
-  const [posts, setposts] = useState([])
-  const [show, setShow] = useState(true)
-  const [errorMessage, setErrorMessage] = useState(true)
+  const [posts, setPosts] = useState([])
+  const [show, setShow] = useState(false)
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    galleryService.setToken(token)
-    setToken(token)
-    setAuthor(localStorage.getItem('name'))
-    loadImages()
+    const storedToken = localStorage.getItem('token')
+    const storedName = localStorage.getItem('name')
+    setToken(storedToken)
+    setAuthor(storedName)
+
+    if (storedToken) {
+      galleryService.setToken(storedToken)
+      loadImages()
+    }
   }, [])
 
   const cld = new Cloudinary({
@@ -40,14 +42,13 @@ const CharacterGallery = () => {
   const loadImages = async () => {
     try {
       const res = await galleryService.getMyGallery('http://localhost:3001/api/my-gallery')
-      const data = res.data
-
-      setposts(data)
+      setPosts(res.data)
     }
     catch (error) {
       console.log(error)
     }
   }
+
   const handleFileInputChange = (e) => {
     const file = e.target.files[0]
     previewFile(file)
@@ -63,68 +64,94 @@ const CharacterGallery = () => {
 
   const handleSubmitFile = (e) => {
     e.preventDefault()
-
-    if(!previewSource) {
-      return
-    }
+    if (!previewSource) return;
 
     const date = String(new Date())
     uploadImage(previewSource, title, date, author)
   }
 
   const uploadImage = async (base64EncodedImage, title, date, author) => {
-    console.log(base64EncodedImage)
     try {
-      const res = await galleryService.uploadToGallery('http://localhost:3001/api/upload-gallery', {data: base64EncodedImage, title: title, date: date, author: author})
-      setposts(posts.concat(res.data))
+      const res = await galleryService.uploadToGallery('http://localhost:3001/api/upload-gallery', {
+        data: base64EncodedImage,
+        title,
+        date,
+        author
+      })
+      setPosts(posts.concat(res.data))
       setTitle('')
       setFileInputState('')
       setPreviewSource('')
+      setShow(false)
     }
     catch (error) {
       console.log("Error in uploading image:", error.message)
     }
   }
 
+  const deletePost = async (id) => {
+    try {
+      const url = `http://localhost:3001/api/gallery/${id}`
+      const res = await axios.delete(url)
+      setPosts(posts.filter(p => p.id !== id))
+    }
+    catch (err) {
+      console.log(err, 'Failed to Delete Post')
+    }
+  }
+
   return (
     <div>
-      <div className='gallery-title-container'>
-        {/* <p className='gallery-page-title'>Create Post</p> */}
-        <div onClick={() => setShow(!show)} className='plus-minus'>
-          {show ? <i className="fa-solid fa-minus fa-lg fa-icon"></i> : <i className="fa-solid fa-plus fa-lg fa-icon"></i>}
-        </div>
-      </div>
-      {show &&
-      <div className='gallery-upload-container'>
-        <form onSubmit={handleSubmitFile} className='form-container'>
-            <input
-              className='post-title-input-box'
-              placeholder='Title'
-              onChange = {e => setTitle(e.target.value)}
-            />
-          <div className='post-upload-btn-group'>
-            <input type='file' name='image' onChange={handleFileInputChange}/>
-            <button type='submit' className='upload-post-btn'>Post Image</button>
+      {token ?
+        <div>
+          <div className='gallery-title-container'>
+            <div onClick={() => setShow(!show)} className='plus-minus'>
+              {show ? <i className="fa-solid fa-minus fa-lg fa-icon"></i> : <i className="fa-solid fa-plus fa-lg fa-icon"></i>}
+            </div>
           </div>
-        </form>
-        {previewSource && (
-          <img
-            src={previewSource} alt="chosen"
-            style={{width: '300px', margin: '20px auto 0 auto', borderRadius: '15px'}}
-            className='gallery-preview-image'
-          />
-        )}
-      </div>
-      }
-      <div className='gallery-board'>
-          {posts && posts.map((post, i) =>
-            (
-            <GalleryPost
-              key={i}
-              post={post}
-            />
-            ))}
+
+          {show &&
+            <div className='gallery-upload-container'>
+              <form onSubmit={handleSubmitFile} className='form-container'>
+                <input
+                  className='post-title-input-box'
+                  placeholder='Title'
+                  value={title}
+                  onChange={e => setTitle(e.target.value)}
+                />
+                <div className='post-upload-btn-group'>
+                  <input type='file' name='image' onChange={handleFileInputChange} />
+                  <button type='submit' className='upload-post-btn'>Post Image</button>
+                </div>
+              </form>
+              {previewSource && (
+                <img
+                  src={previewSource}
+                  alt="chosen"
+                  style={{ width: '300px', margin: '20px auto 0 auto', borderRadius: '15px' }}
+                  className='gallery-preview-image'
+                />
+              )}
+            </div>
+          }
+
+          <div className='gallery-board'>
+            {posts.map((post, i) =>
+              <GalleryPost
+                key={i}
+                post={post}
+                handleDeletePost={() => deletePost(post.id)}
+              />
+            )}
+          </div>
         </div>
+        :
+        <div className='gallery-login-container'>
+          <p className='gallery-login-title'>Weave</p>
+          <p className='gallery-login-text'>Sign up or log in to view your gallery</p>
+          <Link to='/login' className='gallery-login-btn'> Login </Link>
+        </div>
+      }
     </div>
   )
 }

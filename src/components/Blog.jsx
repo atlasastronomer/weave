@@ -14,6 +14,7 @@ const Blog = () => {
   const [author, setAuthor] = useState('Author')
   const [content, setContent] = useState('Content')
   const [hasBlogs, setHasBlogs] = useState(false)
+  const [show, setShow] = useState(false)
 
   useEffect(() => {
     axiosService.setToken(localStorage.getItem('token'))
@@ -47,6 +48,7 @@ const Blog = () => {
     console.log(res.data)
     setTitle('Title')
     setContent('Content')
+    setShow(false)
   }
 
   const deleteBlog = async (id) => {
@@ -64,27 +66,33 @@ const Blog = () => {
     <div>
       {token ?
       <div>
-        <p className='blog-page-title'> My Blogs </p>
+        <div className='blog-title-container'>
+          <div onClick={() => setShow(!show)} className='plus-minus'>
+            {show ? <i className="fa-solid fa-minus fa-lg fa-icon"></i> : <i className="fa-solid fa-plus fa-lg fa-icon"></i>}
+          </div>
+        </div>
+        {show && 
+          <form onSubmit={postBlog} className='blog-input-container'>
+            <input
+              className='blog-title-input-box'
+              placeholder='Title'
+              value={title}
+              onChange = {e => setTitle(e.target.value)}
+            />
+            <input
+              className='blog-content-input-box'
+              placeholder='Content'
+              value={content}
+              onChange = {e => setContent(e.target.value)}
+            />
+            <button className='blog-post-button' type='submit'>Post Blog</button>
+          </form>
+        }
         <div>
           {blogs.map((blog) => 
             <Blogpost key={blog.id} blog={blog} handleDeleteBlog={() => deleteBlog(blog.id)}/>
           )}
         </div>
-        <form onSubmit={postBlog} className='blog-input-container'>
-          <input
-            className='blog-title-input-box'
-            placeholder='Title'
-            value={title}
-            onChange = {e => setTitle(e.target.value)}
-          />
-          <input
-            className='blog-content-input-box'
-            placeholder='Content'
-            value={content}
-            onChange = {e => setContent(e.target.value)}
-          />
-          <button className='blog-post-button' type='submit'>Post Blog</button>
-        </form>
       </div>
       :
       <div className='blog-login-container'>
