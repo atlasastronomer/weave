@@ -9,7 +9,6 @@ const setToken = (newToken) => {
 }
 
 const getBlogs = async () => {
-
   const config = {
     headers: {Authorization: token},
   }
@@ -33,6 +32,7 @@ const deleteBlog = async (id) => {
   }
 
   const res = await axios.delete(`${baseUrl}/${id}`)
+  return res
 }
 
 export default { getBlogs, createBlog, deleteBlog, setToken}

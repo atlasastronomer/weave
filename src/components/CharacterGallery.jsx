@@ -41,7 +41,7 @@ const CharacterGallery = () => {
 
   const loadImages = async () => {
     try {
-      const res = await galleryService.getMyGallery('http://localhost:3001/api/my-gallery')
+      const res = await galleryService.getGallery()
       setPosts(res.data)
     }
     catch (error) {
@@ -72,7 +72,7 @@ const CharacterGallery = () => {
 
   const uploadImage = async (base64EncodedImage, title, date, author) => {
     try {
-      const res = await galleryService.uploadToGallery('http://localhost:3001/api/upload-gallery', {
+      const res = await galleryService.uploadToGallery({
         data: base64EncodedImage,
         title,
         date,
@@ -91,8 +91,7 @@ const CharacterGallery = () => {
 
   const deletePost = async (id) => {
     try {
-      const url = `http://localhost:3001/api/gallery/${id}`
-      const res = await axios.delete(url)
+      galleryService.deletePost(id)
       setPosts(posts.filter(p => p.id !== id))
     }
     catch (err) {
