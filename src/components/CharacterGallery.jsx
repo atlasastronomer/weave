@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import {AdvancedImage} from '@cloudinary/react';
 import {Cloudinary} from "@cloudinary/url-gen";
 import { crop, fill, scale, fit, thumbnail, pad } from '@cloudinary/url-gen/actions/resize';
 import { format } from '@cloudinary/url-gen/actions/delivery';
@@ -9,7 +8,6 @@ import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
 import { GalleryPost } from './CharacterGalleryPost';
 import { Link } from 'react-router-dom';
 import './CharacterGallery.css'
-import axios from 'axios';
 
 const CharacterGallery = () => {
 
@@ -33,16 +31,10 @@ const CharacterGallery = () => {
     }
   }, [])
 
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: 'dxmjrqdzj'
-    }
-  })
-
   const loadImages = async () => {
     try {
       const res = await galleryService.getGallery()
-      setPosts(res.data)
+      setPosts(res.data.reverse())
     }
     catch (error) {
       console.log(error)
@@ -64,7 +56,7 @@ const CharacterGallery = () => {
 
   const handleSubmitFile = (e) => {
     e.preventDefault()
-    if (!previewSource) return;
+    if (!previewSource) return
 
     const date = String(new Date())
     uploadImage(previewSource, title, date, author)
@@ -78,14 +70,14 @@ const CharacterGallery = () => {
         date,
         author
       })
-      setPosts(posts.concat(res.data))
+      setPosts(posts.concat(res.data).reverse())
       setTitle('')
       setFileInputState('')
       setPreviewSource('')
       setShow(false)
     }
     catch (error) {
-      console.log("Error in uploading image:", error.message)
+      console.log('Error in uploading image:', error.message)
     }
   }
 
@@ -119,7 +111,7 @@ const CharacterGallery = () => {
                   onChange={e => setTitle(e.target.value)}
                 />
                 <div className='post-upload-btn-group'>
-                  <input type='file' name='image' onChange={handleFileInputChange} />
+                  <input type='file' name='image' accept='image/png, image/jpeg, image/jpg, image/avif, image/webp' onChange={handleFileInputChange} />
                   <button type='submit' className='upload-post-btn'>Post Image</button>
                 </div>
               </form>

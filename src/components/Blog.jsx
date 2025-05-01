@@ -8,7 +8,7 @@ import './Blog.css'
 const Blog = () => {
   
   const [blogs, setBlogs] = useState([])
-
+  
   const [token, setToken] = useState('')
   const [title, setTitle] = useState('Title')
   const [author, setAuthor] = useState('Author')
@@ -28,7 +28,7 @@ const Blog = () => {
       
       blogService.getBlogs()
       .then(res => {
-        setBlogs(res.data)
+        setBlogs(res.data.reverse())
       })
   
       if (blogs) {
@@ -49,7 +49,7 @@ const Blog = () => {
 
     const res = await blogService.createBlog(blogObject)
 
-    setBlogs(blogs.concat(res.data))
+    setBlogs(blogs.concat(res.data).reverse())
     console.log(res.data)
     setTitle('Title')
     setContent('Content')
