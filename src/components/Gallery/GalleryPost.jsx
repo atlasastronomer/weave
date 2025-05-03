@@ -4,7 +4,7 @@ import { crop, fill, scale, fit, thumbnail, pad } from '@cloudinary/url-gen/acti
 import { format } from '@cloudinary/url-gen/actions/delivery';
 import galleryService from '/src/services/galleryService'
 import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
-import './CharacterGallery.css'
+import './Gallery.css'
 
 const GalleryPost = ({post, handleDeletePost}) => {
 

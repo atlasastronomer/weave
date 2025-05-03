@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
-import { NavBar } from './components/NavBar.jsx'
-import { Home } from './components/Home.jsx'
-import { About } from './components/About.jsx'
-import { Blog } from './components/Blog.jsx'
-import { CharacterGallery } from './components/CharacterGallery.jsx'
-import { Login } from './components/Login.jsx'
-import { Account } from './components/Account.jsx'
-import { Signup } from './components/Signup.jsx'
+import { NavBar } from './components/Navigation/NavBar.jsx'
+import { Home } from './components/Home/Home.jsx'
+import { About } from './components/About/About.jsx'
+import { Blog } from './components/Blog/Blog.jsx'
+import { Gallery } from './components/Gallery/Gallery.jsx'
+import { Login } from './components/Authentication/Login.jsx'
+import { Account } from './components/Account/Account.jsx'
+import { Signup } from './components/Authentication/Signup.jsx'
 
 import './assets/App.css'
 
@@ -26,7 +26,7 @@ const App = () => {
             <Route path='/' element={<Home />}/>
             <Route path='/about' element={<About />}/>
             <Route path='/blogs' element={<Blog />}/>
-            <Route path='/gallery' element={<CharacterGallery />}/>
+            <Route path='/gallery' element={<Gallery />}/>
             <Route path='/account' element={!token ? <Login/> : <Account />}/>
             <Route path='/login' element={token ? <Account/> : <Login />}/>
             <Route path='/signup' element={token ? <Account/> : <Signup />}/>

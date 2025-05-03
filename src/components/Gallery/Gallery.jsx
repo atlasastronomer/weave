@@ -5,11 +5,11 @@ import { format } from '@cloudinary/url-gen/actions/delivery';
 import galleryService from '/src/services/galleryService'
 import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
 
-import { GalleryPost } from './CharacterGalleryPost';
+import { GalleryPost } from './GalleryPost';
 import { Link } from 'react-router-dom';
-import './CharacterGallery.css'
+import './Gallery.css'
 
-const CharacterGallery = () => {
+const Gallery = () => {
 
   const [token, setToken] = useState('')
   const [title, setTitle] = useState('Title')
@@ -147,4 +147,4 @@ const CharacterGallery = () => {
   )
 }
 
-export { CharacterGallery }
+export { Gallery }

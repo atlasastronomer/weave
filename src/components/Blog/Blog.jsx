@@ -50,7 +50,6 @@ const Blog = () => {
     const res = await blogService.createBlog(blogObject)
 
     setBlogs(blogs.concat(res.data).reverse())
-    console.log(res.data)
     setTitle('Title')
     setContent('Content')
     setShow(false)
