@@ -1,5 +1,5 @@
 const Blogpost = ({blog, handleDeleteBlog}) => {
-  return(
+  return (
     <div className='blog-container'>
       <div className='blog-header'>
         <p className='blog-title'>{blog.title} </p>

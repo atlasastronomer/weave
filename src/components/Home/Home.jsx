@@ -3,7 +3,8 @@ import {Cloudinary} from "@cloudinary/url-gen";
 import avatarService from '/src/services/avatarService'
 import linkService from '/src/services/linkService'
 
-import { Avatar } from './HomePfp'
+import { Avatar } from './Avatar'
+import { MediaLink } from './MediaLink';
 import './Home.css'
 
 const Home = () => {
@@ -12,10 +13,11 @@ const Home = () => {
   const [username, setUsername] = useState('')
 
   const [avatar, setAvatar] = useState(null)
-  const [links, setLinks] = useState(null)
+  const [links, setLinks] = useState([])
+  const [showDeleteLink, setShowDeleteLink] = useState(true)
 
   const [showAvatar, setShowAvatar] = useState(null)
-  const [showLinks, setShowLinks] = useState([])
+  const [showLinks, setShowLinks] = useState(null)
 
   const [fileInputState, setFileInputState] = useState('')
   const [previewSource, setPreviewSource] = useState('')
@@ -36,6 +38,7 @@ const Home = () => {
     }
   }, [])
 
+  /** Avatar */
   const loadAvatar = async () => {
     try {
       const res = await avatarService.getAvatar()
@@ -43,17 +46,6 @@ const Home = () => {
     }
     catch (error) {
       console.log('Error in fetching resume:', error.message)
-    }
-  }
-
-  const getLinks = async () => {
-    try {
-      const res = await linkService.getLinks()
-      setLinks(res.data)
-      console.log(res.data)
-    }
-    catch (error) {
-      console.log('Error in fetching links:', error.message)
     }
   }
 
@@ -98,33 +90,68 @@ const Home = () => {
     }
   }
 
+  /** Links */
+  const getLinks = async () => {
+    try {
+      const res = await linkService.getLinks()
+      setLinks(res.data)
+      console.log(res.data)
+    }
+    catch (error) {
+      console.log('Error in fetching links:', error.message)
+    }
+  }
+
+  const postLink = async (e) => {
+
+  }
+
+  const deleteLink = async (id) => {
+
+  }
+
+  const editLinks = () => {
+    setShowDeleteLink(!showDeleteLink)
+  }
+
+  /** Return */
   return(
     <div>
       <div className='home-container'>
-        <p className='home-username'>{username}</p>
-        <p className='home-name'>{name}</p>
-        {!previewSource ? <Avatar avatar = {avatar}/>
-          :
-          <img
-            src={previewSource}
-            alt="chosen"
-            style={{ width: '200px', height: '200px', borderRadius: '20px', objectFit: 'contain'}}
-            className='gallery-preview-image'
-          />
-        }
-        <div onClick={handleShowHideAvatar} className='pencil-icon'>
-          {showAvatar ? <i className="fa-solid fa-xmark fa-lg fa-icon"></i> : <i className="fa-solid fa-pencil fa-lg fa-icon"></i>}
-        </div>
-        {showAvatar &&
-          <div className='home-upload-container'>
-            <form onSubmit={handleSubmitFile} className='form-container'>
-              <div className='post-upload-btn-group'>
-                <input type='file' name='image' accept="image/png, image/jpeg, image/jpg, image/avif, image/webp" onChange={handleFileInputChange} />
-                <button type='submit' className='upload-post-btn'>Post Image</button>
-              </div>
-            </form>
+          <p className='home-username'>{username}</p>
+          <p className='home-name'>{name}</p>
+          {!previewSource ? <Avatar avatar = {avatar}/>
+            :
+            <img
+              src={previewSource}
+              alt="chosen"
+              style={{ width: '200px', height: '200px', borderRadius: '20px', objectFit: 'contain'}}
+              className='gallery-preview-image'
+            />
+          }
+          <div onClick={handleShowHideAvatar} className='pencil-icon'>
+            {showAvatar ? <i className="fa-solid fa-xmark fa-lg fa-icon"></i> : <i className="fa-solid fa-pencil fa-lg fa-icon"></i>}
           </div>
-        }
+          {showAvatar &&
+            <div className='home-upload-container'>
+              <form onSubmit={handleSubmitFile} className='form-container'>
+                <div className='post-upload-btn-group'>
+                  <input type='file' name='image' accept="image/png, image/jpeg, image/jpg, image/avif, image/webp" onChange={handleFileInputChange} />
+                  <button type='submit' className='upload-post-btn'>Set Avatar</button>
+                </div>
+              </form>
+            </div>
+          }
+      <hr className='line-break' style={{ width: '100%', border: 'none', height: '1px', backgroundColor: '#ccc' }} />
+        <p className='links-title-display'>Links</p>
+        <div>
+          {links.map((link) =>
+            <MediaLink key={link.id} link={link} handleDeleteLink={() => deleteLink(link.id)} showDeleteLink={showDeleteLink}/>
+          )}
+        </div>
+        <div onClick={editLinks} className='pencil-icon'>
+            {showDeleteLink ? <i className="fa-solid fa-xmark fa-lg fa-icon"></i> : <i className="fa-solid fa-pencil fa-lg fa-icon"></i>}
+          </div>
       </div>
     </div>
   )
