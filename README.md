@@ -23,8 +23,8 @@ Click here to view the repository containing the backend --> https://github.com/
 - Github
 
 ## Resources
-Full Stack Open for learning REST APIs, React.js, MongoDB, and Postman
+Full Stack Open for learning REST APIs, React.js, MongoDB, and Postman  
 https://fullstackopen.com/en/
 
-Cloudinary Official Documentation for setting up Cloudinary
+Cloudinary Official Documentation for setting up Cloudinary  
 https://cloudinary.com/documentation/react_integration
