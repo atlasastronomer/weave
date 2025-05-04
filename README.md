@@ -7,6 +7,8 @@ This repository contains the working frontend for the application and is intende
 Click here to view the repository containing the backend --> https://github.com/atlasastronomer/weave-database  
 The backend repository has brief instructions on how to set up the project
 
+This project was built through VSCode. While it is possible to use another text editor or IDE in its place, using VSCode makes the setup for this project significantly easier
+
 ## Technologies
 ### Frontend
 - React.js (Ver. 19.0.0)
@@ -18,6 +20,7 @@ The backend repository has brief instructions on how to set up the project
 - Express.js
 - MongoDB (Mongoose ODM)
 ### Tools and Enviornments
+- VSCode
 - Cloudinary API
 - Node Package Manager (npm)
 - Postman
