@@ -19,7 +19,7 @@ This project was built through VSCode. While it is possible to use another text 
 - Node.js (v23.11.0)
 - Express.js
 - MongoDB (Mongoose ODM)
-### Tools and Enviornments
+### Tools and Environments
 - VSCode
 - Cloudinary API
 - Node Package Manager (npm)
