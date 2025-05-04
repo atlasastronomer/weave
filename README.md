@@ -1,4 +1,4 @@
-# Weave 🪡
+# 🪡 Weave 🪡
 
 ## General Info
 Weave is a full stack website application aimed for media creators, where they can host a link page, upload and display images on their gallery page, and maintain blogs on their blog page-- all within a single integrated platform.
