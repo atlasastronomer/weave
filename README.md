@@ -2,24 +2,25 @@
 
 ## General Info
 Weave is a full stack website application aimed for media creators, where they can host a link page, upload and display images on their gallery page, and maintain blogs on their blog page-- all within a single integrated platform.
+
 This repository contains the working front-end for the application and is intended to be run alongside the backend.
 Click here to view the repository containing the backend --> https://github.com/atlasastronomer/weave-database
 
 ## Technologies
 ### Frontend
-React.js (Ver. 19.0.0)
-HTML5
-CSS3
-Javascript (ES6+)
+- React.js (Ver. 19.0.0)
+- HTML5
+- CSS3
+- Javascript (ES6+)
 ### Backend
-Node.js (v23.11.0)
-Express.js
-MongoDB (Mongoose ODM)
+- Node.js (v23.11.0)
+- Express.js
+- MongoDB (Mongoose ODM)
 ### Tools and Enviornments
-Cloudinary API
-Node Package Manager (npm)
-Postman
-Github
+- Cloudinary API
+- Node Package Manager (npm)
+- Postman
+- Github
 
 ## Resources
 Full Stack Open for learning REST APIs, React.js, MongoDB, and Postman
