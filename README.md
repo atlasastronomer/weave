@@ -5,6 +5,7 @@ Weave is a full stack website application aimed for media creators, where they c
 
 This repository contains the working frontend for the application and is intended to be run alongside the backend.  
 Click here to view the repository containing the backend --> https://github.com/atlasastronomer/weave-database
+The backend repository has brief instructions on how to set up the project
 
 ## Technologies
 ### Frontend
