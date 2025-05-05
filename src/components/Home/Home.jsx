@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import {Cloudinary} from "@cloudinary/url-gen";
 import avatarService from '/src/services/avatarService'
 import linkService from '/src/services/linkService'
 
@@ -14,13 +13,15 @@ const Home = () => {
 
   const [avatar, setAvatar] = useState(null)
   const [links, setLinks] = useState([])
-  const [showDeleteLink, setShowDeleteLink] = useState(true)
+  const [showEditLinks, setShowEditLinks] = useState(false)
 
-  const [showAvatar, setShowAvatar] = useState(null)
-  const [showLinks, setShowLinks] = useState(null)
+  const [showAvatar, setShowAvatar] = useState(false)
 
   const [fileInputState, setFileInputState] = useState('')
   const [previewSource, setPreviewSource] = useState('')
+
+  const [title, setTitle] = useState('')
+  const [mediaLink, setMediaLink] = useState('')
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token')
@@ -103,15 +104,33 @@ const Home = () => {
   }
 
   const postLink = async (e) => {
+    e.preventDefault()
 
+    const linkObject = {
+      title: title,
+      mediaLink: mediaLink,
+    }
+
+    const res = await linkService.createLink(linkObject)
+
+    setLinks(links.concat(res.data))
+    setTitle('')
+    setMediaLink('')
+    setShowEditLinks(false)
   }
 
   const deleteLink = async (id) => {
-
+    try {
+      linkService.deleteLink(id)
+      setLinks(links.filter(l => l.id !== id))
+    }
+    catch (err) {
+      console.log(err, 'Failed to Delete Link')
+    }
   }
 
   const editLinks = () => {
-    setShowDeleteLink(!showDeleteLink)
+    setShowEditLinks(!showEditLinks)
   }
 
   /** Return */
@@ -144,14 +163,31 @@ const Home = () => {
           }
       <hr className='line-break' style={{ width: '100%', border: 'none', height: '1px', backgroundColor: '#ccc' }} />
         <p className='links-title-display'>Links</p>
-        <div>
+        <div className='links-container'>
           {links.map((link) =>
-            <MediaLink key={link.id} link={link} handleDeleteLink={() => deleteLink(link.id)} showDeleteLink={showDeleteLink}/>
+            <MediaLink key={link.id} link={link} handleDeleteLink={() => deleteLink(link.id)} showDeleteLink={showEditLinks}/>
           )}
         </div>
         <div onClick={editLinks} className='pencil-icon'>
-            {showDeleteLink ? <i className="fa-solid fa-xmark fa-lg fa-icon"></i> : <i className="fa-solid fa-pencil fa-lg fa-icon"></i>}
-          </div>
+          {showEditLinks ? <i className="fa-solid fa-xmark fa-lg fa-icon"></i> : <i className="fa-solid fa-pencil fa-lg fa-icon"></i>}
+        </div>
+        {showEditLinks && 
+          <form onSubmit={postLink} className='link-input-container'>
+            <input
+              className='link-input-box'
+              placeholder='Title'
+              value={title}
+              onChange = {e => setTitle(e.target.value)}
+            />
+            <input
+              className='link-input-box'
+              placeholder='Link'
+              value={mediaLink}
+              onChange = {e => setMediaLink(e.target.value)}
+            />
+            <button className='blog-post-button' type='submit'>Add Link</button>
+          </form>
+        }
       </div>
     </div>
   )

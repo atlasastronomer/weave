@@ -12,8 +12,8 @@ import './Gallery.css'
 const Gallery = () => {
 
   const [token, setToken] = useState('')
-  const [title, setTitle] = useState('Title')
-  const [author, setAuthor] = useState('Author')
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
   const [fileInputState, setFileInputState] = useState('')
   const [previewSource, setPreviewSource] = useState('')
   const [posts, setPosts] = useState([])
