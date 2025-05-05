@@ -12,13 +12,17 @@ const Home = () => {
   const [username, setUsername] = useState('')
 
   const [avatar, setAvatar] = useState(null)
+  const [avatarFileInputState, setAvatarFileInputState] = useState('')
+  const [avatarPreviewSource, setAvatarPreviewSource] = useState('')
+  const [showEditAvatar, setShowEditAvatar] = useState(false)
+  
+  const [background, setBackground] = useState(null)
+  const [backgroundFileInputState, setBackgroundFileInputState] = useState('')
+  const [backgroundPreviewSource, setBackgroundPreviewSource] = useState('')
+  const [showEditBackground, setShowEditBackground] = useState(false)
+
   const [links, setLinks] = useState([])
   const [showEditLinks, setShowEditLinks] = useState(false)
-
-  const [showAvatar, setShowAvatar] = useState(false)
-
-  const [fileInputState, setFileInputState] = useState('')
-  const [previewSource, setPreviewSource] = useState('')
 
   const [title, setTitle] = useState('')
   const [mediaLink, setMediaLink] = useState('')
@@ -51,40 +55,40 @@ const Home = () => {
   }
 
   const handleShowHideAvatar = () => {
-    setShowAvatar(!showAvatar)
-    setPreviewSource('')
+    setShowEditAvatar(!showEditAvatar)
+    setAvatarPreviewSource('')
   }
 
-  const handleFileInputChange = (e) => {
+  const handleAvatarFileInputChange = (e) => {
     const file = e.target.files[0]
-    previewFile(file)
+    previewAvatarFile(file)
   }
   
-  const previewFile = (file) => {
+  const previewAvatarFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file)
     reader.onloadend = () => {
-      setPreviewSource(reader.result)
+      setAvatarPreviewSource(reader.result)
     }
   }
 
-  const handleSubmitFile = (e) => {
+  const handleSubmitAvatarFile = (e) => {
     e.preventDefault()
-    if (!previewSource) return
+    if (!avatarPreviewSource) return
 
-    uploadImage(previewSource)
+    uploadAvatarImage(avatarPreviewSource)
   }
 
-  const uploadImage = async(base64EncodedImage) => {
+  const uploadAvatarImage = async(base64EncodedImage) => {
     try {
       const res = await avatarService.uploadAvatar({
         data: base64EncodedImage
       })
 
       setAvatar(res.data)
-      setFileInputState('')
-      setPreviewSource('')
-      setShowAvatar(false)
+      setAvatarFileInputState('')
+      setAvatarPreviewSource('')
+      setShowEditAvatar(false)
     }
     catch (error) {
       console.log('Error in uploading avatar:', error.message)
@@ -133,29 +137,49 @@ const Home = () => {
     setShowEditLinks(!showEditLinks)
   }
 
+  /** Background */
+  const handleShowHideBackground = () => {
+    setShowEditBackground(!showEditBackground)
+  }
+
   /** Return */
   return(
     <div>
+      <div className='background-upload-container'>
+        <div onClick={handleShowHideBackground} className='pencil-icon'>
+          {showEditBackground ? <i className="fa-solid fa-xmark fa-lg fa-icon"></i> : <i className="fa-solid fa-pencil fa-lg fa-icon"></i>}
+        </div>
+        {showEditBackground && 
+          <div className='home-upload-container'>
+            <form onSubmit={() => {}} className='form-container'>
+              <div className='post-upload-btn-group'>
+                <input type='file' name='image' accept="image/png, image/jpeg, image/jpg, image/avif, image/webp" onChange={() => {}} />
+                <button type='submit' className='upload-post-btn'>Set Wallpaper</button>
+              </div>
+            </form>
+          </div>
+        }
+      </div>
       <div className='home-container'>
           <p className='home-username'>{username}</p>
           <p className='home-name'>{name}</p>
-          {!previewSource ? <Avatar avatar = {avatar}/>
+          {!avatarPreviewSource ? <Avatar avatar = {avatar}/>
             :
             <img
-              src={previewSource}
+              src={avatarPreviewSource}
               alt="chosen"
               style={{ width: '200px', height: '200px', borderRadius: '20px', objectFit: 'contain'}}
               className='gallery-preview-image'
             />
           }
           <div onClick={handleShowHideAvatar} className='pencil-icon'>
-            {showAvatar ? <i className="fa-solid fa-xmark fa-lg fa-icon"></i> : <i className="fa-solid fa-pencil fa-lg fa-icon"></i>}
+            {showEditAvatar ? <i className="fa-solid fa-xmark fa-lg fa-icon"></i> : <i className="fa-solid fa-pencil fa-lg fa-icon"></i>}
           </div>
-          {showAvatar &&
+          {showEditAvatar &&
             <div className='home-upload-container'>
-              <form onSubmit={handleSubmitFile} className='form-container'>
+              <form onSubmit={handleSubmitAvatarFile} className='form-container'>
                 <div className='post-upload-btn-group'>
-                  <input type='file' name='image' accept="image/png, image/jpeg, image/jpg, image/avif, image/webp" onChange={handleFileInputChange} />
+                  <input type='file' name='image' accept="image/png, image/jpeg, image/jpg, image/avif, image/webp" onChange={handleAvatarFileInputChange} />
                   <button type='submit' className='upload-post-btn'>Set Avatar</button>
                 </div>
               </form>
