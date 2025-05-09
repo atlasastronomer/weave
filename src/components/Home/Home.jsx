@@ -49,7 +49,7 @@ const Home = () => {
       setAvatar(res.data[0])
     }
     catch (error) {
-      console.log('Error in fetching resume:', error.message)
+      console.log('Error in fetching avatar:', error.message)
     }
   }
 

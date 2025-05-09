@@ -1,25 +1,22 @@
-import {AdvancedImage} from '@cloudinary/react';
-import {Cloudinary} from "@cloudinary/url-gen";
-import { crop, fill, scale, fit, thumbnail, pad } from '@cloudinary/url-gen/actions/resize';
-import { format } from '@cloudinary/url-gen/actions/delivery';
-import galleryService from '/src/services/galleryService'
-import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
-import './Home.css'
+import { AdvancedImage } from '@cloudinary/react'
+import { Cloudinary } from '@cloudinary/url-gen'
+import { scale } from '@cloudinary/url-gen/actions/resize'
+import { dpr } from '@cloudinary/url-gen/actions/delivery'
+import { byRadius } from '@cloudinary/url-gen/actions/roundCorners'
 
-const Avatar = ({avatar}) => {
-  
+const Avatar = ({ avatar }) => {
   const cld = new Cloudinary({
-    cloud: {
-      cloudName: 'dxmjrqdzj'
-    }
+    cloud: { cloudName: 'dxmjrqdzj' }
   })
 
-  return(
-    <AdvancedImage
-      cldImg={avatar ? cld.image(avatar.publicId).resize(scale().width(200).height(200)).roundCorners(byRadius(20)).format('png') :
-        cld.image('a4wnscg3rzebph187nng').resize(scale().width(200).height(200)).roundCorners(byRadius(20)).format('png')}
-    />
-  )
+  const img = cld.image(avatar?.publicId || 'a4wnscg3rzebph187nng')
+    .resize(scale().width(400))
+    .roundCorners(byRadius(20))
+    .format('png')
+    .delivery(dpr('auto'))
+
+  return <AdvancedImage cldImg={img} className='avatar' />
 }
+
 
 export { Avatar }

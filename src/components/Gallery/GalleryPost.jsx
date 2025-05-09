@@ -1,10 +1,8 @@
-import {AdvancedImage} from '@cloudinary/react';
-import {Cloudinary} from "@cloudinary/url-gen";
-import { crop, fill, scale, fit, thumbnail, pad } from '@cloudinary/url-gen/actions/resize';
-import { format } from '@cloudinary/url-gen/actions/delivery';
-import galleryService from '/src/services/galleryService'
-import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
-import './Gallery.css'
+import { AdvancedImage } from '@cloudinary/react'
+import { Cloudinary } from '@cloudinary/url-gen'
+import { scale } from '@cloudinary/url-gen/actions/resize'
+import { dpr } from '@cloudinary/url-gen/actions/delivery'
+import { byRadius } from '@cloudinary/url-gen/actions/roundCorners'
 
 const GalleryPost = ({post, handleDeletePost}) => {
 
@@ -23,7 +21,11 @@ const GalleryPost = ({post, handleDeletePost}) => {
         <p> {post.author} &#x2022; {post.date} </p>
       </div>
       <AdvancedImage
-        cldImg={cld.image(post.publicId).resize(scale().width(500)).roundCorners(byRadius(20)).format('png')}
+        className='gallery-image'
+        cldImg={cld.image(post.publicId)
+          .roundCorners(byRadius(20))
+          .delivery(dpr('auto'))
+        }
       />
       <button className='delete-post-btn' onClick={handleDeletePost}>Delete Post</button>
     </div>

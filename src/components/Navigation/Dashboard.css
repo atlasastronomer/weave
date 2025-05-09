@@ -3,6 +3,7 @@ body {
   background-image: url('../../assets/default-background.jpeg');
   background-attachment: fixed;
 }
+
 .dashboard {
   width: 100%;
 }
