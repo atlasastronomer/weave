@@ -1,7 +1,12 @@
+body {
+  background-size: cover;
+  background-image: url('../../assets/default-background.jpeg');
+  background-attachment: fixed;
+}
 .dashboard {
   width: 100%;
 }
 
 .main-page {
-  --foo: bar;
+  margin-top: 65px;
 }

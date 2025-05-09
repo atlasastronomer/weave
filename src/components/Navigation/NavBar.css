@@ -1,12 +1,15 @@
 .nav-bar {
   display: flex;
   width: 100%;
+  /* If you adjust the height, be sure to adjust the margin-bottom */
+  /* of the main-page in ./Navigation/Dashboard.css as well! */
+  height: 40px; 
   flex-direction: row;
   justify-content: space-between;
   background-color: transparent;
   transition: hover, 0.15s;
   background-color: var(--nav-bar-color);
-  position: static;
+  position: fixed;
 }
 
 .nav-button-wrapper {
