@@ -6,6 +6,7 @@
   background-color: transparent;
   transition: hover, 0.15s;
   background-color: var(--nav-bar-color);
+  position: static;
 }
 
 .nav-button-wrapper {

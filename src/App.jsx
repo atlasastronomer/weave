@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
+import { Dashboard } from './components/Navigation/Dashboard.jsx'
 import { NavBar } from './components/Navigation/NavBar.jsx'
 import { Home } from './components/Home/Home.jsx'
 import { About } from './components/About/About.jsx'
@@ -21,7 +22,7 @@ const App = () => {
   return (
     <div className='wrapper'>
       <Router>
-        <NavBar token={token}/>
+        <Dashboard/>
           <Routes>
             <Route path='/' element={<Home />}/>
             <Route path='/about' element={<About />}/>

@@ -1,0 +1,7 @@
+.dashboard {
+  width: 100%;
+}
+
+.main-page {
+  --foo: bar;
+}

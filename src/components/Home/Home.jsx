@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import avatarService from '/src/services/avatarService'
 import linkService from '/src/services/linkService'
-
 import { Avatar } from './Avatar'
 import { MediaLink } from './MediaLink';
 import './Home.css'
@@ -16,10 +15,10 @@ const Home = () => {
   const [avatarPreviewSource, setAvatarPreviewSource] = useState('')
   const [showEditAvatar, setShowEditAvatar] = useState(false)
   
-  const [background, setBackground] = useState(null)
-  const [backgroundFileInputState, setBackgroundFileInputState] = useState('')
-  const [backgroundPreviewSource, setBackgroundPreviewSource] = useState('')
-  const [showEditBackground, setShowEditBackground] = useState(false)
+  const [wallpaper, setWallpaper] = useState(null)
+  const [wallpaperFileInputState, setWallpaperFileInputState] = useState('')
+  const [wallpaperPreviewSource, setWallpaperPreviewSource] = useState('')
+  const [showEditWallpaper, setShowEditWallpaper] = useState(false)
 
   const [links, setLinks] = useState([])
   const [showEditLinks, setShowEditLinks] = useState(false)
@@ -137,19 +136,19 @@ const Home = () => {
     setShowEditLinks(!showEditLinks)
   }
 
-  /** Background */
-  const handleShowHideBackground = () => {
-    setShowEditBackground(!showEditBackground)
+  /** Wallpaper */
+  const handleShowHideWallpaper = () => {
+    setShowEditWallpaper(!showEditWallpaper)
   }
 
   /** Return */
   return(
     <div>
-      <div className='background-upload-container'>
-        <div onClick={handleShowHideBackground} className='pencil-icon'>
-          {showEditBackground ? <i className="fa-solid fa-xmark fa-lg fa-icon"></i> : <i className="fa-solid fa-pencil fa-lg fa-icon"></i>}
+      <div className='wallpaper-upload-container'>
+        <div onClick={handleShowHideWallpaper} className='pencil-icon'>
+          {showEditWallpaper ? <i className="fa-solid fa-xmark fa-lg fa-icon"></i> : <i className="fa-solid fa-pencil fa-lg fa-icon"></i>}
         </div>
-        {showEditBackground && 
+        {showEditWallpaper && 
           <div className='home-upload-container'>
             <form onSubmit={() => {}} className='form-container'>
               <div className='post-upload-btn-group'>
