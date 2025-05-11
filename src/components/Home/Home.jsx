@@ -51,7 +51,7 @@ const Home = () => {
       document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${wallpaperToSet}')`
     }
     return () => {
-      document.body.style.backgroundImage = wallpaperUrl ? `url('${wallpaperUrl}')` : ''
+      document.body.style.backgroundImage = wallpaperUrl ? `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${wallpaperUrl}')` : ''
     }
   }, [wallpaperPreviewSource, wallpaperUrl])
 
@@ -229,8 +229,7 @@ const Home = () => {
           <img
             src={avatarPreviewSource}
             alt="chosen"
-            style={{ width: '200px', height: '200px', borderRadius: '20px', objectFit: 'contain'}}
-            className='gallery-preview-image'
+            className="avatar-preview"
           />
         }
         <div onClick={handleShowHideAvatar} className='pencil-icon'>
