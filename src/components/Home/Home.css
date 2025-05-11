@@ -81,13 +81,6 @@
   margin-bottom: 15px;
 }
 
-.avatar {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 20px;
-}
-
 .links-title-display {
   font-family: 'Open Sans';
   font-size: 25px;
@@ -183,4 +176,11 @@
   margin-bottom: 20px;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+.avatar {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 20px;
 }

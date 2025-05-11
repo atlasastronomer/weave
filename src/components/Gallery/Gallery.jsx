@@ -34,7 +34,7 @@ const Gallery = () => {
   const loadImages = async () => {
     try {
       const res = await galleryService.getGallery()
-      setPosts(res.data.reverse())
+      setPosts(res.data)
     }
     catch (error) {
       console.log(error)
@@ -70,7 +70,7 @@ const Gallery = () => {
         date,
         author
       })
-      setPosts(posts.concat(res.data).reverse())
+      setPosts([res.data, ...posts])
       setTitle('')
       setFileInputState('')
       setPreviewSource('')

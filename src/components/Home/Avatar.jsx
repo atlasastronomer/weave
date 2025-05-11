@@ -15,7 +15,9 @@ const Avatar = ({ avatar }) => {
     .format('png')
     .delivery(dpr('auto'))
 
-  return <AdvancedImage cldImg={img} className='avatar' />
+  return(
+    <AdvancedImage cldImg={img} className='avatar' />
+  )
 }
 
 

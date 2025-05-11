@@ -8,7 +8,7 @@
   justify-content: space-between;
   background-color: transparent;
   transition: hover, 0.15s;
-  background-color: var(--nav-bar-color);
+  background-color: rgba(0, 0, 0, 0.50);
   position: fixed;
 }
 
