@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import avatarService from '/src/services/avatarService'
+import wallpaperService from '/src/services/wallpaperService'
 import linkService from '/src/services/linkService'
 import { Avatar } from './Avatar'
-import { MediaLink } from './MediaLink';
+import { MediaLink } from './MediaLink'
 import './Home.css'
 
 const Home = () => {
@@ -15,7 +16,7 @@ const Home = () => {
   const [avatarPreviewSource, setAvatarPreviewSource] = useState('')
   const [showEditAvatar, setShowEditAvatar] = useState(false)
   
-  const [wallpaper, setWallpaper] = useState(null)
+  const [wallpaperUrl, setWallpaperUrl] = useState('')
   const [wallpaperFileInputState, setWallpaperFileInputState] = useState('')
   const [wallpaperPreviewSource, setWallpaperPreviewSource] = useState('')
   const [showEditWallpaper, setShowEditWallpaper] = useState(false)
@@ -36,17 +37,30 @@ const Home = () => {
 
     if (storedToken) {
       avatarService.setToken(storedToken)
+      wallpaperService.setToken(storedToken)
       linkService.setToken(storedToken)
       loadAvatar()
+      loadWallpaper()
       getLinks()
     }
   }, [])
+
+  useEffect(() => {
+    const wallpaperToSet = wallpaperPreviewSource || wallpaperUrl
+    if (wallpaperToSet) {
+      document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${wallpaperToSet}')`
+    }
+    return () => {
+      document.body.style.backgroundImage = wallpaperUrl ? `url('${wallpaperUrl}')` : ''
+    }
+  }, [wallpaperPreviewSource, wallpaperUrl])
+
 
   /** Avatar */
   const loadAvatar = async () => {
     try {
       const res = await avatarService.getAvatar()
-      setAvatar(res.data[0])
+      setAvatar(res.data)
     }
     catch (error) {
       console.log('Error in fetching avatar:', error.message)
@@ -64,7 +78,7 @@ const Home = () => {
   }
   
   const previewAvatarFile = (file) => {
-    const reader = new FileReader();
+    const reader = new FileReader()
     reader.readAsDataURL(file)
     reader.onloadend = () => {
       setAvatarPreviewSource(reader.result)
@@ -94,12 +108,65 @@ const Home = () => {
     }
   }
 
+  /** Wallpaper */
+  const loadWallpaper = async () => {
+    try {
+      const cloudName = 'dxmjrqdzj'
+      const res = await wallpaperService.getWallpaper()
+      const result = res.data
+      setWallpaperUrl(`https://res.cloudinary.com/dxmjrqdzj/image/upload/${result.publicId}`)
+    }
+    catch (error) {
+      console.log('Error in fetching wallpaper:', error.message)
+    }
+  }
+
+  const handleShowHideWallpaper = () => {
+    setShowEditWallpaper(!showEditWallpaper)
+    setWallpaperPreviewSource('')
+  }
+
+  const handleWallpaperFileInputChange = (e) => {
+    const file = e.target.files[0]
+    previewWallpaperFile(file)
+  }
+
+  const previewWallpaperFile = (file) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onloadend = () => {
+      setWallpaperPreviewSource(reader.result)
+    }
+  }
+
+  const handleSubmitWallpaperFile = (e) => {
+    e.preventDefault()
+    if (!wallpaperPreviewSource) return
+
+    uploadWallpaperImage(wallpaperPreviewSource)
+  }
+
+  const uploadWallpaperImage = async(base64EncodedImage) => {
+    try {
+      const res = await wallpaperService.uploadWallpaper({
+        data: base64EncodedImage
+      })
+      const uploadedWallpaperUrl = `https://res.cloudinary.com/dxmjrqdzj/image/upload/${res.data.publicId}`
+      setWallpaperUrl(uploadedWallpaperUrl)
+      setWallpaperFileInputState('')
+      setWallpaperPreviewSource('')
+      setShowEditWallpaper(false)
+    }
+    catch (error) {
+      console.log('Error in uploading wallpaper:', error.message)
+    }
+  }
+
   /** Links */
   const getLinks = async () => {
     try {
       const res = await linkService.getLinks()
       setLinks(res.data)
-      console.log(res.data)
     }
     catch (error) {
       console.log('Error in fetching links:', error.message)
@@ -136,11 +203,6 @@ const Home = () => {
     setShowEditLinks(!showEditLinks)
   }
 
-  /** Wallpaper */
-  const handleShowHideWallpaper = () => {
-    setShowEditWallpaper(!showEditWallpaper)
-  }
-
   /** Return */
   return(
     <div>
@@ -150,9 +212,9 @@ const Home = () => {
         </div>
         {showEditWallpaper && 
           <div className='home-upload-container'>
-            <form onSubmit={() => {}} className='form-container'>
+            <form onSubmit={handleSubmitWallpaperFile} className='form-container'>
               <div className='post-upload-btn-group'>
-                <input type='file' name='image' accept="image/png, image/jpeg, image/jpg, image/avif, image/webp" onChange={() => {}} />
+                <input type='file' name='image' accept="image/png, image/jpeg, image/jpg, image/avif, image/webp" onChange={handleWallpaperFileInputChange} />
                 <button type='submit' className='upload-post-btn'>Set Wallpaper</button>
               </div>
             </form>
@@ -160,30 +222,30 @@ const Home = () => {
         }
       </div>
       <div className='home-container'>
-          <p className='home-username'>{username}</p>
-          <p className='home-name'>{name}</p>
-          {!avatarPreviewSource ? <Avatar avatar = {avatar}/>
-            :
-            <img
-              src={avatarPreviewSource}
-              alt="chosen"
-              style={{ width: '200px', height: '200px', borderRadius: '20px', objectFit: 'contain'}}
-              className='gallery-preview-image'
-            />
-          }
-          <div onClick={handleShowHideAvatar} className='pencil-icon'>
-            {showEditAvatar ? <i className="fa-solid fa-xmark fa-lg fa-icon"></i> : <i className="fa-solid fa-pencil fa-lg fa-icon"></i>}
+        <p className='home-username'>{username}</p>
+        <p className='home-name'>{name}</p>
+        {!avatarPreviewSource ? <Avatar avatar = {avatar}/>
+          :
+          <img
+            src={avatarPreviewSource}
+            alt="chosen"
+            style={{ width: '200px', height: '200px', borderRadius: '20px', objectFit: 'contain'}}
+            className='gallery-preview-image'
+          />
+        }
+        <div onClick={handleShowHideAvatar} className='pencil-icon'>
+          {showEditAvatar ? <i className="fa-solid fa-xmark fa-lg fa-icon"></i> : <i className="fa-solid fa-pencil fa-lg fa-icon"></i>}
+        </div>
+        {showEditAvatar &&
+          <div className='home-upload-container'>
+            <form onSubmit={handleSubmitAvatarFile} className='form-container'>
+              <div className='post-upload-btn-group'>
+                <input type='file' name='image' accept="image/png, image/jpeg, image/jpg, image/avif, image/webp" onChange={handleAvatarFileInputChange} />
+                <button type='submit' className='upload-post-btn'>Set Avatar</button>
+              </div>
+            </form>
           </div>
-          {showEditAvatar &&
-            <div className='home-upload-container'>
-              <form onSubmit={handleSubmitAvatarFile} className='form-container'>
-                <div className='post-upload-btn-group'>
-                  <input type='file' name='image' accept="image/png, image/jpeg, image/jpg, image/avif, image/webp" onChange={handleAvatarFileInputChange} />
-                  <button type='submit' className='upload-post-btn'>Set Avatar</button>
-                </div>
-              </form>
-            </div>
-          }
+        }
       <hr className='line-break' style={{ width: '100%', border: 'none', height: '1px', backgroundColor: '#ccc' }} />
         <p className='links-title-display'>Links</p>
         <div className='links-container'>
