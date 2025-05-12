@@ -21,13 +21,13 @@ const GalleryPost = ({post, handleDeletePost}) => {
         <p> {post.author} &#x2022; {post.date} </p>
       </div>
       <AdvancedImage
-        className='gallery-image'
+        className='gallery-image container'
         cldImg={cld.image(post.publicId)
           .roundCorners(byRadius(20))
           .delivery(dpr('auto'))
         }
       />
-      <button className='delete-post-btn' onClick={handleDeletePost}>Delete Post</button>
+      <button className='upload-delete-btn' onClick={handleDeletePost}>Delete Post</button>
     </div>
   )
 }

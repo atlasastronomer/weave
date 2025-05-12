@@ -1,8 +1,11 @@
 :root{
   /* Root */
   --title-color: rgba(255, 255, 255, 1);
-  --text-color: rgb(0, 0, 0);
-  --link-color: rgb(255, 255, 255);
+  --container-color: #1a1a1a;
+  --text-color: white;
+  --text-color-2: gray;
+  --button-color: #f2f3f5;
+  --button-color-hover: #ccd1db;
   
   /* Login */
   --login-wrapper-color: rgb(255, 255, 255);
@@ -12,9 +15,6 @@
   --nav-bar-color: rgba(73, 157, 232, 0.25);
   --nav-wrapper-color: rgba(73, 157, 232, 0.25);
   --nav-btn-hover-color: rgba(228, 228, 228, 0.59);
-
-  /* Login */
-  --blog-wrapper-color: rgba(73, 157, 232, 0.25);
 }
 
 body {
@@ -28,4 +28,66 @@ body {
   justify-content: center;
   align-items: center;
   margin-bottom: 25px;
+}
+
+.fa-icon {
+  color: black;
+}
+
+.upload-delete-btn {
+  font-family: 'Open Sans';
+  margin-top: 15px;
+  font-size: 15px;
+  font-weight: 600;
+  color: black;
+  text-decoration: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: var(--button-color);
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: hover, 0.2s;
+}
+
+.upload-delete-btn:hover {
+  background: var(--button-color-hover);
+}
+
+/* Home */
+.pencil-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f2f3f5;
+  padding: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  transition: hover, 0.3s;
+  width: 20px;
+  height: 20px;
+}
+
+.pencil-icon:hover {
+  cursor: pointer;
+  background-color: #ccd1db;
+}
+
+/* Blog/Gallery */
+.plus-minus {
+  background-color: #f2f3f5;
+  padding: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  transition: hover, 0.3s;
+}
+
+.plus-minus:hover {
+  cursor: pointer;
+  background-color: #ccd1db;
 }

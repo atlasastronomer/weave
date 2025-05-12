@@ -7,7 +7,7 @@ body {
 }
 
 .home-container {
-  background-color: rgba(255, 255, 255, 1);
+  background-color: var(--container-color);
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@ body {
 }
 
 .home-upper-container {
-  background-color: rgba(255, 255, 255, 1);
+  background-color: var(--container-color);
   display: flex;
   padding: 15px;
   flex-direction: column;
@@ -30,7 +30,7 @@ body {
 }
 
 .home-lower-container {
-  background-color: rgba(255, 255, 255, 1);
+  background-color: var(--container-color);
   display: flex;
   padding: 15px;
   flex-direction: column;
@@ -48,44 +48,20 @@ body {
   padding-right: 15px;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: var(--container-color);
   border-radius: 15px;
-}
-
-.pencil-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #f2f3f5;
-  padding: 15px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 15px;
-  transition: hover, 0.3s;
-  width: 20px;
-  height: 20px;
-}
-
-.pencil-icon:hover {
-  cursor: pointer;
-  background-color: #ccd1db;
-}
-
-.fa-icon {
-  color: black;
 }
 
 .home-username {
   font-family: 'Open Sans';
   font-size: 30px;
-  color: black;
+  color: var(--text-color);
 }
 
 .home-name {
   font-family: 'Open Sans';
   font-size: 18px;
-  color: gray;
+  color: var(--text-color-2);
   margin-bottom: 15px;
 }
 
@@ -105,7 +81,7 @@ body {
   font-family: 'Open Sans';
   text-decoration: none;
   text-align: center;
-  background-color: #f2f3f5;
+  background-color: var(--button-color);
   color: black;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -120,14 +96,14 @@ body {
 
 .media-link-btn:hover {
   cursor: pointer;
-  background-color: #ccd1db;
+  background-color: var(--button-color);
 }
 
 .delete-link-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f2f3f5;
+  background-color: var(--button-color);
   padding: 15px;
   padding-bottom: 12px;
   margin-top: 10px;
@@ -138,7 +114,7 @@ body {
 
 .delete-link-btn:hover {
   cursor: pointer;
-  background-color: #ccd1db;
+  background-color: var(--button-color-hover);
 }
 
 .line-break {
@@ -178,7 +154,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
+  background-color: var(--container-color);
   border-radius: 15px;
   width: 100%;
   margin-bottom: 20px;

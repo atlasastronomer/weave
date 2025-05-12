@@ -5,11 +5,11 @@
   margin: none;
   margin-top: 25px;
   margin-bottom: 25px;
-  color: white;
+  color: var(--text-color)
 }
 
 .blog-login-container {
-  background-color: white;
+  background-color: var(--container-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,14 +23,14 @@
   font-family: 'Open Sans';
   font-size: 25px;
   font-weight: 600;
-  color: black;
+  color: var(--text-color);
   margin-bottom: 1px;
 }
 
 .blog-login-text {
   font-family: 'Open Sans';
   font-size: 15px;
-  color: gray;
+  color: var(--text-color-2);
 }
 
 .blog-login-btn {
@@ -38,13 +38,13 @@
   font-family: 'Open Sans';
   font-size: 15px;
   font-weight: 600;
-  color: black;
+  color: var(--text-color);
   text-decoration: none;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 15px;
   padding-right: 15px;
-  background-color: #f2f3f5;
+  background-color: var(--button-color);
   border-radius: 100px;
   border: none;
   cursor: pointer;
@@ -52,7 +52,7 @@
 }
 
 .blog-login-btn:hover {
-  background-color: #ccd1db;
+  background-color: var(--button-color-hover);
 }
 
 .blog-title-container {
@@ -103,26 +103,6 @@
   font-family: 'Open Sans';
   color: black;
   margin-bottom: 30px;
-}
-
-.delete-blog-btn {
-  font-family: 'Open Sans';
-  font-size: 15px;
-  font-weight: 600;
-  color: black;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 15px;
-  padding-right: 15px;
-  background-color: #f2f3f5;
-  border-radius: 100px;
-  border: none;
-  cursor: pointer;
-  transition: hover, 0.2s;
-}
-
-.delete-blog-btn:hover {
-  background-color: #ccd1db;
 }
 
 .blog-input-container {
