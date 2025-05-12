@@ -1,11 +1,13 @@
 :root{
   /* Root */
   --title-color: rgba(255, 255, 255, 1);
-  --container-color: #1a1a1a;
+  --container-color: rgba(26, 26, 26, 1);
+  --box-shadow: 0 5px 10px rgba(154,160,185,.15), 0 15px 40px rgba(166,173,201,.5);
   --text-color: white;
-  --text-color-2: gray;
-  --button-color: #f2f3f5;
-  --button-color-hover: #ccd1db;
+  --text-color-2: #999999;
+  --button-color: #262626;
+  --button-color-hover: #3c3c3c;
+  --button-text-color: white;
   
   /* Login */
   --login-wrapper-color: rgb(255, 255, 255);
@@ -17,6 +19,7 @@
   --nav-btn-hover-color: rgba(228, 228, 228, 0.59);
 }
 
+/* General */
 body {
   display: flex;
   flex-direction: column;
@@ -31,7 +34,29 @@ body {
 }
 
 .fa-icon {
-  color: black;
+  color: var(--button-text-color);
+}
+
+input[type="file"]::file-selector-button {
+  margin-top: 15px;
+  font-family: 'Open Sans';
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--button-text-color);
+  text-decoration: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: var(--button-color);
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: hover, 0.2s;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background: var(--button-color-hover);
 }
 
 .upload-delete-btn {
@@ -39,7 +64,7 @@ body {
   margin-top: 15px;
   font-size: 15px;
   font-weight: 600;
-  color: black;
+  color: var(--button-text-color);
   text-decoration: none;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -62,7 +87,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #f2f3f5;
+  background-color: var(--button-color);
   padding: 15px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -74,12 +99,12 @@ body {
 
 .pencil-icon:hover {
   cursor: pointer;
-  background-color: #ccd1db;
+  background-color: var(--button-color-hover);
 }
 
 /* Blog/Gallery */
 .plus-minus {
-  background-color: #f2f3f5;
+  background-color: var(--button-color);
   padding: 15px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -89,5 +114,5 @@ body {
 
 .plus-minus:hover {
   cursor: pointer;
-  background-color: #ccd1db;
+  background-color: var(--button-color-hover);
 }

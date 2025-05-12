@@ -15,6 +15,7 @@ body {
   align-items: center;
   border-radius: 15px;
   width: 392.54px;
+  box-shadow: var(--box-shadow);
 }
 
 .home-upper-container {
@@ -68,6 +69,7 @@ body {
 .links-title-display {
   font-family: 'Open Sans';
   font-size: 25px;
+  color: var(--text-color);
 }
 
 .media-link-wrapper {
@@ -82,7 +84,7 @@ body {
   text-decoration: none;
   text-align: center;
   background-color: var(--button-color);
-  color: black;
+  color: var(--text-color);
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 15px;
@@ -96,7 +98,7 @@ body {
 
 .media-link-btn:hover {
   cursor: pointer;
-  background-color: var(--button-color);
+  background-color: var(--button-color-hover);
 }
 
 .delete-link-btn {
@@ -160,6 +162,7 @@ body {
   margin-bottom: 20px;
   padding-top: 5px;
   padding-bottom: 5px;
+  box-shadow: var(--box-shadow);
 }
 
 .avatar {

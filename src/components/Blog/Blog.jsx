@@ -88,7 +88,7 @@ const Blog = () => {
               value={content}
               onChange = {e => setContent(e.target.value)}
             />
-            <button className='blog-post-button' type='submit'>Post Blog</button>
+            <button className='upload-delete-btn' type='submit'>Post Blog</button>
           </form>
         }
         <div>

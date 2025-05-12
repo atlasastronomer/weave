@@ -12,13 +12,13 @@
   align-items: center;
   margin: 40px;
   width: max-content;
-  background-color: var(--login-wrapper-color);
+  background-color: var(--container-color);
   padding-top: 15px;
   padding-bottom: 15px;
   padding-left: 30px;
   padding-right: 30px;
   border-radius: 5px;
-  box-shadow: rgba(33, 27, 38, 0.59) 0px 10px 30px 0px;
+  box-shadow: var(--box-shadow);
 }
 
 .login-title {
@@ -48,7 +48,6 @@
   outline: none;
   margin-bottom: 20px;
   border-radius: 40px;
-  box-shadow: 0 0 10px rgba(0 0 0 .1);
   cursor: pointer;
   transition: hover, 0.2s;
 }
@@ -81,7 +80,7 @@
   border: none;
   outline: none;
   font-family: 'Open Sans';
-  color: black;
+  color: var(--text-color);
   margin: none;
 }
 
@@ -120,7 +119,7 @@
 }
 
 .register-link:hover {
-  color: #ccd1db;
+  color: var(--button-color-hover);
 }
 
 .register-info {
@@ -131,7 +130,7 @@
   margin-bottom: 20px;
   font-size: 14.5px;
   font-family: Work Sans;
-  color: white;
+  color: var(--text-color);
 }
 
 .error-container {
