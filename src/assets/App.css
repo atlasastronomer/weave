@@ -2,7 +2,7 @@
   /* Root */
   --title-color: rgba(255, 255, 255, 1);
   --container-color: rgba(26, 26, 26, 1);
-  --box-shadow: 0 5px 10px rgba(154,160,185,.15), 0 15px 40px rgba(166,173,201,.5);
+  --box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
   --text-color: white;
   --text-color-2: #999999;
   --button-color: #262626;

@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Blogpost } from './Blogpost.jsx'
 import blogService from '/src/services/blogService'
 import { Link } from 'react-router-dom'
+import { Wallpaper } from '../Wallpaper.jsx'
 import './Blog.css'
 
 const Blog = () => {
@@ -67,6 +68,7 @@ const Blog = () => {
 
   return (
     <div>
+      <Wallpaper/>
       {token ?
       <div>
         <div className='blog-title-container'>

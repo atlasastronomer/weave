@@ -240,7 +240,7 @@ const Home = () => {
             <form onSubmit={handleSubmitAvatarFile} className='form-container'>
               <div className='post-upload-btn-group'>
                 <input type='file' name='image' accept="image/png, image/jpeg, image/jpg, image/avif, image/webp" onChange={handleAvatarFileInputChange} />
-                <button type='submit' className='upload-post-btn'>Set Avatar</button>
+                <button type='submit' className='upload-delete-btn'>Set Avatar</button>
               </div>
             </form>
           </div>
