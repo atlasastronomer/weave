@@ -26,4 +26,4 @@ const changeAbout = async (newObject) => {
   return res
 }
 
-export default { getAbout, changeAbout, setToken}
+export default { getAbout, changeAbout, setToken }

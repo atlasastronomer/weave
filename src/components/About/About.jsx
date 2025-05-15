@@ -42,7 +42,7 @@ const About = () => {
     e.preventDefault()
     
     const newAbout = {
-      about: about
+      about: aboutInput
     }
 
     const res = await aboutService.changeAbout(newAbout)
