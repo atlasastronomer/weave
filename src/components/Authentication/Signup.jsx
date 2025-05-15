@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axiosService from '/src/services/axios'
+import authService from '/src/services/authService'
 import './Login.css'
 
 const Signup = () => {
@@ -44,7 +44,7 @@ const Signup = () => {
     }
 
     try {
-      const newUser = await axiosService.signup('http://localhost:3001/api/signup', {name, username, password})
+      const newUser = await authService.signup('http://localhost:3001/api/signup', {name, username, password})
       localStorage.setItem("token", newUser.token)
       localStorage.setItem("username",user.username)
       localStorage.setItem("name",user.name)

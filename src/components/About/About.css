@@ -1,0 +1,68 @@
+.about-edit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--container-color);
+  border-radius: 15px;
+  width: 100%;
+  margin-bottom: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  box-shadow: var(--box-shadow);
+}
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  width: 600px;
+  background-color: var(--container-color);
+  box-shadow: var(--box-shadow);
+  border-radius: 15px;
+}
+
+.about-title {
+  font-family: 'Open Sans';
+  font-size: 25px;
+  color: var(--text-color);
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.about-name {
+  font-family: 'Open Sans';
+  font-size: 15px;
+  color: var(--text-color-2);
+  margin-top: 0px;
+  margin-bottom: 15px;
+}
+
+.about-text {
+  font-family: 'Open Sans';
+  font-size: 18px;
+  color: var(--text-color);
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.about-input {
+  font-family: 'Open Sans';
+  font-size: 18px;
+  text-align: center;
+  width: 500px;
+  border: none;
+  outline: none;
+  margin-bottom: 15px;
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+.about-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

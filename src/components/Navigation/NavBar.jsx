@@ -25,7 +25,7 @@ const NavBar = ({ token }) => {
       <Link to='/about' className='span'><NavButton name='About' style='regular' icon='fa-address-card'/></Link>
       <Link to='/blogs' className='span'><NavButton name='Blog' style='solid' icon='fa-blog'/></Link>
       <Link to='/gallery' className='span'><NavButton name='Gallery' style='solid' icon='fa-paintbrush'/></Link>
-      {token ? <Link to='/account' className='span'><NavButton name='Account' style='solid' icon='fa-user'/></Link> : <Link to='/login' className='span'><NavButton name='Login' style='solid' icon='fa-arrow-right-to-bracket'/></Link>}
+      {token ? <Link to='/account' className='span'><NavButton name='Account' style='solid' icon='fa-user'/></Link> : <Link to='/login' className='span'><NavButton name='Account' style='solid' icon='fa-arrow-right-to-bracket'/></Link>}
     </div>
   )
 }
