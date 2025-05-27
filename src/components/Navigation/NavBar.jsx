@@ -11,13 +11,12 @@ const NavButton = ({name, style, icon}) => {
   )
 }
 
-const NavBar = ({ token }) => {
-
-  const [currentToken, setCurrentToken] = useState(token);
+const NavBar = () => {
+  const [token, setToken] = useState('');
 
   useEffect(() => {
-    setCurrentToken(token);
-  }, [token]);
+    setToken(localStorage.getItem('token'));
+  }, []);
   
   return (
     <div className='nav-bar'>
@@ -25,6 +24,7 @@ const NavBar = ({ token }) => {
       <Link to='/about' className='span'><NavButton name='About' style='regular' icon='fa-address-card'/></Link>
       <Link to='/blogs' className='span'><NavButton name='Blog' style='solid' icon='fa-blog'/></Link>
       <Link to='/gallery' className='span'><NavButton name='Gallery' style='solid' icon='fa-paintbrush'/></Link>
+      <Link to='/explore' className='span'><NavButton name='Explore' style='solid' icon='fa-compass'/></Link>
       {token ? <Link to='/account' className='span'><NavButton name='Account' style='solid' icon='fa-user'/></Link> : <Link to='/login' className='span'><NavButton name='Account' style='solid' icon='fa-arrow-right-to-bracket'/></Link>}
     </div>
   )
