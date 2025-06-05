@@ -1,0 +1,31 @@
+.explore-user-container {
+  background-color: var(--container-color);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  width: 300px;
+  box-shadow: var(--box-shadow);
+}
+
+.user-username {
+  font-family: 'Open Sans';
+  font-size: 30px;
+  color: var(--text-color);
+}
+
+.user-name {
+  font-family: 'Open Sans';
+  font-size: 18px;
+  color: var(--text-color-2);
+  margin-bottom: 15px;
+}
+
+.view-profile-btn {
+  font-family: 'Open Sans';
+  font-size: 18px;
+  color: var(--text-color-2);
+  margin-bottom: 15px;
+}
