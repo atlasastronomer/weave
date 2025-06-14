@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: center;
   background-color: var(--container-color);
-  box-shadow: var(--box-shadow);
   border-radius: 15px;
   padding: 5px;
   margin-bottom: 20px;
@@ -20,8 +19,7 @@
   padding-left: 30px;
   padding-right: 30px;
   border-radius: 15px;
-  background-color: var(--container-color);
-  box-shadow: var(--box-shadow);
+  background-color: var(--container-color-2);
   width: 600px;
 }
 
@@ -56,7 +54,6 @@
   align-items: center;
   justify-content: center;
   background-color:var(--container-color);
-  box-shadow: var(--box-shadow);
   padding: 20px;
   border-radius: 15px;
   margin-bottom: 20px;

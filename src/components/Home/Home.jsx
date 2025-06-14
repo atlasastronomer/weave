@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Avatar } from './Avatar'
-import { MediaLink } from './MediaLink'
+import { MediaLink } from '../Links/MediaLink'
 import { ModalNavbar } from '../UserModal/ModalNavbar'
+import { Blog } from '../Blog/Blog'
+import { Gallery } from '../Gallery/Gallery'
 import avatarService from '/src/services/avatarService'
 import wallpaperService from '/src/services/wallpaperService'
 import linkService from '/src/services/linkService'
@@ -30,6 +33,11 @@ const Home = () => {
   const [wallpaperPreviewSource, setWallpaperPreviewSource] = useState('')
   const [showEditWallpaper, setShowEditWallpaper] = useState(false)
 
+  const location = useLocation()
+  const isHomePage = location.pathname === '/'
+  const isBlogPage = location.pathname === '/blogs'
+  const isGalleryPage = location.pathname === '/gallery'
+  
   useEffect(() => {
     const storedToken = localStorage.getItem('token')
     const storedName = localStorage.getItem('name')
@@ -230,7 +238,6 @@ const Home = () => {
         <p className='modal-username'>@{username}</p>
         <p className='modal-name'>{name}</p>
         <p className='modal-about'>{about}</p>
-        <hr></hr>
         <ModalNavbar />
         {showEditAvatar &&
           <div className='home-upload-container'>
@@ -243,32 +250,41 @@ const Home = () => {
           </div>
         }
         <hr className='line-break' style={{ width: '100%', border: 'none', height: '1px', backgroundColor: '#ccc' }} />
-        <div className='links-container'>
-          {links.map((link) =>
-            <MediaLink key={link.id} link={link} handleDeleteLink={() => deleteLink(link.id)} showDeleteLink={showEditLinks}/>
-          )}
-        </div>
-        <div onClick={editLinks} className='pencil-icon'>
-          {showEditLinks ? <i className="fa-solid fa-xmark fa-lg fa-icon"></i> : <i className="fa-solid fa-pencil fa-lg fa-icon"></i>}
-        </div>
         {/* Links */}
-        {showEditLinks && 
-          <form onSubmit={postLink} className='link-input-container'>
-            <input
-              className='link-input-box'
-              placeholder='Title'
-              value={title}
-              onChange = {e => setTitle(e.target.value)}
-            />
-            <input
-              className='link-input-box'
-              placeholder='Link'
-              value={mediaLink}
-              onChange = {e => setMediaLink(e.target.value)}
-            />
-            <button className='blog-post-button' type='submit'>Add Link</button>
-          </form>
-        }
+        {isHomePage &&
+        (
+          <>     
+            <div className='links-container'>
+              {links.map((link) =>
+                <MediaLink key={link.id} link={link} handleDeleteLink={() => deleteLink(link.id)} showDeleteLink={showEditLinks}/>
+              )}
+            </div>
+            <div onClick={editLinks} className='pencil-icon'>
+              {showEditLinks ? <i className="fa-solid fa-xmark fa-lg fa-icon"></i> : <i className="fa-solid fa-pencil fa-lg fa-icon"></i>}
+            </div>
+            {showEditLinks && 
+              <form onSubmit={postLink} className='link-input-container'>
+                <input
+                  className='blog-content-input-box'
+                  placeholder='Title'
+                  value={title}
+                  onChange = {e => setTitle(e.target.value)}
+                />
+                <input
+                  className='blog-content-input-box'
+                  placeholder='Link'
+                  value={mediaLink}
+                  onChange = {e => setMediaLink(e.target.value)}
+                />
+                <button className='upload-delete-btn' type='submit'>Add Link</button>
+              </form>
+            }
+          </>
+        )}
+        {/* Blogs */}
+        {isBlogPage && (<Blog/>)}
+        {/* Gallery */}
+        {isGalleryPage && (<Gallery/>)}
       </div>
     </div>
   )

@@ -5,7 +5,7 @@ const MediaLink = ({link, handleDeleteLink, showDeleteLink}) => {
         {link.title}
       </a>
       {showDeleteLink && <div onClick={handleDeleteLink} className='delete-link-btn'>
-        <i className="fa-solid fa-trash"></i>
+        <i className="fa-icon fa-solid fa-trash"></i>
       </div>}
     </div>
   )

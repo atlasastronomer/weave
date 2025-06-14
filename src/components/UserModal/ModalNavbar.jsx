@@ -12,17 +12,17 @@ const NavButton = ({name, style, icon}) => {
 }
 
 const ModalNavbar = () => {
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState('')
 
   useEffect(() => {
-    setToken(localStorage.getItem('token'));
-  }, []);
+    setToken(localStorage.getItem('token'))
+  }, [])
   
   return (
     <div className='modal-nav-bar'>
       <Link to='/' className='span'><NavButton name='Home' style='solid' icon='fa-home'/></Link>
-      <Link to='/about' className='span'><NavButton name='Blog' style='regular' icon='fa-address-card'/></Link>
-      <Link to='/blogs' className='span'><NavButton name='Gallery' style='solid' icon='fa-blog'/></Link>
+      <Link to='/blogs' className='span'><NavButton name='Blog' style='regular' icon='fa-address-card'/></Link>
+      <Link to='/gallery' className='span'><NavButton name='Gallery' style='solid' icon='fa-blog'/></Link>
     </div>
   )
 }

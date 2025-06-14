@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Blogpost } from './Blogpost.jsx'
 import { Link } from 'react-router-dom'
-import { Wallpaper } from '../Wallpaper.jsx'
 import blogService from '/src/services/blogService'
 import './Blog.css'
 
@@ -67,7 +66,6 @@ const Blog = () => {
 
   return (
     <div>
-      <Wallpaper/>
       {token ?
       <div>
         <div className='blog-title-container'>

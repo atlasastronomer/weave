@@ -3,7 +3,6 @@ import { UserModal } from '../UserModal/UserModal.jsx'
 import { UserContainer } from './UserContainer.jsx'
 import { useState, useEffect } from 'react'
 import userService from '/src/services/userService'
-import { Wallpaper } from '../Wallpaper.jsx'
 import './Explore.css'
 
 const Explore = () => {
@@ -48,8 +47,6 @@ const Explore = () => {
 
   return (
     <div>
-      <Wallpaper />
-
       <div className='user-grid'>
         {users.map((user) => 
         <UserContainer user={user} key={user.id} openModal={openModal}/>

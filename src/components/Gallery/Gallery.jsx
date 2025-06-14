@@ -6,7 +6,6 @@ import galleryService from '/src/services/galleryService'
 import { byRadius } from '@cloudinary/url-gen/actions/roundCorners'
 
 import { GalleryPost } from './GalleryPost'
-import { Wallpaper } from '../Wallpaper'
 import { Link } from 'react-router-dom'
 import './Gallery.css'
 
@@ -94,7 +93,6 @@ const Gallery = () => {
 
   return (
     <div>
-      <Wallpaper/>
       {token ?
         <div>
           <div className='gallery-title-container'>

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Wallpaper } from '../Wallpaper'
 import './Account.css'
 
 const Account = () => {
@@ -16,7 +15,6 @@ const Account = () => {
   }
   return(
     <>
-      <Wallpaper/>
       <div className='account-wrapper'>
         <p className='logout-title'> Logout </p>
         <button className='logout-btn' onClick={handleLogout}> Logout </button>
