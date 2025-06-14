@@ -1,5 +1,5 @@
 import { useNavigate, Routes, Route, useLocation } from 'react-router-dom'
-import { UserModal } from './UserModal.jsx'
+import { UserModal } from '../UserModal/UserModal.jsx'
 import { UserContainer } from './UserContainer.jsx'
 import { useState, useEffect } from 'react'
 import userService from '/src/services/userService'
@@ -13,8 +13,6 @@ const Explore = () => {
 
   const [token, setToken] = useState('')
   const [users, setUsers] = useState([])
-  const [expandedUserId, setExpandedUserId] = useState('')
-
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token')
@@ -29,7 +27,6 @@ const Explore = () => {
   const loadUsers = async () => {
       const res = await userService.getAllUsers()
       setUsers(res.data)
-      console.log(res.data)
   }
 
   useEffect(() => {

@@ -111,12 +111,6 @@
   background-color: var(--button-color-hover);
 }
 
-.line-break {
-  width: 100%;
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
 .link-input-container {
   display: flex;
   flex-direction: column;
@@ -169,4 +163,22 @@
   height: 200px;
   border-radius: 20px;
   object-fit: cover;
+}
+
+.home-modal-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 750px;
+  height: 100vh;
+  background-color: var(--container-color);
+  overflow-y: auto;
+  padding: 15px;
+  z-index: 1001;
+  border-left: 1px #343434 solid;
+  border-right: 1px #343434 solid;
 }

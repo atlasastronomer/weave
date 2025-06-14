@@ -7,4 +7,9 @@ const getAllUsers = async () => {
   return res
 }
 
-export default { getAllUsers }
+const getUser = async (username) => {
+  const res = await axios.get(`${baseUrl}/${username}`)
+  return res
+}
+
+export default { getAllUsers, getUser }

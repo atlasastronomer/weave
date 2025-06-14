@@ -1,0 +1,14 @@
+.side-bar {
+  position: fixed;
+  top: 0;
+  left: calc(50% + 390px);
+  height: 100vh;
+  width: calc(50% - 390px); /** Formula: 50% + (1/2 * (Home.css home-modal-wrapper width + padding))
+                                ONLY adjust this in tandem with the above css class*/
+  background-color: var(--container-color);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  z-index: 1000;
+}

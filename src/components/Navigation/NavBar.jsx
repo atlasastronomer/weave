@@ -12,11 +12,11 @@ const NavButton = ({name, style, icon}) => {
 }
 
 const NavBar = () => {
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState('')
 
   useEffect(() => {
-    setToken(localStorage.getItem('token'));
-  }, []);
+    setToken(localStorage.getItem('token'))
+  }, [])
   
   return (
     <div className='nav-bar'>
