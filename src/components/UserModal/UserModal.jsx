@@ -33,31 +33,28 @@ const UserModal = ({ closeModal }) => {
   }
 
   return (
-    <div className='modal'>
-      <div className='overlay' onClick={closeModal}></div>
-      <div className='modal-wrapper'>
-        <div className='avatar-wallpaper-wrapper'>
-          <div
-            className='modal-wallpaper'
-            style={{
-              backgroundImage: wallpaper?.publicId
-                ? `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://res.cloudinary.com/dxmjrqdzj/image/upload/${wallpaper.publicId}')`
-                : 'none',
-            }}
-          ></div>
-          <Avatar avatar={avatar} />
-        </div>
-        <p className='modal-username'>@{username}</p>
-        <p className='modal-name'>{name}</p>
-        <p className='modal-about'>{about}</p>
-        <div className='modal-nav-bar'>
-          <ModalNavbar />
-        </div>
-        <hr></hr>
-        <button className='close-modal' onClick={closeModal}>
-          <i className="fa-solid fa-xmark fa-lg fa-icon"></i>
-        </button>
+    <div>
+      <div className='avatar-wallpaper-wrapper'>
+        <div
+          className='modal-wallpaper'
+          style={{
+            backgroundImage: wallpaper?.publicId
+              ? `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://res.cloudinary.com/dxmjrqdzj/image/upload/${wallpaper.publicId}')`
+              : 'none',
+          }}
+        ></div>
+        <Avatar avatar={avatar} />
       </div>
+      <p className='modal-username'>@{username}</p>
+      <p className='modal-name'>{name}</p>
+      <p className='modal-about'>{about}</p>
+      <div className='modal-nav-bar'>
+        <ModalNavbar />
+      </div>
+      <hr></hr>
+      <button className='close-modal' onClick={closeModal}>
+        <i className="fa-solid fa-xmark fa-lg fa-icon"></i>
+      </button>
     </div>
   )
 }

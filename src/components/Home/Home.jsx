@@ -222,7 +222,6 @@ const Home = () => {
   }
 
   return (
-    <div>
       <div className='home-modal-wrapper'>
         <div className='avatar-wallpaper-wrapper'>
           <div
@@ -286,7 +285,6 @@ const Home = () => {
         {/* Gallery */}
         {isGalleryPage && (<Gallery/>)}
       </div>
-    </div>
   )
 }
 

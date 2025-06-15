@@ -21,7 +21,6 @@ const NavBar = () => {
   return (
     <div className='nav-bar'>
       <Link to='/' className='span'><NavButton name='Home' style='solid' icon='fa-home'/></Link>
-      <Link to='/about' className='span'><NavButton name='About' style='regular' icon='fa-address-card'/></Link>
       <Link to='/blogs' className='span'><NavButton name='Blog' style='solid' icon='fa-blog'/></Link>
       <Link to='/gallery' className='span'><NavButton name='Gallery' style='solid' icon='fa-paintbrush'/></Link>
       <Link to='/explore' className='span'><NavButton name='Explore' style='solid' icon='fa-compass'/></Link>

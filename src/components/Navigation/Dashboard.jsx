@@ -5,13 +5,18 @@ import { useState, useEffect } from 'react'
 import './Dashboard.css'
 
 const Dashboard = () => {
+  const [token, setToken] = useState(null)
+  
+  useEffect(() => {
+    setToken(localStorage.getItem('token'))
+  }, [])
   return(
     <div className='dashboard'>
-      <NavBar/>
+      {token && <NavBar/>}
       <div className='main-page'>
         <Outlet/>
       </div>
-      <SideBar/>
+      {token && <SideBar/>}
     </div>
   )
 }

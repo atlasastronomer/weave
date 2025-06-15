@@ -14,12 +14,12 @@ const Account = () => {
     window.location.reload()
   }
   return(
-    <>
+    <div className=''>
       <div className='account-wrapper'>
         <p className='logout-title'> Logout </p>
         <button className='logout-btn' onClick={handleLogout}> Logout </button>
       </div>
-    </>
+    </div>
   )
 }
 

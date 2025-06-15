@@ -3,14 +3,15 @@
   top: 0;
   left: 0;
   height: 100vh;
-  width: calc(50% - 390px); /** Formula: 50% - (1/2 * (Home.css home-modal-wrapper width + padding))
+  width: calc(50% - 375px); /** Formula: 50% + (1/2 * (Home.css home-modal-wrapper total width))
                                 ONLY adjust this in tandem with the above css class*/
   background-color: var(--container-color);
   display: flex;
   flex-direction: column;
   gap: 15px;
   padding: 20px;
-  z-index: 1000;
+  z-index: 2000;
+  border-right: 1px #343434 solid;
 }
 
 .nav-button-wrapper {

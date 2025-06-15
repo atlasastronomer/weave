@@ -28,11 +28,10 @@ const Blog = () => {
       blogService.getBlogs()
       .then(res => {
         setBlogs(res.data.reverse())
-      })
-  
-      if (blogs) {
+        if (res.data.length > 0) {
         setHasBlogs(true)
       }
+      })
     }
   },[])
 
