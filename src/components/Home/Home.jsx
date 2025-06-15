@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Avatar } from './Avatar'
-import { MediaLink } from '../Links/MediaLink'
 import { ModalNavbar } from '../UserModal/ModalNavbar'
+import { LinkPage } from '../Links/LinkPage'
 import { Blog } from '../Blog/Blog'
 import { Gallery } from '../Gallery/Gallery'
 import avatarService from '/src/services/avatarService'
 import wallpaperService from '/src/services/wallpaperService'
-import linkService from '/src/services/linkService'
 import aboutService from '/src/services/aboutService'
 import './Home.css'
 
@@ -16,12 +15,6 @@ const Home = () => {
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [about, setAbout] = useState()
-
-  const [links, setLinks] = useState([])
-  const [showEditLinks, setShowEditLinks] = useState(false)
-
-  const [title, setTitle] = useState('')
-  const [mediaLink, setMediaLink] = useState('')
 
   const [avatar, setAvatar] = useState(null)
   const [avatarFileInputState, setAvatarFileInputState] = useState('')
@@ -49,12 +42,10 @@ const Home = () => {
     if (storedToken) {
       avatarService.setToken(storedToken)
       wallpaperService.setToken(storedToken)
-      linkService.setToken(storedToken)
       aboutService.setToken(storedToken)
       loadAvatar()
       loadWallpaper()
       loadAbout()
-      getLinks()
     }
   }, [])
 
@@ -180,47 +171,6 @@ const Home = () => {
     }
   }
 
-  /** Links */
-  const getLinks = async () => {
-    try {
-      const res = await linkService.getLinks()
-      setLinks(res.data)
-    }
-    catch (error) {
-      console.log('Error in fetching links:', error.message)
-    }
-  }
-
-  const postLink = async (e) => {
-    e.preventDefault()
-
-    const linkObject = {
-      title: title,
-      mediaLink: mediaLink,
-    }
-
-    const res = await linkService.createLink(linkObject)
-
-    setLinks(links.concat(res.data))
-    setTitle('')
-    setMediaLink('')
-    setShowEditLinks(false)
-  }
-
-  const deleteLink = async (id) => {
-    try {
-      linkService.deleteLink(id)
-      setLinks(links.filter(l => l.id !== id))
-    }
-    catch (err) {
-      console.log(err, 'Failed to Delete Link')
-    }
-  }
-
-  const editLinks = () => {
-    setShowEditLinks(!showEditLinks)
-  }
-
   return (
       <div className='home-modal-wrapper'>
         <div className='avatar-wallpaper-wrapper'>
@@ -250,36 +200,7 @@ const Home = () => {
         }
         <hr className='line-break' style={{ width: '100%', border: 'none', height: '1px', backgroundColor: '#ccc' }} />
         {/* Links */}
-        {isHomePage &&
-        (
-          <>     
-            <div className='links-container'>
-              {links.map((link) =>
-                <MediaLink key={link.id} link={link} handleDeleteLink={() => deleteLink(link.id)} showDeleteLink={showEditLinks}/>
-              )}
-            </div>
-            <div onClick={editLinks} className='pencil-icon'>
-              {showEditLinks ? <i className="fa-solid fa-xmark fa-lg fa-icon"></i> : <i className="fa-solid fa-pencil fa-lg fa-icon"></i>}
-            </div>
-            {showEditLinks && 
-              <form onSubmit={postLink} className='link-input-container'>
-                <input
-                  className='blog-content-input-box'
-                  placeholder='Title'
-                  value={title}
-                  onChange = {e => setTitle(e.target.value)}
-                />
-                <input
-                  className='blog-content-input-box'
-                  placeholder='Link'
-                  value={mediaLink}
-                  onChange = {e => setMediaLink(e.target.value)}
-                />
-                <button className='upload-delete-btn' type='submit'>Add Link</button>
-              </form>
-            }
-          </>
-        )}
+        {isHomePage && (<LinkPage />)}
         {/* Blogs */}
         {isBlogPage && (<Blog/>)}
         {/* Gallery */}

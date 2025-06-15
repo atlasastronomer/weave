@@ -1,9 +1,5 @@
 import { useState, useEffect } from 'react'
-import {Cloudinary} from "@cloudinary/url-gen"
-import { crop, fill, scale, fit, thumbnail, pad } from '@cloudinary/url-gen/actions/resize'
-import { format } from '@cloudinary/url-gen/actions/delivery'
 import galleryService from '/src/services/galleryService'
-import { byRadius } from '@cloudinary/url-gen/actions/roundCorners'
 
 import { GalleryPost } from './GalleryPost'
 import { Link } from 'react-router-dom'
