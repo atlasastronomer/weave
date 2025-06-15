@@ -172,7 +172,7 @@ const Home = () => {
   }
 
   return (
-      <div className='home-modal-wrapper'>
+      <div className='main-page-wrapper'>
         <div className='avatar-wallpaper-wrapper'>
           <div
             className='modal-wallpaper'
