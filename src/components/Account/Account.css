@@ -5,13 +5,12 @@
   align-items: center;
   margin: 40px;
   width: max-content;
-  background-color: var(--container-color);
+  background-color: var(--container-color-2);
   padding-top: 15px;
   padding-bottom: 15px;
   padding-left: 30px;
   padding-right: 30px;
   border-radius: 15px;
-  box-shadow: var(--box-shadow);
 }
 
 .logout-title {
@@ -26,6 +25,7 @@
 }
 
 .logout-btn {
+  color: white;
   font-family: 'Open Sans';
   font-size: 14.5px;
   width: 200px;

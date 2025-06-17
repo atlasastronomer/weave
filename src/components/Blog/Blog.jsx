@@ -67,7 +67,7 @@ const Blog = () => {
     <div>
       {token ?
       <div>
-        <div className='blog-title-container'>
+        <div className='edit-blog-container'>
           <div onClick={() => setShow(!show)} className='plus-minus'>
             {show ? <i className="fa-solid fa-minus fa-lg fa-icon"></i> : <i className="fa-solid fa-plus fa-lg fa-icon"></i>}
           </div>

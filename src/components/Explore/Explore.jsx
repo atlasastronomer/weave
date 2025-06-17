@@ -46,7 +46,7 @@ const Explore = () => {
   const closeModal = () => navigate('/explore')
 
   return (
-    <div>
+    <div className='main-page-wrapper'>
       <div className='user-grid'>
         {users.map((user) => 
         <UserContainer user={user} key={user.id} openModal={openModal}/>

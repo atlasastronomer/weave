@@ -13,7 +13,7 @@ const Dashboard = () => {
   return(
     <div className='dashboard'>
       {token && <NavBar/>}
-      <div className='main-page'>
+      <div className={token ? 'main-page' : ''}>
         <Outlet/>
       </div>
       {token && <SideBar/>}

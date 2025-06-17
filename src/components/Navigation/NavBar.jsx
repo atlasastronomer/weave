@@ -21,8 +21,6 @@ const NavBar = () => {
   return (
     <div className='nav-bar'>
       <Link to='/' className='span'><NavButton name='Home' style='solid' icon='fa-home'/></Link>
-      <Link to='/blogs' className='span'><NavButton name='Blog' style='solid' icon='fa-blog'/></Link>
-      <Link to='/gallery' className='span'><NavButton name='Gallery' style='solid' icon='fa-paintbrush'/></Link>
       <Link to='/explore' className='span'><NavButton name='Explore' style='solid' icon='fa-compass'/></Link>
       {token ? <Link to='/account' className='span'><NavButton name='Account' style='solid' icon='fa-user'/></Link> : <Link to='/login' className='span'><NavButton name='Account' style='solid' icon='fa-arrow-right-to-bracket'/></Link>}
     </div>

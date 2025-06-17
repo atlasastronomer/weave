@@ -7,7 +7,6 @@
   align-items: center;
   border-radius: 15px;
   width: 300px;
-  box-shadow: var(--box-shadow);
 }
 
 .user-username {
