@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
-import './ModalNavbar.css'
+import './UserPageNavbar.css'
 import { useState, useEffect } from 'react'
 
 const NavButton = ({name, style, icon}) => {
@@ -11,7 +11,7 @@ const NavButton = ({name, style, icon}) => {
   )
 }
 
-const ModalNavbar = () => {
+const UserPageNavbar = () => {
   const [token, setToken] = useState('')
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const ModalNavbar = () => {
   }, [])
   
   return (
-    <div className='modal-nav-bar'>
+    <div className='userpage-nav-bar'>
       <Link to='/' className='span'><NavButton name='Home' style='solid' icon='fa-home'/></Link>
       <Link to='/blogs' className='span'><NavButton name='Blog' style='regular' icon='fa-address-card'/></Link>
       <Link to='/gallery' className='span'><NavButton name='Gallery' style='solid' icon='fa-blog'/></Link>
@@ -27,4 +27,4 @@ const ModalNavbar = () => {
   )
 }
 
-export { ModalNavbar }
+export { UserPageNavbar }

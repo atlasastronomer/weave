@@ -17,6 +17,11 @@ const getWallpaper = async () => {
   return res
 }
 
+const getWallpaperByUsername = async (username) => {
+  const res = await axios.get(`${baseUrl}/${username}`)
+  return res
+}
+
 const uploadWallpaper = async (body) => {
   const config = {
     headers: {Authorization: token,
@@ -27,4 +32,4 @@ const uploadWallpaper = async (body) => {
   return res
 }
 
-export default { getWallpaper, uploadWallpaper, setToken }
+export default { getWallpaper, uploadWallpaper, setToken, getWallpaper, getWallpaperByUsername }

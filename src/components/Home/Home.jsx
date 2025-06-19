@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Avatar } from './Avatar'
-import { ModalNavbar } from '../UserModal/ModalNavbar'
+import { UserPageNavbar } from '../UserPage/UserPageNavbar'
 import { LinkPage } from '../Links/LinkPage'
 import { Blog } from '../Blog/Blog'
 import { Gallery } from '../Gallery/Gallery'
@@ -9,6 +9,7 @@ import avatarService from '/src/services/avatarService'
 import wallpaperService from '/src/services/wallpaperService'
 import aboutService from '/src/services/aboutService'
 import './Home.css'
+import '../UserPage/UserPage.css'
 
 const Home = () => {
   const [token, setToken] = useState('')
@@ -175,7 +176,7 @@ const Home = () => {
       <div className='main-page-wrapper'>
         <div className='avatar-wallpaper-wrapper'>
           <div
-            className='modal-wallpaper'
+            className='userpage-wallpaper'
             style={{
               backgroundImage: wallpaperUrl
                 ? `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${wallpaperUrl})`
@@ -184,10 +185,10 @@ const Home = () => {
           ></div>
           <Avatar avatar={avatar} />
         </div>
-        <p className='modal-username'>@{username}</p>
-        <p className='modal-name'>{name}</p>
-        <p className='modal-about'>{about}</p>
-        <ModalNavbar />
+        <p className='userpage-username'>@{username}</p>
+        <p className='userpage-name'>{name}</p>
+        <p className='userpage-about'>{about}</p>
+        <UserPageNavbar />
         {showEditAvatar &&
           <div className='home-upload-container'>
             <form onSubmit={handleSubmitAvatarFile} className='form-container'>

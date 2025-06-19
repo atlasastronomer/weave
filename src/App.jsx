@@ -5,7 +5,7 @@ import { Home } from './components/Home/Home.jsx'
 import { Login } from './components/Authentication/Login.jsx'
 import { Account } from './components/Account/Account.jsx'
 import { Signup } from './components/Authentication/Signup.jsx'
-import { Explore } from './components/Explore/Explore.jsx'
+import { UserPage } from './components/UserPage/UserPage.jsx'
 
 import './assets/App.css'
 
@@ -26,9 +26,9 @@ const App = () => {
             <Route path='/blogs' element={<Home />}/>
             <Route path='/gallery' element={<Home />}/>
             <Route path='/account' element={!token ? <Login/> : <Account />}/>
-            <Route path='/explore/*' element={<Explore />} />
             <Route path='/login' element={token ? <Account/> : <Login />}/>
             <Route path='/signup' element={token ? <Account/> : <Signup />}/>
+            <Route path='/:username' element={<UserPage />}/>
           </Routes>
       </Router>
     </div>

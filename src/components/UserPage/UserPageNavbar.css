@@ -1,4 +1,4 @@
-.modal-nav-bar {
+.userpage-nav-bar {
   display: flex;
   width: 100%;
   height: 40px; 
@@ -8,7 +8,7 @@
   transition: hover, 0.15s;
 }
 
-.modal-nav-button-wrapper {
+.userpage-nav-button-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -23,15 +23,15 @@
   transition-timing-function: ease-out;
 }
 
-.modal-nav-button-wrapper:active {
+.userpage-nav-button-wrapper:active {
   opacity: 0.75;
 }
 
-.modal-nav-button-wrapper:hover {
+.userpage-nav-button-wrapper:hover {
   background-color: var(--nav-btn-hover-color)
 }
 
-.modal-nav-button-label {
+.userpage-nav-button-label {
   flex: 5;
   text-align: left;
   font-family: "Open Sans";
@@ -44,7 +44,7 @@
   padding-bottom: 8px;
 }
 
-.modal-nav-button-icon {
+.userpage-nav-button-icon {
   flex: 2;
   color: white;
   text-align: right;
