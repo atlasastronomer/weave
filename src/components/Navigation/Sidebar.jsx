@@ -53,11 +53,13 @@ const SideBar = () => {
           onChange={e => setSearchValue(e.target.value)}
         />
       </div>
-      <div className='search-results'>
-        {filteredUsers.map((user) => 
-          <UserEntry user={user} key={user.id} openModal={() => navigate(`${user.username}`)}/>
-        )}
-      </div>
+      {filteredUsers.length !== 0 && (
+        <div className='search-results'>
+          {filteredUsers.map((user) => 
+            <UserEntry user={user} key={user.id} openModal={() => navigate(`${user.username}`)}/>
+          )}
+        </div>
+      )}
     </div>
   )
 }

@@ -41,4 +41,41 @@
 .search-results {
   display: flex;
   flex-direction: column;
+  background-color: var(--container-color-2);
+  border-radius: 15px;
+}
+
+.user-search-row {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  padding: 15px;
+  transition: hover ease 2s;
+}
+
+.user-search-row:hover {
+  background-color: var(--container-color-2-hover);
+}
+
+.user-search-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-search-name {
+  color: var(--text-color);
+  font-size: 15px;
+}
+
+.user-search-username {
+  color: var(--text-color-2);
+  font-size: 15px;
+}
+
+.user-search-avatar {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 10px;
 }

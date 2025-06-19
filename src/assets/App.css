@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Open Sans';
 }
 
 :root{
@@ -7,6 +8,7 @@
   --title-color: rgba(255, 255, 255, 1);
   --container-color: rgba(26, 26, 26, 1);
   --container-color-2: #262626;
+  --container-color-2-hover: #3b3b3b;
   --box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
   --text-color: white;
   --text-color-2: #999999;
@@ -22,7 +24,7 @@
   /* NavBar */
   --nav-bar-color: rgba(73, 157, 232, 0.25);
   --nav-wrapper-color: rgba(73, 157, 232, 0.25);
-  --nav-btn-hover-color: rgba(228, 228, 228, 0.59);
+  --nav-btn-hover-color: #3b3b3b
 }
 
 hr {

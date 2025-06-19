@@ -62,16 +62,16 @@
 
 .userpage-username {
   font-family: 'Open Sans';
-  margin-top: 60px;
-  font-size: 30px;
-  color: var(--text-color);
+  font-size: 18px;
+  color: var(--text-color-2);
+  margin-bottom: 15px;
 }
 
 .userpage-name {
   font-family: 'Open Sans';
-  font-size: 18px;
-  color: var(--text-color-2);
-  margin-bottom: 15px;
+  margin-top: 60px;
+  font-size: 30px;
+  color: var(--text-color);
 }
 
 .userpage-about {

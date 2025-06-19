@@ -8,7 +8,6 @@ import { Gallery } from '../Gallery/Gallery'
 import avatarService from '/src/services/avatarService'
 import wallpaperService from '/src/services/wallpaperService'
 import aboutService from '/src/services/aboutService'
-import './Home.css'
 import '../UserPage/UserPage.css'
 
 const Home = () => {
@@ -185,8 +184,8 @@ const Home = () => {
           ></div>
           <Avatar avatar={avatar} />
         </div>
-        <p className='userpage-username'>@{username}</p>
         <p className='userpage-name'>{name}</p>
+        <p className='userpage-username'>@{username}</p>
         <p className='userpage-about'>{about}</p>
         <UserPageNavbar />
         {showEditAvatar &&
