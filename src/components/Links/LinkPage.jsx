@@ -64,7 +64,7 @@ const LinkPage = () => {
   }
 
   return (
-    <>     
+    <div>
       <div className='links-container'>
         {links.map((link) =>
           <MediaLink key={link.id} link={link} handleDeleteLink={() => deleteLink(link.id)} showDeleteLink={showEditLinks}/>
@@ -90,7 +90,7 @@ const LinkPage = () => {
           <button className='upload-delete-btn' type='submit'>Add Link</button>
         </form>
       }
-    </>
+    </div>
   )
 }
 

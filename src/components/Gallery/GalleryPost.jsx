@@ -27,7 +27,6 @@ const GalleryPost = ({post, handleDeletePost}) => {
           .delivery(dpr('auto'))
         }
       />
-      <button className='upload-delete-btn' onClick={handleDeletePost}>Delete Post</button>
     </div>
   )
 }

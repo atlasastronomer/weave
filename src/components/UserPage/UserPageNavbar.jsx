@@ -11,18 +11,20 @@ const NavButton = ({name, style, icon}) => {
   )
 }
 
-const UserPageNavbar = () => {
+const UserPageNavbar = ({username}) => {
   const [token, setToken] = useState('')
+  const [userUsername, setUserUsername] = useState()
 
   useEffect(() => {
     setToken(localStorage.getItem('token'))
-  }, [])
+    setUserUsername(username)
+  }, [username])
   
   return (
     <div className='userpage-nav-bar'>
-      <Link to='/' className='span'><NavButton name='Home' style='solid' icon='fa-home'/></Link>
-      <Link to='/blogs' className='span'><NavButton name='Blog' style='regular' icon='fa-address-card'/></Link>
-      <Link to='/gallery' className='span'><NavButton name='Gallery' style='solid' icon='fa-blog'/></Link>
+      <Link to={`/${userUsername}`} className='span'><NavButton name='Home' style='solid' icon='fa-home'/></Link>
+      <Link to={`/${userUsername}/blogs`} className='span'><NavButton name='Blog' style='regular' icon='fa-address-card'/></Link>
+      <Link to={`/${userUsername}/gallery`} className='span'><NavButton name='Gallery' style='solid' icon='fa-blog'/></Link>
     </div>
   )
 }

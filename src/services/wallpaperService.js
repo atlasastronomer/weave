@@ -18,7 +18,11 @@ const getWallpaper = async () => {
 }
 
 const getWallpaperByUsername = async (username) => {
-  const res = await axios.get(`${baseUrl}/${username}`)
+  const config = {
+    headers: {Authorization: token},
+  }
+
+  const res = await axios.get(`${baseUrl}/${username}`, config)
   return res
 }
 

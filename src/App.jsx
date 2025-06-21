@@ -28,7 +28,10 @@ const App = () => {
             <Route path='/account' element={!token ? <Login/> : <Account />}/>
             <Route path='/login' element={token ? <Account/> : <Login />}/>
             <Route path='/signup' element={token ? <Account/> : <Signup />}/>
+            <Route path='/explore' element={<></>}/>
             <Route path='/:username' element={<UserPage />}/>
+            <Route path='/:username/blogs' element={<UserPage />}/>
+            <Route path='/:username/gallery' element={<UserPage />}/>
           </Routes>
       </Router>
     </div>

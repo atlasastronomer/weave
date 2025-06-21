@@ -10,7 +10,6 @@ const Blogpost = ({blog, handleDeleteBlog}) => {
       <div className='blog-body'>
         <p> {blog.content} </p>
       </div>
-      <button className='upload-delete-btn' onClick={handleDeleteBlog}>Delete Blog</button>
     </div>
   )
 }
