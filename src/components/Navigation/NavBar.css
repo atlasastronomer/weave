@@ -1,4 +1,7 @@
-.nav-bar {
+.nav-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: fixed;
   top: 0;
   left: 0;
@@ -12,6 +15,12 @@
   padding: 20px;
   z-index: 2000;
   border-right: 1px #343434 solid;
+}
+
+.nav-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .nav-button-wrapper {
@@ -38,6 +47,31 @@
 .nav-button-icon {
   color: white;
   font-size: 14px;
+}
+
+.create-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 15px;
+  background-color: white;
+  transition: background-color 0.2s ease;
+}
+
+.create-button:hover {
+  cursor: pointer;
+  background-color: var(--login-btn-hover-color);
+}
+
+.create-button-label {
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
 }
 
 .span {

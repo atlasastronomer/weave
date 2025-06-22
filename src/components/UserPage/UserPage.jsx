@@ -65,7 +65,6 @@ const UserPage = () => {
         setUserPosts(user.posts)
         setUserBlogs(user.blogs)
         setWallpaperUrl(`https://res.cloudinary.com/dxmjrqdzj/image/upload/${user.wallpaper.publicId}`)
-        console.log(user.wallpaper.publicId)
       } catch (error) {
         console.error('Error fetching user:', error)
       }

@@ -62,6 +62,10 @@ body {
   color: var(--button-text-color);
 }
 
+.fa-black {
+  color: black;
+}
+
 input[type="file"]::file-selector-button {
   margin-top: 15px;
   font-family: 'Open Sans';

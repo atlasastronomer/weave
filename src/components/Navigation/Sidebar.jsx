@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useNavigate} from 'react-router-dom'
 import userService from '/src/services/userService'
 import { UserEntry } from './UserEntry.jsx'
@@ -6,6 +7,7 @@ import './Sidebar.css'
 
 const SideBar = () => {
   const navigate = useNavigate()
+  const location = useLocation()
 
   const [token, setToken] = useState('')
   const [searchValue, setSearchValue] = useState('')
@@ -41,6 +43,11 @@ const SideBar = () => {
     )
     setFilteredUsers(filtered)
   }, [searchValue, users])
+
+  useEffect(() => {
+    setSearchValue('')
+    setFilteredUsers([])
+  }, [location])
 
   return (
     <div className='side-bar'>
