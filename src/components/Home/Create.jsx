@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Blog } from '../Blog/Blog'
 import { Gallery } from '../Gallery/Gallery'
 import { LinkPage } from '../Links/LinkPage'
@@ -17,6 +18,10 @@ const CreateButton = ({icon, text, color}) => {
 
 const Create = ({closeCreate}) => {
   const [token, setToken] = useState('')
+  const location = useLocation()
+  const isCreatingLink = location.pathname === '/new/link'
+  const isCreatingBlog = location.pathname === '/new/blog'
+  const isCreatingPost = location.pathname === '/new/post'
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token')

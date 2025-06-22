@@ -11,7 +11,7 @@ const NavButton = ({name, style, icon}) => {
   )
 }
 
-const NavBar = ({openCreateMedia}) => {
+const NavBar = ({openCreate}) => {
   const [token, setToken] = useState('')
   const [username, setUsername] = useState('')
   const [showCreate, setShowCreate] = useState(false)
@@ -30,7 +30,7 @@ const NavBar = ({openCreateMedia}) => {
           <Link to={`/${username}`} className='span'><NavButton name='Profile' style='solid' icon='fa-user'/></Link>
           {token ? <Link to='/account' className='span'><NavButton name='Settings' style='solid' icon='fa-gear'/></Link> : <Link to='/login' className='span'><NavButton name='Settings' style='solid' icon='fa-arrow-right-to-bracket'/></Link>}
         </div>
-        <button className='create-button' onClick={openCreateMedia}>
+        <button className='create-button' onClick={openCreate}>
           <i className={'fa-solid fa-lg fa-pencil'}></i>
           <p className='create-button-label'>Create</p>
         </button>

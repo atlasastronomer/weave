@@ -32,8 +32,6 @@ const UserPage = () => {
   const [userPosts, setUserPosts] = useState([])
   const [userWallpaperId, setUserWallpaperId] = useState()
   const [wallpaperUrl, setWallpaperUrl] = useState('')
-  
-  const [activeTab, setActiveTab] = useState('links')
 
   const location = useLocation()
   const isHomePage = location.pathname === `/${username}`
