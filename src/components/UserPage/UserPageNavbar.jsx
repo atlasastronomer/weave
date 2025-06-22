@@ -23,8 +23,8 @@ const UserPageNavbar = ({username}) => {
   return (
     <div className='userpage-nav-bar'>
       <Link to={`/${userUsername}`} className='span'><NavButton name='Home' style='solid' icon='fa-home'/></Link>
-      <Link to={`/${userUsername}/blogs`} className='span'><NavButton name='Blog' style='regular' icon='fa-address-card'/></Link>
-      <Link to={`/${userUsername}/gallery`} className='span'><NavButton name='Gallery' style='solid' icon='fa-blog'/></Link>
+      <Link to={`/${userUsername}/blogs`} className='span'><NavButton name='Blog' style='solid' icon='fa-blog'/></Link>
+      <Link to={`/${userUsername}/gallery`} className='span'><NavButton name='Gallery' style='solid' icon='fa-image'/></Link>
     </div>
   )
 }

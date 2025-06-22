@@ -15,7 +15,6 @@ const Dashboard = () => {
 
   const openCreateMedia = () => {
     setShowCreate(!showCreate)
-    console.log(showCreate)
   }
 
   return(

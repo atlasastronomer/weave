@@ -60,11 +60,11 @@
   padding-bottom: 10px;
   border-radius: 15px;
   background-color: white;
+  cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
 .create-button:hover {
-  cursor: pointer;
   background-color: var(--login-btn-hover-color);
 }
 

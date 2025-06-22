@@ -1,5 +1,19 @@
 import { useState, useEffect } from 'react'
+import { Blog } from '../Blog/Blog'
+import { Gallery } from '../Gallery/Gallery'
+import { LinkPage } from '../Links/LinkPage'
 import './Create.css'
+
+const CreateButton = ({icon, text, color}) => {
+  return (
+    <div className='create-btn-wrapper'>
+      <button className='create-btn' style={{backgroundColor: `${color}`}}>
+        <i className={`fa-solid fa-3x fa-black ${icon}`}></i>
+      </button>
+      <p className='create-label'>{text}</p>
+    </div>
+  )
+}
 
 const Create = ({closeCreate}) => {
   const [token, setToken] = useState('')
@@ -11,11 +25,14 @@ const Create = ({closeCreate}) => {
 
   return (
       <div className='create-container-wrapper'>
-        <div className='create-container'>
-          <button className='create-cancel-btn' onClick={(closeCreate)}>
-            <i className='fa-solid fa-xl fa-xmark fa-black'></i>
-          </button>
+        <div className='create-btn-row'>
+          <CreateButton icon={'fa-link'} text={'Link'} color={'#ffffff'}/>
+          <CreateButton icon={'fa-blog'} text={'Blog'} color={'#ffffff'}/>
+          <CreateButton icon={'fa-image'} text={'Image'} color={'#ffffff'}/>
         </div>
+        <button className='create-cancel-btn' onClick={(closeCreate)}>
+          <i className='fa-solid fa-xl fa-xmark fa-black'></i>
+        </button>
       </div>
   )
 }

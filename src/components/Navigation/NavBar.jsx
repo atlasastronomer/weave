@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
 import './NavBar.css'
 import { useState, useEffect } from 'react'
-import { Create } from '../Home/Create'
 
 const NavButton = ({name, style, icon}) => {
   return (
