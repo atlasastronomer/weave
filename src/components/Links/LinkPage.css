@@ -33,24 +33,6 @@
   background-color: var(--button-color-hover);
 }
 
-.delete-link-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--button-color);
-  padding: 15px;
-  padding-bottom: 12px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 50%;
-  transition: hover, 0.3s;
-}
-
-.delete-link-btn:hover {
-  cursor: pointer;
-  background-color: var(--button-color-hover);
-}
-
 .link-input-container {
   display: flex;
   flex-direction: column;
@@ -60,19 +42,33 @@
   margin-bottom: 20px;
 }
 
-.link-input-box {
+.link-title-input-box {
+  font-family: 'Open Sans';
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 25px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+.link-url-input-box {
   font-family: 'Open Sans';
   font-size: 15px;
   text-align: center;
-  width: 390px;
+  width: 500px;
   border: none;
   outline: none;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
+  background-color: transparent;
+  color: var(--text-color);
 }
 
-.links-container {
+.link-post-btn-group {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
 }

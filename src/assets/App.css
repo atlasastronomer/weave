@@ -17,12 +17,11 @@
   --button-color-hover: #3c3c3c;
   --button-text-color: white;
   --blue-color: #03bbff;
+  --blue-color-hover: #49cfff;
   
-  /* Login */
   --login-wrapper-color: rgb(255, 255, 255);
   --login-btn-hover-color: #ccd1db;
   
-  /* NavBar */
   --nav-bar-color: rgba(73, 157, 232, 0.25);
   --nav-wrapper-color: rgba(73, 157, 232, 0.25);
   --nav-btn-hover-color: #3b3b3b
@@ -111,39 +110,22 @@ input[type="file"]::file-selector-button:hover {
   background: var(--button-color-hover);
 }
 
-/* Home */
-.pencil-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  background-color: var(--button-color);
-  padding: 15px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 15px;
-  transition: hover 0.3s;
-}
-
-.pencil-icon:hover {
+.blue-btn {
+  font-family: 'Open Sans';
+  margin-top: 15px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--button-text-color);
+  text-decoration: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: var(--blue-color);
+  border-radius: 100px;
+  border: none;
   cursor: pointer;
-  background-color: var(--button-color-hover);
-}
-
-/* Blog/Gallery */
-.plus-minus {
-  background-color: var(--button-color);
-  padding: 15px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 15px;
-  transition: hover, 0.3s;
-}
-
-.plus-minus:hover {
-  cursor: pointer;
-  background-color: var(--button-color-hover);
+  transition: hover, 0.2s;
 }
 
 .main-page-wrapper {

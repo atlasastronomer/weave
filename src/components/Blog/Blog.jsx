@@ -1,23 +1,26 @@
 import { useState, useEffect } from 'react'
-import { Blogpost } from './Blogpost.jsx'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import blogService from '/src/services/blogService'
 import './Blog.css'
 
 const Blog = () => {
-  const [blogs, setBlogs] = useState([])
-  
+
   const [token, setToken] = useState('')
-  const [title, setTitle] = useState('Title')
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+  const [username, setUsername] = useState('')
   const [author, setAuthor] = useState('Author')
-  const [content, setContent] = useState('Content')
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token')
     const storedName = localStorage.getItem('name')
+    const storedUsername = localStorage.getItem('username')
 
     setToken(storedToken)
     setAuthor(storedName)
+    setUsername(storedUsername)
 
     if (storedToken) {
       blogService.setToken(storedToken)
@@ -34,11 +37,11 @@ const Blog = () => {
       content: content,
     }
 
-    const res = await blogService.createBlog(blogObject)
+    await blogService.createBlog(blogObject)
 
-    setBlogs([res.data, ...blogs])
     setTitle('')
     setContent('')
+    navigate(`${username}/blogs`)
   }
 
   return (
@@ -57,7 +60,10 @@ const Blog = () => {
             value={content}
             onChange = {e => setContent(e.target.value)}
           />
-          <button className='gray-btn' type='submit'>Post Blog</button>
+          <div className='blog-post-btn-group'>
+            <button className='gray-btn' type='button' onClick={() => {navigate(-1)}}>Close</button>
+            <button className='blue-btn' type='submit'>Post Blog</button>
+          </div>
         </form>
       </div>
     </div>
