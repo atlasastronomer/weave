@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Blog } from '../Blog/Blog'
 import { Gallery } from '../Gallery/Gallery'
 import { LinkPage } from '../Links/LinkPage'
 import './Create.css'
 
-const CreateButton = ({icon, text, color}) => {
+const CreateButton = ({icon, text, color, navigateTo}) => {
+  const navigate = useNavigate()
+
   return (
     <div className='create-btn-wrapper'>
-      <button className='create-btn' style={{backgroundColor: `${color}`}}>
+      <button className='create-btn' style={{backgroundColor: `${color}`}} onClick={() => navigate(`/new/${navigateTo}`)}>
         <i className={`fa-solid fa-3x fa-black ${icon}`}></i>
       </button>
       <p className='create-label'>{text}</p>
@@ -18,6 +20,7 @@ const CreateButton = ({icon, text, color}) => {
 
 const Create = ({closeCreate}) => {
   const [token, setToken] = useState('')
+
   const location = useLocation()
   const isCreatingLink = location.pathname === '/new/link'
   const isCreatingBlog = location.pathname === '/new/blog'
@@ -30,14 +33,20 @@ const Create = ({closeCreate}) => {
 
   return (
       <div className='create-container-wrapper'>
-        <div className='create-btn-row'>
-          <CreateButton icon={'fa-link'} text={'Link'} color={'#ffffff'}/>
-          <CreateButton icon={'fa-blog'} text={'Blog'} color={'#ffffff'}/>
-          <CreateButton icon={'fa-image'} text={'Image'} color={'#ffffff'}/>
-        </div>
-        <button className='create-cancel-btn' onClick={(closeCreate)}>
-          <i className='fa-solid fa-xl fa-xmark fa-black'></i>
-        </button>
+        {(!isCreatingLink && !isCreatingBlog && !isCreatingPost) &&
+        <>
+          <div className='create-btn-row'>
+            <CreateButton icon={'fa-link'} text={'Link'} color={'#ffffff'} navigateTo={'link'}/>
+            <CreateButton icon={'fa-blog'} text={'Blog'} color={'#ffffff'} navigateTo={'blog'}/>
+            <CreateButton icon={'fa-image'} text={'Image'} color={'#ffffff'} navigateTo={'image'}/>
+          </div>
+          <button className='create-cancel-btn' onClick={(closeCreate)}>
+            <i className='fa-solid fa-xl fa-xmark fa-black'></i>
+          </button>
+        </>}
+        {isCreatingLink && <LinkPage/>}
+        {isCreatingBlog && <Blog/>}
+        {isCreatingPost && <Gallery/>}
       </div>
   )
 }

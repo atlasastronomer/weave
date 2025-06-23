@@ -16,6 +16,7 @@
   --button-color-2: rgba(26, 26, 26, 1);
   --button-color-hover: #3c3c3c;
   --button-text-color: white;
+  --blue-color: #03bbff;
   
   /* Login */
   --login-wrapper-color: rgb(255, 255, 255);
@@ -88,7 +89,7 @@ input[type="file"]::file-selector-button:hover {
   background: var(--button-color-hover);
 }
 
-.upload-delete-btn {
+.gray-btn {
   font-family: 'Open Sans';
   margin-top: 15px;
   font-size: 15px;
@@ -106,7 +107,7 @@ input[type="file"]::file-selector-button:hover {
   transition: hover, 0.2s;
 }
 
-.upload-delete-btn:hover {
+.gray-btn:hover {
   background: var(--button-color-hover);
 }
 

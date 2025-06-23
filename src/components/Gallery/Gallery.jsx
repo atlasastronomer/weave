@@ -108,7 +108,7 @@ const Gallery = () => {
                 />
                 <div className='post-upload-btn-group'>
                   <input type='file' name='image' accept='image/png, image/jpeg, image/jpg, image/avif, image/webp' onChange={handleFileInputChange} />
-                  <button type='submit' className='upload-delete-btn'>Post Image</button>
+                  <button type='submit' className='gray-btn'>Post Image</button>
                 </div>
               </form>
               {previewSource && (

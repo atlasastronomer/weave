@@ -14,7 +14,6 @@ const NavButton = ({name, style, icon}) => {
 const NavBar = ({openCreate}) => {
   const [token, setToken] = useState('')
   const [username, setUsername] = useState('')
-  const [showCreate, setShowCreate] = useState(false)
 
   useEffect(() => {
     setToken(localStorage.getItem('token'))

@@ -87,7 +87,7 @@ const LinkPage = () => {
             value={mediaLink}
             onChange = {e => setMediaLink(e.target.value)}
           />
-          <button className='upload-delete-btn' type='submit'>Add Link</button>
+          <button className='gray-btn' type='submit'>Add Link</button>
         </form>
       }
     </div>
