@@ -24,7 +24,7 @@ const Create = ({closeCreate}) => {
   const location = useLocation()
   const isCreatingLink = location.pathname === '/new/link'
   const isCreatingBlog = location.pathname === '/new/blog'
-  const isCreatingPost = location.pathname === '/new/post'
+  const isCreatingPost = location.pathname === '/new/image'
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token')

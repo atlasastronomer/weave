@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import galleryService from '/src/services/galleryService'
 
-import { GalleryPost } from './GalleryPost'
-import { Link } from 'react-router-dom'
 import './Gallery.css'
 
 const Gallery = () => {
@@ -10,32 +9,26 @@ const Gallery = () => {
   const [token, setToken] = useState('')
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
+  const [username, setUsername] = useState('')
   const [fileInputState, setFileInputState] = useState('')
   const [previewSource, setPreviewSource] = useState('')
-  const [posts, setPosts] = useState([])
-  const [show, setShow] = useState(false)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token')
     const storedName = localStorage.getItem('name')
+    const storedUsername = localStorage.getItem('username')
+
     setToken(storedToken)
     setAuthor(storedName)
+    setUsername(storedUsername)
 
     if (storedToken) {
       galleryService.setToken(storedToken)
-      loadImages()
     }
   }, [])
 
-  const loadImages = async () => {
-    try {
-      const res = await galleryService.getGallery()
-      setPosts(res.data.reverse())
-    }
-    catch (error) {
-      console.log(error)
-    }
-  }
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0]
@@ -50,12 +43,13 @@ const Gallery = () => {
     }
   }
 
-  const handleSubmitFile = (e) => {
+  const handleSubmitFile = async (e) => {
     e.preventDefault()
     if (!previewSource) return
 
     const date = String(new Date())
-    uploadImage(previewSource, title, date, author)
+    await uploadImage(previewSource, title, date, author)
+    navigate(`${username}/gallery`)
   }
 
   const uploadImage = async (base64EncodedImage, title, date, author) => {
@@ -66,7 +60,6 @@ const Gallery = () => {
         date,
         author
       })
-      setPosts([res.data, ...posts])
       setTitle('')
       setFileInputState('')
       setPreviewSource('')
@@ -77,68 +70,29 @@ const Gallery = () => {
     }
   }
 
-  const deletePost = async (id) => {
-    try {
-      galleryService.deletePost(id)
-      setPosts(posts.filter(p => p.id !== id))
-    }
-    catch (err) {
-      console.log(err, 'Failed to Delete Post')
-    }
-  }
-
   return (
-    <div>
-      {token ?
-        <div>
-          <div className='gallery-title-container'>
-            <div onClick={() => setShow(!show)} className='plus-minus'>
-              {show ? <i className="fa-solid fa-minus fa-lg fa-icon"></i> : <i className="fa-solid fa-plus fa-lg fa-icon"></i>}
-            </div>
-          </div>
-
-          {show &&
-            <div className='gallery-upload-container'>
-              <form onSubmit={handleSubmitFile} className='form-container'>
-                <input
-                  className='post-title-input-box'
-                  placeholder='Title'
-                  value={title}
-                  onChange={e => setTitle(e.target.value)}
-                />
-                <div className='post-upload-btn-group'>
-                  <input type='file' name='image' accept='image/png, image/jpeg, image/jpg, image/avif, image/webp' onChange={handleFileInputChange} />
-                  <button type='submit' className='gray-btn'>Post Image</button>
-                </div>
-              </form>
-              {previewSource && (
-                <img
-                  src={previewSource}
-                  alt="chosen"
-                  style={{ width: '300px', margin: '20px auto 0 auto', borderRadius: '15px' }}
-                  className='gallery-preview-image'
-                />
-              )}
-            </div>
-          }
-
-          <div className='gallery-board'>
-            {posts.map((post, i) =>
-              <GalleryPost
-                key={i}
-                post={post}
-                handleDeletePost={() => deletePost(post.id)}
-              />
-            )}
-          </div>
+    <div className='gallery-upload-container'>
+      <form onSubmit={handleSubmitFile} className='gallery-form-container'>
+        <input
+          className='post-title-input-box'
+          placeholder='Title'
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+        />
+        <div className='post-btn-group'>
+          <button className='gray-btn' type='button' onClick={() => {navigate(-1)}}>Close</button>
+          <input type='file' name='image' accept='image/png, image/jpeg, image/jpg, image/avif, image/webp' onChange={handleFileInputChange} />
+          <button type='submit' className='blue-btn'>Post Image</button>
         </div>
-        :
-        <div className='gallery-login-container'>
-          <p className='gallery-login-title'>Weave</p>
-          <p className='gallery-login-text'>Sign up or log in to view your gallery</p>
-          <Link to='/login' className='gallery-login-btn'> Login </Link>
-        </div>
-      }
+      </form>
+      {previewSource && (
+        <img
+          src={previewSource}
+          alt="chosen"
+          style={{ width: '300px', margin: '20px auto 0 auto', borderRadius: '15px' }}
+          className='gallery-preview-image'
+        />
+      )}
     </div>
   )
 }

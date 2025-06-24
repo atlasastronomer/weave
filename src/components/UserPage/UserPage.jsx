@@ -22,6 +22,7 @@ const UserPage = () => {
   const [token, setToken] = useState('')
   
   const { username } = useParams()
+  const [isSelf, setIsSelf] = useState()
 
   const [userName, setUserName] = useState()
   const [userUsername, setUserUsername] = useState()
@@ -47,6 +48,7 @@ const UserPage = () => {
     if (storedToken) {
       avatarService.setToken(storedToken)
       aboutService.setToken(storedToken)
+      userService.setToken(storedToken)
     }
   }, [])
 
@@ -59,9 +61,9 @@ const UserPage = () => {
         setUserName(user.name)
         setUserUsername(user.username)
         setUserAbout(user.about)
-        setUserLinks(user.links)
-        setUserPosts(user.posts)
-        setUserBlogs(user.blogs)
+        setUserLinks(user.links.reverse())
+        setUserPosts(user.posts.reverse())
+        setUserBlogs(user.blogs.reverse())
         setWallpaperUrl(`https://res.cloudinary.com/dxmjrqdzj/image/upload/${user.wallpaper.publicId}`)
       } catch (error) {
         console.error('Error fetching user:', error)
@@ -69,6 +71,21 @@ const UserPage = () => {
     }
 
     fetchUser()
+  }, [username])
+
+  useEffect(() => {
+    const verifyIsSelf = async () => {
+      try {
+        const res = await userService.verifyIsSelf(username)
+        const result = await res.data
+        console.log(result.isSelf)
+      }
+      catch (error) {
+        console.error('Error fetching user:', error)
+      }
+    }
+
+    verifyIsSelf()
   }, [username])
 
   const Blog = () => {
