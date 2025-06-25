@@ -14,7 +14,7 @@ const getGallery = async () => {
   }
 
   const res = await axios.get(baseUrl, config)
-  return res
+  return res.data
 }
 
 const uploadToGallery = async (body) => {
@@ -24,7 +24,7 @@ const uploadToGallery = async (body) => {
     }
   }
   const res = await axios.post(baseUrl, body, config)
-  return res
+  return res.data
 }
 
 const deletePost = async (id) => {
@@ -33,7 +33,7 @@ const deletePost = async (id) => {
   }
 
   const res = await axios.delete(`${baseUrl}/${id}`)
-  return res
+  return res.data
 }
 
 export default { uploadToGallery, getGallery, deletePost, setToken}

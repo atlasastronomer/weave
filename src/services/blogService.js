@@ -14,7 +14,7 @@ const getBlogs = async () => {
   }
 
   const res = await axios.get(baseUrl, config)
-  return res
+  return res.data
 }
 
 const createBlog = async (newObject) => {
@@ -23,7 +23,7 @@ const createBlog = async (newObject) => {
   }
 
   const res = await axios.post(baseUrl, newObject, config)
-  return res
+  return res.data
 }
 
 const deleteBlog = async (id) => {
@@ -32,7 +32,7 @@ const deleteBlog = async (id) => {
   }
 
   const res = await axios.delete(`${baseUrl}/${id}`)
-  return res
+  return res.data
 }
 
 export default { getBlogs, createBlog, deleteBlog, setToken}

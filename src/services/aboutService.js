@@ -14,7 +14,7 @@ const getAbout = async () => {
   }
 
   const res = await axios.get(baseUrl, config)
-  return res
+  return res.data
 }
 
 const changeAbout = async (newObject) => {
@@ -23,7 +23,7 @@ const changeAbout = async (newObject) => {
   }
 
   const res = await axios.post(baseUrl, newObject, config)
-  return res
+  return res.data
 }
 
 export default { getAbout, changeAbout, setToken }

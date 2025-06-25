@@ -10,12 +10,12 @@ const setToken = (newToken) => {
 
 const getAllUsers = async () => {
   const res = await axios.get(baseUrl)
-  return res
+  return res.data
 }
 
 const getUser = async (username) => {
   const res = await axios.get(`${baseUrl}/${username}`)
-  return res
+  return res.data
 }
 
 const verifyIsSelf = async (username) => {
@@ -25,7 +25,7 @@ const verifyIsSelf = async (username) => {
 
   const url = `http://localhost:${VITE_PORT}/api/is-self`
   const res = await axios.post(url, {username: username}, config)
-  return res
+  return res.data
 }
 
 export default { getAllUsers, getUser, verifyIsSelf, setToken }

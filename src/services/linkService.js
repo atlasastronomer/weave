@@ -14,7 +14,7 @@ const getLinks = async () => {
   }
 
   const res = await axios.get(baseUrl, config)
-  return res
+  return res.data
 }
 
 const createLink = async (newObject) => {
@@ -23,7 +23,7 @@ const createLink = async (newObject) => {
   }
 
   const res = await axios.post(baseUrl, newObject, config)
-  return res
+  return res.data
 }
 
 const deleteLink = async (id) => {
@@ -32,7 +32,7 @@ const deleteLink = async (id) => {
   }
 
   const res = await axios.delete(`${baseUrl}/${id}`)
-  return res
+  return res.data
 }
 
 export default { getLinks, createLink, deleteLink, setToken}

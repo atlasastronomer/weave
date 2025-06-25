@@ -25,8 +25,8 @@ const SideBar = () => {
 
   const loadUsers = async () => {
     try {
-      const res = await userService.getAllUsers()
-      setUsers(res.data)
+      const users = await userService.getAllUsers()
+      setUsers(users)
     } catch (error) {
       console.error('Failed to load users:', error)
     }

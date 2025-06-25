@@ -14,7 +14,7 @@ const getAvatar = async () => {
   }
 
   const res = await axios.get(baseUrl, config)
-  return res
+  return res.data
 }
 
 const uploadAvatar = async (body) => {
@@ -24,7 +24,7 @@ const uploadAvatar = async (body) => {
     }
   }
   const res = await axios.post(baseUrl, body, config)
-  return res
+  return res.data
 }
 
 export default { getAvatar, uploadAvatar, setToken }

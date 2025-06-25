@@ -55,8 +55,7 @@ const UserPage = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await userService.getUser(username)
-        const user = await res.data
+        const user = await userService.getUser(username)
         setUserAvatar(user.avatar)
         setUserName(user.name)
         setUserUsername(user.username)
@@ -76,9 +75,8 @@ const UserPage = () => {
   useEffect(() => {
     const verifyIsSelf = async () => {
       try {
-        const res = await userService.verifyIsSelf(username)
-        const result = await res.data
-        console.log(result.isSelf)
+        const result = await userService.verifyIsSelf(username)
+        console.log("UserPage.jsx: Viewing my Profile:",result.isSelf)
       }
       catch (error) {
         console.error('Error fetching user:', error)
@@ -105,6 +103,7 @@ const UserPage = () => {
           {userPosts.map((post, i) =>
             <GalleryPost
               key={i}
+              user={username}
               post={post}
               handleDeletePost={() => deletePost(post.id)}
             />
@@ -138,7 +137,7 @@ const UserPage = () => {
               : 'none',
           }}
         ></div>
-        <Avatar avatar={userAvatar} />
+        <Avatar avatar={userAvatar} size={400}/>
       </div>
       <p className='userpage-name'>{userName}</p>
       <p className='userpage-username'>@{userUsername}</p>

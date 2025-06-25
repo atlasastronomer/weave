@@ -4,20 +4,20 @@ import { scale } from '@cloudinary/url-gen/actions/resize'
 import { dpr } from '@cloudinary/url-gen/actions/delivery'
 import { byRadius } from '@cloudinary/url-gen/actions/roundCorners'
 
-const Avatar = ({ avatar, size }) => {
+const UserAvatar = ({ avatar }) => {
   const cld = new Cloudinary({
     cloud: { cloudName: 'dxmjrqdzj' }
   })
 
   const img = cld.image(avatar?.publicId || 'a4wnscg3rzebph187nng')
-    .resize(scale().width(size))
-    .roundCorners(byRadius(20))
+    .resize(scale().width(400))
     .format('png')
     .delivery(dpr('auto'))
 
   return(
-    <AdvancedImage cldImg={img} className='avatar' />
+    <AdvancedImage cldImg={img} className='user-search-avatar' />
   )
 }
 
-export { Avatar }
+
+export { UserAvatar }

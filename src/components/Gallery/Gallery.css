@@ -19,6 +19,11 @@
   border-radius: 15px;
 }
 
+.post-header {
+  display: flex;
+  flex-direction: row;
+}
+
 .gallery-upload-container {
   display: flex;
   flex-direction: column;
@@ -60,7 +65,7 @@
   color: var(--text-color);
 }
 
-.post-info {
+.post-date {
   font-family: 'Open Sans';
   font-size: 15px;
   color: var(--text-color-2);
