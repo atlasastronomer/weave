@@ -17,6 +17,11 @@ const getAvatar = async () => {
   return res.data
 }
 
+const getAvatarByUsername = async (username) => {
+  const res = await axios.get(`${baseUrl}/${username}`)
+  return res.data
+}
+
 const uploadAvatar = async (body) => {
   const config = {
     headers: {Authorization: token,
@@ -27,4 +32,4 @@ const uploadAvatar = async (body) => {
   return res.data
 }
 
-export default { getAvatar, uploadAvatar, setToken }
+export default { getAvatar, uploadAvatar, getAvatarByUsername, setToken }

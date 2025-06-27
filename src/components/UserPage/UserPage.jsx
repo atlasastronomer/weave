@@ -102,6 +102,7 @@ const UserPage = () => {
         <div className='gallery-board'>
           {userPosts.map((post, i) =>
             <GalleryPost
+              username={username}
               key={i}
               user={username}
               post={post}
@@ -137,7 +138,7 @@ const UserPage = () => {
               : 'none',
           }}
         ></div>
-        <Avatar avatar={userAvatar} size={400}/>
+        <Avatar avatar={userAvatar} classname={'avatar'}/>
       </div>
       <p className='userpage-name'>{userName}</p>
       <p className='userpage-username'>@{userUsername}</p>

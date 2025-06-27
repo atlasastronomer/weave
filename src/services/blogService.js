@@ -31,7 +31,7 @@ const deleteBlog = async (id) => {
     headers: {Authorization: token},
   }
 
-  const res = await axios.delete(`${baseUrl}/${id}`)
+  const res = await axios.delete(`${baseUrl}/${id}`, config)
   return res.data
 }
 

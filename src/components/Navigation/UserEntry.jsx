@@ -1,6 +1,4 @@
-import { useNavigate, Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
-import { UserAvatar } from './UserAvatar'
+import { Avatar } from '../Home/Avatar'
 
 const UserEntry = ({user, openModal}) => {
   const name = user.name
@@ -9,7 +7,7 @@ const UserEntry = ({user, openModal}) => {
 
   return (
     <div className='user-search-row' onClick={() => openModal(user.username)}>
-      <UserAvatar avatar = {avatar}/>
+      <Avatar avatar={avatar} classname={'user-search-avatar'}/>
       <div className='user-search-info'>
         <p className='user-search-name'>{name}</p>
         <p className='user-search-username'>@{username}</p>
