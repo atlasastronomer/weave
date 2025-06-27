@@ -42,13 +42,12 @@ const GalleryPost = ({username, post, handleDeletePost}) => {
       <div className='post-header'>
         <Avatar avatar={avatar} classname={'gallery-avatar'}/>
         <div className='post-information'>
-          <div className='post-title'>
-            <p>{post.title} </p>
-          </div>
-          <div className='post-date'>
-            <p> {post.author} &#x2022; {post.date} </p>
-          </div>
+          <p className='post-title'>{post.title} </p>
+          <p className='post-date'> {post.author} &#x2022; {post.date} </p>
         </div>
+        <button className='more-button'>
+          <i className={`fa-solid fa-2x fa-icon fa-ellipsis`}></i>
+        </button>
       </div>
       <AdvancedImage
         className='gallery-image container'

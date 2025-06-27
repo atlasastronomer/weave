@@ -90,7 +90,11 @@ const UserPage = () => {
     return(
       <div>
         {userBlogs.map((blog) => 
-          <Blogpost key={blog.id} blog={blog}/>
+          <Blogpost
+            username={username}
+            key={blog.id}
+            blog={blog}
+          />
         )}
       </div>
     )
@@ -106,7 +110,6 @@ const UserPage = () => {
               key={i}
               user={username}
               post={post}
-              handleDeletePost={() => deletePost(post.id)}
             />
           )}
         </div>

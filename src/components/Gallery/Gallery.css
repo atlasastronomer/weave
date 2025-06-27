@@ -29,6 +29,10 @@
   padding-right: 15px;
 }
 
+.post-information {
+  margin-right: auto;
+}
+
 .gallery-upload-container {
   display: flex;
   flex-direction: column;

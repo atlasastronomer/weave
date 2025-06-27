@@ -4,8 +4,8 @@
   align-items: center;
   margin-bottom: 20px;
   display: flex;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 15px;
+  padding-bottom: -15px;
   padding-left: 30px;
   padding-right: 30px;
   border-radius: 15px;
@@ -14,7 +14,15 @@
 }
 
 .blog-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
   width: 100%;
+}
+
+.blog-information {
+  margin-right: auto;
 }
 
 .blog-title {
@@ -23,7 +31,7 @@
   color: var(--text-color);
 }
 
-.blog-info {
+.blog-date {
   width: 100%;
   font-family: 'Open Sans';
   font-size: 15px;

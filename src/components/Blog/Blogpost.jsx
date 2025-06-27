@@ -1,11 +1,43 @@
-const Blogpost = ({blog, handleDeleteBlog}) => {
+import { useState, useEffect } from 'react'
+import { Avatar } from '../Home/Avatar'
+
+import userService from '/src/services/userService'
+import avatarService from '/src/services/avatarService'
+
+const Blogpost = ({username, blog, handleDeleteBlog}) => {
+  const [token, setToken] = useState('')
+  const [avatar, setAvatar] = useState('')
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token')
+    setToken(storedToken)
+
+    if (storedToken) {
+      userService.setToken(storedToken)
+      avatarService.setToken(storedToken)
+    }
+  })
+
+  useEffect(() => {
+    const fetchAvatar = async () => {
+      const avatar = await avatarService.getAvatarByUsername(username)
+      setAvatar(avatar)
+    }
+
+    fetchAvatar()
+  }, [])
+
   return (
     <div className='blog-container'>
       <div className='blog-header'>
-        <p className='blog-title'>{blog.title} </p>
-      </div>
-      <div className='blog-info'>
-        <p> {blog.author} &#x2022; {blog.date} </p>
+        <Avatar avatar={avatar} classname={'gallery-avatar'}/>
+        <div className='blog-information'>
+          <p className='blog-title'>{blog.title} </p>
+          <p className='blog-date'> {blog.author} &#x2022; {blog.date} </p>
+        </div>
+        <button className='more-button'>
+          <i className={`fa-solid fa-2x fa-icon fa-ellipsis`}></i>
+        </button>
       </div>
       <div className='blog-body'>
         <p> {blog.content} </p>

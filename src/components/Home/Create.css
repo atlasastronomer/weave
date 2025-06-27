@@ -31,15 +31,18 @@
 }
 
 .create-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 30px;
-  padding-left: 25px;
-  padding-right:25px;
   background-color: white;
   border-radius: 15px;
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease;
   margin-bottom: 15px;
+  width: 100px;
+  height: 100px;
 }
 
 .create-label {
