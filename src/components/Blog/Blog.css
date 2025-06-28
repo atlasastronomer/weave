@@ -2,15 +2,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   display: flex;
-  padding-top: 15px;
-  padding-bottom: -15px;
-  padding-left: 30px;
-  padding-right: 30px;
-  border-radius: 15px;
+  padding-top: 0.9375rem;
+  padding-bottom: -0.9375rem;
+  padding-left: 1.875rem;
+  padding-right: 1.875rem;
+  border-radius: 0.9375rem;
   background-color: var(--container-color-2);
-  width: 600px;
+  width: 37.5rem;
 }
 
 .blog-header {
@@ -27,23 +27,23 @@
 
 .blog-title {
   font-family: 'Open Sans';
-  font-size: 25px;
+  font-size: 1.5625rem;
   color: var(--text-color);
 }
 
 .blog-date {
   width: 100%;
   font-family: 'Open Sans';
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: var(--text-color-2);
-  margin-bottom: 15px;
+  margin-bottom: 0.9375rem;
 }
 
 .blog-body {
   width: 100%;
   font-family: 'Open Sans';
   color: var(--text-color);
-  margin-bottom: 30px;
+  margin-bottom: 1.875rem;
 }
 
 .blog-input-container {
@@ -51,17 +51,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color:var(--container-color);
-  padding: 20px;
-  border-radius: 15px;
-  margin-bottom: 20px;
+  background-color: var(--container-color);
+  padding: 1.25rem;
+  border-radius: 0.9375rem;
+  margin-bottom: 1.25rem;
 }
 
 .blog-title-input-box {
   font-family: 'Open Sans';
-  font-size: 25px;
+  font-size: 1.5625rem;
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 1.5625rem;
   border: none;
   outline: none;
   background-color: transparent;
@@ -70,12 +70,12 @@
 
 .blog-content-input-box {
   font-family: 'Open Sans';
-  font-size: 15px;
+  font-size: 0.9375rem;
   text-align: center;
-  width: 500px;
+  width: 31.25rem;
   border: none;
   outline: none;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
   background-color: transparent;
   color: var(--text-color);
 }

@@ -1,6 +1,6 @@
 .links-title-display {
   font-family: 'Open Sans';
-  font-size: 25px;
+  font-size: 1.5625rem;
   color: var(--text-color);
 }
 
@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: row;
   width: max-content;
-  column-gap: 10px;
+  column-gap: 0.625rem;
 }
 
 .media-link-btn {
@@ -17,15 +17,15 @@
   text-align: center;
   background-color: var(--button-color);
   color: var(--text-color);
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 50px;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+  border-radius: 3.125rem;
   transition: hover, 0.3s;
-  width: 275px;
+  width: 17.1875rem;
 }
 
 .media-link-btn:hover {
@@ -38,15 +38,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px;
-  margin-bottom: 20px;
+  padding: 0.625rem;
+  margin-bottom: 1.25rem;
 }
 
 .link-title-input-box {
   font-family: 'Open Sans';
-  font-size: 25px;
+  font-size: 1.5625rem;
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 1.5625rem;
   border: none;
   outline: none;
   background-color: transparent;
@@ -55,12 +55,12 @@
 
 .link-url-input-box {
   font-family: 'Open Sans';
-  font-size: 15px;
+  font-size: 0.9375rem;
   text-align: center;
-  width: 500px;
+  width: 31.25rem;
   border: none;
   outline: none;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
   background-color: transparent;
   color: var(--text-color);
 }

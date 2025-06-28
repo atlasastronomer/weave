@@ -6,30 +6,27 @@
   top: 0;
   left: 0;
   height: 100vh;
-  width: calc(50% - 375px); /** Formula: 50% + (1/2 * (Home.css home-modal-wrapper total width))
-                                ONLY adjust this in tandem with the above css class*/
+  width: calc(50% - 23.4375rem); /* 375px to rem */
   background-color: var(--container-color);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding: 20px;
+  gap: 0.9375rem;
+  padding: 1.25rem;
   z-index: 2000;
-  border-right: 1px #343434 solid;
+  border-right: 0.0625rem #343434 solid;
 }
 
 .nav-bar {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 0.9375rem;
 }
 
 .nav-button-wrapper {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
+  gap: 0.625rem;
+  padding: 0.625rem 1.25rem;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   transition: background-color 0.2s ease;
 }
 
@@ -40,13 +37,13 @@
 .nav-button-label {
   color: white;
   font-family: "Open Sans";
-  font-size: 15px;
+  font-size: 0.9375rem;
   margin: 0;
 }
 
 .nav-button-icon {
   color: white;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .create-button {
@@ -54,11 +51,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 1.25rem;
   border: none;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-radius: 15px;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  border-radius: 0.9375rem;
   background-color: white;
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -69,7 +66,7 @@
 }
 
 .create-button-label {
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: bold;
   color: black;
 }
