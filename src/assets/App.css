@@ -172,3 +172,24 @@ input[type="file"]::file-selector-button:hover {
 .more-button:hover {
   background-color: var(--button-color-hover);
 }
+
+.more-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.more-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--container-color);
+  box-shadow: var(--box-shadow);
+  z-index: 10;
+  border-radius: 6px;
+  width: 250px;
+}

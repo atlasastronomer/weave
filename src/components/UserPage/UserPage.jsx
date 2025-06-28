@@ -87,6 +87,12 @@ const UserPage = () => {
   }, [username])
 
   const Blog = () => {
+    const [openMoreId, setOpenMoreId] = useState(null)
+
+    const toggleMore = (id) => {
+      setOpenMoreId(prev => (prev === id ? null: id))
+    }
+
     return(
       <div>
         {userBlogs.map((blog) => 
@@ -94,6 +100,8 @@ const UserPage = () => {
             username={username}
             key={blog.id}
             blog={blog}
+            isMoreOpen={openMoreId === blog.id}
+            toggleMore={toggleMore}
           />
         )}
       </div>
@@ -101,6 +109,12 @@ const UserPage = () => {
   }
 
   const Gallery = () => {
+    const [openMoreId, setOpenMoreId] = useState(null)
+
+    const toggleMore = (id) => {
+      setOpenMoreId(prev => (prev === id ? null : id))
+    }
+
     return(
       <div>
         <div className='gallery-board'>
@@ -110,6 +124,8 @@ const UserPage = () => {
               key={i}
               user={username}
               post={post}
+              isMoreOpen={openMoreId === post.id}
+              toggleMore={toggleMore}
             />
           )}
         </div>

@@ -8,7 +8,7 @@ import { Avatar } from '../Home/Avatar'
 import userService from '/src/services/userService'
 import avatarService from '/src/services/avatarService'
 
-const GalleryPost = ({username, post, handleDeletePost}) => {
+const GalleryPost = ({username, post, isMoreOpen, toggleMore, ishandleDeletePost}) => {
   const [token, setToken] = useState('')
   const [avatar, setAvatar] = useState('')
 
@@ -45,9 +45,18 @@ const GalleryPost = ({username, post, handleDeletePost}) => {
           <p className='post-title'>{post.title} </p>
           <p className='post-date'> {post.author} &#x2022; {post.date} </p>
         </div>
-        <button className='more-button'>
-          <i className={`fa-solid fa-2x fa-icon fa-ellipsis`}></i>
-        </button>
+        <div className='more-wrapper'>
+          <button className='more-button' onClick={() => toggleMore(post.id)}>
+            <i className={`fa-solid fa-2x fa-icon fa-ellipsis`}></i>
+          </button>
+          {isMoreOpen && (
+            <div className='more-container'>
+              <div>
+                Delete Image
+              </div>
+            </div>
+          )}
+        </div>
       </div>
       <AdvancedImage
         className='gallery-image container'
