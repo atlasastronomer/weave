@@ -4,7 +4,7 @@ import { Avatar } from '../Home/Avatar'
 import userService from '/src/services/userService'
 import avatarService from '/src/services/avatarService'
 
-const Blogpost = ({username, blog, isMoreOpen, toggleMore, handleDeleteBlog}) => {
+const Blogpost = ({username, blog, isMoreOpen, toggleMore, isSelf, handleDeleteBlog}) => {
   const [token, setToken] = useState('')
   const [avatar, setAvatar] = useState('')
 
@@ -41,9 +41,12 @@ const Blogpost = ({username, blog, isMoreOpen, toggleMore, handleDeleteBlog}) =>
           </button>
           {isMoreOpen && (
             <div className='more-container'>
-              <div>
-                Delete Blog
-              </div>
+              {isSelf &&
+                <div className='more-button-wrapper' onClick={handleDeleteBlog}>
+                  <i className='fa-solid fa-trash fa-red'></i>
+                  <p className='more-text-red'>Delete</p>
+                </div>
+              }
             </div>
           )}
         </div>

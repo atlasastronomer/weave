@@ -9,7 +9,7 @@
   --container-color: rgba(26, 26, 26, 1);
   --container-color-2: #262626;
   --container-color-2-hover: #3b3b3b;
-  --box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
+  --box-shadow: 0 0 12px rgba(255, 255, 255, 0.2), 0 0 24px rgba(255, 255, 255, 0.2);
   --text-color: white;
   --text-color-2: #999999;
   --button-color: #262626;
@@ -69,6 +69,10 @@ body {
 
 .fa-black {
   color: black;
+}
+
+.fa-red {
+  color: red;
 }
 
 input[type="file"]::file-selector-button {
@@ -190,11 +194,33 @@ input[type="file"]::file-selector-button:hover {
   justify-content: center;
   position: absolute;
   top: 100%;
-  left: 50%;
+  left: -50%;
   transform: translateX(-50%);
   background-color: var(--container-color);
   box-shadow: var(--box-shadow);
   z-index: 10;
   border-radius: 0.375rem;
   width: 15.625rem;
+}
+
+.more-button-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 1.25rem;
+  cursor: pointer;
+  border-radius: 0.625rem;
+  transition: background-color 0.2s ease;
+}
+
+.more-text-red {
+  font-size: 1rem;
+  text-align: center;
+  color: red;
+}
+
+.more-text-white {
+  font-size: 1rem;
+  text-align: center;
+  color: white;
 }

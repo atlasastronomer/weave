@@ -12,6 +12,8 @@ import { GalleryPost } from '../Gallery/GalleryPost'
 import userService from '/src/services/userService'
 import avatarService from '/src/services/avatarService'
 import aboutService from '/src/services/aboutService'
+import blogService from '/src/services/blogService'
+import galleryService from '/src/services/galleryService'
 
 import '../UserPage/UserPage.css'
 import '../Blog/Blog.css'
@@ -31,7 +33,6 @@ const UserPage = () => {
   const [userLinks, setUserLinks] = useState([])
   const [userBlogs, setUserBlogs] = useState([])
   const [userPosts, setUserPosts] = useState([])
-  const [userWallpaperId, setUserWallpaperId] = useState()
   const [wallpaperUrl, setWallpaperUrl] = useState('')
 
   const location = useLocation()
@@ -41,8 +42,6 @@ const UserPage = () => {
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token')
-    const storedName = localStorage.getItem('name')
-    const storedUsername = localStorage.getItem('username')
     setToken(storedToken)
 
     if (storedToken) {
@@ -76,7 +75,7 @@ const UserPage = () => {
     const verifyIsSelf = async () => {
       try {
         const result = await userService.verifyIsSelf(username)
-        console.log("UserPage.jsx: Viewing my Profile:",result.isSelf)
+        setIsSelf(result.isSelf)
       }
       catch (error) {
         console.error('Error fetching user:', error)
@@ -93,6 +92,16 @@ const UserPage = () => {
       setOpenMoreId(prev => (prev === id ? null: id))
     }
 
+    const deleteBlog = (id) => {
+      try {
+        blogService.deleteBlog(id)
+        setUserBlogs(userBlogs.filter(b => b.id !== id))
+      }
+      catch (err) {
+        console.log(err, 'Failed to Delete Blog')
+      }
+    }
+
     return(
       <div>
         {userBlogs.map((blog) => 
@@ -102,6 +111,8 @@ const UserPage = () => {
             blog={blog}
             isMoreOpen={openMoreId === blog.id}
             toggleMore={toggleMore}
+            isSelf={isSelf}
+            handleDeleteBlog={() => {deleteBlog(blog.id)}}
           />
         )}
       </div>
@@ -115,17 +126,29 @@ const UserPage = () => {
       setOpenMoreId(prev => (prev === id ? null : id))
     }
 
+    const deletePost = async (id) => {
+      try {
+        galleryService.deletePost(id)
+        setUserPosts(userPosts.filter(p => p.id !== id))
+      }
+      catch (err) {
+        console.log(err, 'Failed to Delete Post')
+      }
+    }
+
     return(
       <div>
         <div className='gallery-board'>
-          {userPosts.map((post, i) =>
+          {userPosts.map((post) =>
             <GalleryPost
               username={username}
-              key={i}
+              key={post.id}
               user={username}
               post={post}
               isMoreOpen={openMoreId === post.id}
               toggleMore={toggleMore}
+              isSelf={isSelf}
+              handleDeletePost={() => deletePost(post.id)}
             />
           )}
         </div>
