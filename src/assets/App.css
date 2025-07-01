@@ -27,15 +27,6 @@
   --nav-btn-hover-color: #3b3b3b
 }
 
-hr {
-  width: 100%;
-  height: 0.3125rem;
-  color: white;
-  border: none;
-  margin-top: 0.9375rem;
-  margin-bottom: 0.9375rem;
-}
-
 /* General */
 html, body {
   height: 100%;
@@ -149,7 +140,6 @@ input[type="file"]::file-selector-button:hover {
   height: auto;
   background-color: var(--container-color);
   overflow-y: auto;
-  padding: 0.9375rem;
   z-index: 1000;
 }
 

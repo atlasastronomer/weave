@@ -9,11 +9,7 @@ const setToken = (newToken) => {
 }
 
 const getAvatar = async () => {
-  const config = {
-    headers: {Authorization: token},
-  }
-
-  const res = await axios.get(baseUrl, config)
+  const res = await axios.get(baseUrl)
   return res.data
 }
 

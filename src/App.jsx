@@ -22,14 +22,17 @@ const App = () => {
         <Dashboard/>
           <Routes>
             <Route path='/' element={<Home />}/>
+            <Route path='/for_you' element={<Home />}/>
+            <Route path='/following' element={<Home />}/>
+
+            <Route path='/explore/*' element={<></>}/>
             <Route path='/account' element={!token ? <Login/> : <Account />}/>
             <Route path='/login' element={token ? <Account/> : <Login />}/>
             <Route path='/signup' element={token ? <Account/> : <Signup />}/>
-            <Route path='/explore' element={<></>}/>
+
             <Route path='/new/*' element={<></>} />
-            <Route path='/:username' element={<UserPage />}/>
-            <Route path='/:username/blogs' element={<UserPage />}/>
-            <Route path='/:username/gallery' element={<UserPage />}/>
+
+            <Route path='/:username/*' element={<UserPage />}/>
           </Routes>
       </Router>
     </div>

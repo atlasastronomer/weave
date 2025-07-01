@@ -1,0 +1,30 @@
+.feed-toggle-navbar {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  border-bottom: 0.0625rem solid #343434;
+}
+
+.feed-toggle-btn {
+  display: flex;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  border-bottom: 0.2rem solid transparent;
+}
+
+.feed-toggle-btn:hover {
+  background-color: var(--button-color-hover);
+}
+
+.feed-toggle-label {
+  font-weight: 600;
+  color: var(--text-color);
+}

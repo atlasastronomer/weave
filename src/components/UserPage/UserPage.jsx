@@ -186,7 +186,6 @@ const UserPage = () => {
       <p className='userpage-username'>@{userUsername}</p>
       <p className='userpage-about'>{userAbout}</p>
       <UserPageNavbar username={username} />
-      <hr className='line-break' style={{ width: '100%', border: 'none', height: '1px', backgroundColor: '#ccc' }} />
       {isHomePage && (<LinkPage />)}
       {isBlogPage && (<Blog/>)}
       {isGalleryPage && (<Gallery/>)}

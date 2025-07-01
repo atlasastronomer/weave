@@ -6,6 +6,8 @@
   justify-content: space-between;
   background-color: transparent;
   transition: hover, 0.15s;
+  border-bottom: 0.0625rem solid #343434;
+  margin-bottom: 1rem;
 }
 
 .userpage-nav-button-wrapper {
