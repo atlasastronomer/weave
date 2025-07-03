@@ -1,11 +1,17 @@
 .feed-toggle-navbar {
   display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 10;
   width: 100%;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+  background: rgb(26, 26, 26, 0.7);
+  backdrop-filter: blur(10px);
   border-bottom: 0.0625rem solid #343434;
 }
+
 
 .feed-toggle-btn {
   display: flex;

@@ -139,7 +139,6 @@ input[type="file"]::file-selector-button:hover {
   width: 46.875rem;
   height: auto;
   background-color: var(--container-color);
-  overflow-y: auto;
   z-index: 1000;
 }
 

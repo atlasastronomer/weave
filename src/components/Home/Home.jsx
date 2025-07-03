@@ -52,7 +52,7 @@ const Home = () => {
 
   return (
     <div className='main-page-wrapper'>
-      <div className='feed-toggle-navbar'>
+      <div className='feed-toggle-navbar' style={{ marginBottom: '1.25rem' }}>
         <FeedToggleButton
           label='For You'
           onClick={() => {navigate('/for_you')}}
