@@ -21,7 +21,6 @@ const App = () => {
       <Router>
         <Dashboard/>
           <Routes>
-            <Route path='/' element={<Home />}/>
             <Route path='/for_you' element={<Home />}/>
             <Route path='/following' element={<Home />}/>
 

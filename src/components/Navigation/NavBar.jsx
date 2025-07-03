@@ -24,7 +24,7 @@ const NavBar = ({openCreate}) => {
     <>
       <div className='nav-bar-wrapper'>
         <div className='nav-bar'>
-          <Link to='/' className='span'><NavButton name='Home' style='solid' icon='fa-home'/></Link>
+          <Link to='/for_you' className='span'><NavButton name='Home' style='solid' icon='fa-home'/></Link>
           <Link to='/explore' className='span'><NavButton name='Explore' style='solid' icon='fa-compass'/></Link>
           <Link to={`/${username}`} className='span'><NavButton name='Profile' style='solid' icon='fa-user'/></Link>
           {token ? <Link to='/account' className='span'><NavButton name='Settings' style='solid' icon='fa-gear'/></Link> : <Link to='/login' className='span'><NavButton name='Settings' style='solid' icon='fa-arrow-right-to-bracket'/></Link>}

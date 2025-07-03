@@ -137,21 +137,19 @@ const UserPage = () => {
     }
 
     return(
-      <div>
-        <div className='gallery-board'>
-          {userPosts.map((post) =>
-            <GalleryPost
-              username={username}
-              key={post.id}
-              user={username}
-              post={post}
-              isMoreOpen={openMoreId === post.id}
-              toggleMore={toggleMore}
-              isSelf={isSelf}
-              handleDeletePost={() => deletePost(post.id)}
-            />
-          )}
-        </div>
+      <div className='gallery-board'>
+        {userPosts.map((post) =>
+          <GalleryPost
+            username={username}
+            key={post.id}
+            user={username}
+            post={post}
+            isMoreOpen={openMoreId === post.id}
+            toggleMore={toggleMore}
+            isSelf={isSelf}
+            handleDeletePost={() => deletePost(post.id)}
+          />
+        )}
       </div>
     )
   }

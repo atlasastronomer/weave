@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Blogpost } from '../Blog/Blogpost'
 import { GalleryPost } from '../Gallery/GalleryPost'
-import { userService } from '/src/services/userService'
+
+import userService from '/src/services/userService'
 import blogService from '/src/services/blogService'
 import galleryService from '/src/services/galleryService'
 
@@ -66,13 +67,26 @@ const Home = () => {
       <div>
         {blogs.map((blog) => 
           <Blogpost
-            username={''}
+            username={blog.user.username}
             key={blog.id}
             blog={blog}
             isMoreOpen={openMoreId === blog.id}
             toggleMore={toggleMore}
             isSelf={false}
             handleDeleteBlog={() => {deleteBlog(blog.id)}}
+          />
+        )}
+      </div>
+      <div className='gallery-board'>
+        {posts.map((post) =>
+          <GalleryPost
+            username={post.user.username}
+            key={post.id}
+            post={post}
+            isMoreOpen={openMoreId === post.id}
+            toggleMore={toggleMore}
+            isSelf={false}
+            handleDeletePost={() => deletePost(post.id)}
           />
         )}
       </div>
