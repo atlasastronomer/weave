@@ -33,7 +33,7 @@ const Blogpost = ({username, blog, isMoreOpen, toggleMore, isSelf, handleDeleteB
         <Avatar avatar={avatar} classname={'gallery-avatar'}/>
         <div className='blog-information'>
           <p className='blog-title'>{blog.title} </p>
-          <p className='blog-date'> {blog.author} &#x2022; {blog.date} </p>
+          <p className='blog-date'> {blog.author} &#x2022; {blog.date.split(' ').slice(0, 4).join(' ')} </p>
         </div>
         <div className='more-wrapper'>
           <button className='more-button' onClick={() => toggleMore(blog.id)}>

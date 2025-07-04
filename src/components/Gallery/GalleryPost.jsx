@@ -43,7 +43,7 @@ const GalleryPost = ({username, post, isMoreOpen, toggleMore, isSelf, handleDele
         <Avatar avatar={avatar} classname={'gallery-avatar'}/>
         <div className='post-information'>
           <p className='post-title'>{post.title} </p>
-          <p className='post-date'> {post.author} &#x2022; {post.date} </p>
+          <p className='post-date'> {post.author} &#x2022; {post.date.split(' ').slice(0, 4).join(' ')} </p>
         </div>
         <div className='more-wrapper'>
           <button className='more-button' onClick={() => toggleMore(post.id)}>
