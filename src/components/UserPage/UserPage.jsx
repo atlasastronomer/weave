@@ -103,7 +103,7 @@ const UserPage = () => {
     }
 
     return(
-      <div>
+      <div className='blog-board'>
         {userBlogs.map((blog) => 
           <Blogpost
             username={username}

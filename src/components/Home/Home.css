@@ -34,3 +34,11 @@
   font-weight: 600;
   color: var(--text-color);
 }
+
+.media-board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1.25rem;
+}

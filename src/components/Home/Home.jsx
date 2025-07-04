@@ -70,12 +70,12 @@ const Home = () => {
           activeTab={onFollowingPage ? true : false}
         />
       </div>
+      <div className='media-board'>
         {media.map(item => (
-          <div>
+          <div key={item.id}>
             {item.type === 'blog' && (
               <Blogpost
                 username={item.user.username}
-                key={item.id}
                 blog={item}
                 isMoreOpen={openMoreId === item.id}
                 toggleMore={toggleMore}
@@ -86,7 +86,6 @@ const Home = () => {
             {item.type === 'post' && (
               <GalleryPost
                 username={item.user.username}
-                key={item.id}
                 post={item}
                 isMoreOpen={openMoreId === item.id}
                 toggleMore={toggleMore}
@@ -96,6 +95,7 @@ const Home = () => {
             )}
           </div>
         ))}
+      </div>
     </div>
   )
 }
