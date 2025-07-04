@@ -21,8 +21,7 @@ const FeedToggleButton = ({label, onClick, activeTab}) => {
 
 const Home = () => {
   const [token, setToken] = useState(null)
-  const [blogs, setBlogs] = useState([])
-  const [posts, setPosts] = useState([])
+  const [media, setMedia] = useState([])
   const [openMoreId, setOpenMoreId] = useState(null)
 
   const toggleMore = (id) => {
@@ -43,12 +42,19 @@ const Home = () => {
     const fetchAllMedia = async () => {
       const blogs = await blogService.getBlogs()
       const posts = await galleryService.getGallery()
-      setBlogs(blogs)
-      setPosts(posts)
+
+      const typedBlogs = blogs.map(blog => ({...blog, type: 'blog'}))
+      const typedPosts = posts.map(post => ({...post, type: 'post'}))
+
+      const media = [...typedBlogs, ...typedPosts]
+
+      media.sort((a, b) => new Date(b.date) - new Date(a.date))
+
+      setMedia(media)
     }
 
     fetchAllMedia()
-  })
+  }, [])
 
   return (
     <div className='main-page-wrapper'>
@@ -64,32 +70,32 @@ const Home = () => {
           activeTab={onFollowingPage ? true : false}
         />
       </div>
-      <div>
-        {blogs.map((blog) => 
-          <Blogpost
-            username={blog.user.username}
-            key={blog.id}
-            blog={blog}
-            isMoreOpen={openMoreId === blog.id}
-            toggleMore={toggleMore}
-            isSelf={false}
-            handleDeleteBlog={() => {deleteBlog(blog.id)}}
-          />
-        )}
-      </div>
-      <div className='gallery-board'>
-        {posts.map((post) =>
-          <GalleryPost
-            username={post.user.username}
-            key={post.id}
-            post={post}
-            isMoreOpen={openMoreId === post.id}
-            toggleMore={toggleMore}
-            isSelf={false}
-            handleDeletePost={() => deletePost(post.id)}
-          />
-        )}
-      </div>
+        {media.map(item => (
+          <div>
+            {item.type === 'blog' && (
+              <Blogpost
+                username={item.user.username}
+                key={item.id}
+                blog={item}
+                isMoreOpen={openMoreId === item.id}
+                toggleMore={toggleMore}
+                isSelf={false}
+                handleDeleteBlog={() => {deleteBlog(item.id)}}
+              />
+            )}
+            {item.type === 'post' && (
+              <GalleryPost
+                username={item.user.username}
+                key={item.id}
+                post={item}
+                isMoreOpen={openMoreId === item.id}
+                toggleMore={toggleMore}
+                isSelf={false}
+                handleDeletePost={() => deletePost(item.id)}
+              />
+            )}
+          </div>
+        ))}
     </div>
   )
 }
