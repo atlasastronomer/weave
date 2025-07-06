@@ -79,3 +79,52 @@
   margin-bottom: 0.9375rem;
   text-align: center;
 }
+
+.userpage-btn-options-container {
+  display: flex;
+  flex-direction: row;
+  row-gap: 0;
+  margin-bottom: 0.625rem;
+}
+
+.follow-btn {
+  font-family: 'Open Sans';
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--button-text-color);
+  text-decoration: none;
+  padding-top: 0.59375rem;
+  padding-bottom: 0.59375rem;
+  padding-left: 0.90625rem;
+  padding-right: 0.90625rem;
+  border-radius: 100px;
+  background-color: var(--button-color);
+  border: 0.0625rem solid var(--button-color);
+  cursor: pointer;
+  transition: hover, 0.2s;
+}
+
+.follow-btn:hover {
+  background-color: var(--button-color-hover);
+}
+
+.unfollow-btn {
+  font-family: 'Open Sans';
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--button-text-color);
+  text-decoration: none;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+  background-color: var(--blue-color);
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: hover, 0.2s;
+}
+
+.unfollow-btn:hover {
+  background-color: var(--blue-color-hover);
+}

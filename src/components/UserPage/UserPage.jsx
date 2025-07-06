@@ -34,6 +34,7 @@ const UserPage = () => {
   const [userBlogs, setUserBlogs] = useState([])
   const [userPosts, setUserPosts] = useState([])
   const [wallpaperUrl, setWallpaperUrl] = useState('')
+  const [following, setFollowing] = useState('false')
 
   const location = useLocation()
   const isHomePage = location.pathname === `/${username}`
@@ -183,6 +184,11 @@ const UserPage = () => {
       <p className='userpage-name'>{userName}</p>
       <p className='userpage-username'>@{userUsername}</p>
       <p className='userpage-about'>{userAbout}</p>
+      {!isSelf &&
+        <div className='userpage-btn-options-container'>
+          <button className='follow-btn'>Follow</button>
+        </div>
+      }
       <UserPageNavbar username={username} />
       {isHomePage && (<LinkPage />)}
       {isBlogPage && (<Blog/>)}

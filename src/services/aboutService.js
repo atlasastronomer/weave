@@ -8,15 +8,6 @@ const setToken = (newToken) => {
   token = `Bearer ${newToken}`
 }
 
-const getAbout = async () => {
-  const config = {
-    headers: {Authorization: token},
-  }
-
-  const res = await axios.get(baseUrl, config)
-  return res.data
-}
-
 const changeAbout = async (newObject) => {
   const config = {
     headers: {Authorization: token},
@@ -26,4 +17,4 @@ const changeAbout = async (newObject) => {
   return res.data
 }
 
-export default { getAbout, changeAbout, setToken }
+export default { changeAbout, setToken }

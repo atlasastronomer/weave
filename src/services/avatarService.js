@@ -8,11 +8,6 @@ const setToken = (newToken) => {
   token = `Bearer ${newToken}`
 }
 
-const getAvatar = async () => {
-  const res = await axios.get(baseUrl)
-  return res.data
-}
-
 const getAvatarByUsername = async (username) => {
   const res = await axios.get(`${baseUrl}/${username}`)
   return res.data
@@ -28,4 +23,4 @@ const uploadAvatar = async (body) => {
   return res.data
 }
 
-export default { getAvatar, uploadAvatar, getAvatarByUsername, setToken }
+export default { uploadAvatar, getAvatarByUsername, setToken }

@@ -8,15 +8,6 @@ const setToken = (newToken) => {
   token = `Bearer ${newToken}`
 }
 
-const getLinks = async () => {
-  const config = {
-    headers: {Authorization: token},
-  }
-
-  const res = await axios.get(baseUrl, config)
-  return res.data
-}
-
 const createLink = async (newObject) => {
   const config = {
     headers: {Authorization: token},
@@ -35,4 +26,4 @@ const deleteLink = async (id) => {
   return res.data
 }
 
-export default { getLinks, createLink, deleteLink, setToken}
+export default { createLink, deleteLink, setToken}

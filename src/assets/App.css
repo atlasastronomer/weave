@@ -90,7 +90,7 @@ input[type="file"]::file-selector-button:hover {
 
 .gray-btn {
   font-family: 'Open Sans';
-  margin-top: 0.9375rem;
+  margin: none;
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--button-text-color);
@@ -112,7 +112,6 @@ input[type="file"]::file-selector-button:hover {
 
 .blue-btn {
   font-family: 'Open Sans';
-  margin-top: 0.9375rem;
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--button-text-color);
@@ -126,6 +125,10 @@ input[type="file"]::file-selector-button:hover {
   border: none;
   cursor: pointer;
   transition: hover, 0.2s;
+}
+
+.blue-btn:hover {
+  background-color: var(--blue-color-hover);
 }
 
 .main-page-wrapper {
