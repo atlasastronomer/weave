@@ -14,6 +14,7 @@ import avatarService from '/src/services/avatarService'
 import aboutService from '/src/services/aboutService'
 import blogService from '/src/services/blogService'
 import galleryService from '/src/services/galleryService'
+import followService from '../../services/followService'
 
 import '../UserPage/UserPage.css'
 import '../Blog/Blog.css'
@@ -34,7 +35,7 @@ const UserPage = () => {
   const [userBlogs, setUserBlogs] = useState([])
   const [userPosts, setUserPosts] = useState([])
   const [wallpaperUrl, setWallpaperUrl] = useState('')
-  const [following, setFollowing] = useState('false')
+  const [isFollowing, setIsFollowing] = useState()
 
   const location = useLocation()
   const isHomePage = location.pathname === `/${username}`
@@ -49,6 +50,7 @@ const UserPage = () => {
       avatarService.setToken(storedToken)
       aboutService.setToken(storedToken)
       userService.setToken(storedToken)
+      followService.setToken(storedToken)
     }
   }, [])
 
@@ -59,11 +61,12 @@ const UserPage = () => {
         setUserAvatar(user.avatar)
         setUserName(user.name)
         setUserUsername(user.username)
-        setUserAbout(user.about)
+        setUserAbout(user.about?.about || 'Hello! Welcome to my space.')
         setUserLinks(user.links.reverse())
         setUserPosts(user.posts.reverse())
         setUserBlogs(user.blogs.reverse())
-        setWallpaperUrl(`https://res.cloudinary.com/dxmjrqdzj/image/upload/${user.wallpaper.publicId}`)
+        const wallpaperId = user.wallpaper?.publicId || 'binknaxauzfs2dj7mcae'
+        setWallpaperUrl(`https://res.cloudinary.com/dxmjrqdzj/image/upload/${wallpaperId}`)
       } catch (error) {
         console.error('Error fetching user:', error)
       }
@@ -168,6 +171,19 @@ const UserPage = () => {
     )
   }
 
+  const handleFollow = async (username) => {
+    const result = await followService.getUserFollow(username)
+    setIsFollowing(result.following)
+  }
+
+  useEffect(() => {
+  const checkFollowStatus = async () => {
+    const response = await followService.getUserFollow(username)
+  }
+  checkFollowStatus()
+}, [username])
+
+
   return (
     <div className='main-page-wrapper'>
       <div className='avatar-wallpaper-wrapper'>
@@ -186,7 +202,10 @@ const UserPage = () => {
       <p className='userpage-about'>{userAbout}</p>
       {!isSelf &&
         <div className='userpage-btn-options-container'>
-          <button className='follow-btn'>Follow</button>
+          <button
+            className={isFollowing ? 'unfollow-btn' : 'follow-btn'}
+            onClick={() => handleFollow(username)}
+          > {isFollowing ? 'Unfollow' : 'Follow'} </button>
         </div>
       }
       <UserPageNavbar username={username} />

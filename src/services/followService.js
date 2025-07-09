@@ -18,7 +18,7 @@ const handleFollow = async (username) => {
     headers: {Authorization: token},
   }
 
-  const res = await axios.post(`${baseUrl}/${username}`)
+  const res = await axios.post(`${baseUrl}/${username}`, null, config)
   return res.data
 }
 

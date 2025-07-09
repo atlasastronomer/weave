@@ -8,6 +8,7 @@
   transition: hover, 0.15s;
   border-bottom: 0.0625rem solid #343434;
   margin-bottom: 1rem;
+  margin-top: 0.9375rem;;
 }
 
 .userpage-nav-button-wrapper {

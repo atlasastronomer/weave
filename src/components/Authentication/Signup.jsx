@@ -46,9 +46,9 @@ const Signup = () => {
     try {
       const newUser = await authService.signup('http://localhost:3001/api/signup', {name, username, password})
       localStorage.setItem("token", newUser.token)
-      localStorage.setItem("username",user.username)
-      localStorage.setItem("name",user.name)
-      navigate('/')
+      localStorage.setItem("username",newUser.username)
+      localStorage.setItem("name",newUser.name)
+      navigate(`/${username}`)
       window.location.reload()
     }
     catch (error) {
