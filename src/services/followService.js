@@ -9,7 +9,7 @@ const setToken = (newToken) => {
 }
 
 const getUserFollow = async (username) => {
-  const res = await axios.get`${baseUrl}/${username}`
+  const res = await axios.get(`${baseUrl}/${username}`)
   return res.data
 }
 

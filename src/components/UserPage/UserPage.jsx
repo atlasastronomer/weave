@@ -172,16 +172,32 @@ const UserPage = () => {
   }
 
   const handleFollow = async (username) => {
-    const result = await followService.getUserFollow(username)
-    setIsFollowing(result.following)
+    try {
+      const res = await followService.handleFollow(username)
+      setIsFollowing(res.following)
+    }
+    catch (error) {
+      console.error('Failed to (un)follow', error)
+    }
   }
 
   useEffect(() => {
-  const checkFollowStatus = async () => {
-    const response = await followService.getUserFollow(username)
-  }
-  checkFollowStatus()
-}, [username])
+    const fetchFollowStatus = async () => {
+      try {
+        if (!token) {
+          return
+        }
+        const res = await followService.getUserFollow(username)
+        const userId = JSON.parse(atob(token.split('.')[1])).id
+        const isFollowing = res.followers.includes(userId)
+        setIsFollowing(isFollowing)
+      }
+      catch (error) {
+        console.error('Failed to fetch follow status', error)
+      }
+    }
+    fetchFollowStatus()
+  }, [username, token])
 
 
   return (
