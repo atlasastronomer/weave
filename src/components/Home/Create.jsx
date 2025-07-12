@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Blog } from '../Blog/CreateBlog'
-import { Gallery } from '../Gallery/CreatePost'
-import { LinkPage } from '../Links/CreateLink'
+import { NewBlog } from '../Blog/CreateBlog'
+import { NewPost } from '../Gallery/CreatePost'
+import { NewLink } from '../Links/CreateLink'
+
 import './Create.css'
 
 const CreateButton = ({icon, text, color, navigateTo}) => {
@@ -44,9 +45,9 @@ const Create = ({closeCreate}) => {
             <i className='fa-solid fa-xl fa-xmark fa-black'></i>
           </button>
         </>}
-        {isCreatingLink && <LinkPage/>}
-        {isCreatingBlog && <Blog/>}
-        {isCreatingPost && <Gallery/>}
+        {isCreatingLink && <NewLink/>}
+        {isCreatingBlog && <NewBlog/>}
+        {isCreatingPost && <NewPost/>}
       </div>
   )
 }

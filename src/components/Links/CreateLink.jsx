@@ -4,7 +4,7 @@ import { MediaLink } from './MediaLink'
 import linkService from '/src/services/linkService'
 import './LinkPage.css'
 
-const LinkPage = () => {
+const NewLink = () => {
   const [token, setToken] = useState('')
 
   const [username, setUsername] = useState('')
@@ -62,4 +62,4 @@ const LinkPage = () => {
   )
 }
 
-export { LinkPage }
+export { NewLink }

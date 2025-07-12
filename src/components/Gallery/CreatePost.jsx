@@ -4,7 +4,7 @@ import galleryService from '/src/services/galleryService'
 
 import './Gallery.css'
 
-const Gallery = () => {
+const NewPost = () => {
 
   const [token, setToken] = useState('')
   const [title, setTitle] = useState('')
@@ -111,4 +111,4 @@ const Gallery = () => {
   )
 }
 
-export { Gallery }
+export { NewPost }

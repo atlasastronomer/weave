@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import blogService from '/src/services/blogService'
 import './Blog.css'
 
-const Blog = () => {
+const NewBlog = () => {
 
   const [token, setToken] = useState('')
   const [title, setTitle] = useState('')
@@ -70,4 +70,4 @@ const Blog = () => {
   )
 }
 
-export { Blog }
+export { NewBlog }
