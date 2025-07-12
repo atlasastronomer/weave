@@ -128,3 +128,24 @@
 .unfollow-btn:hover {
   background-color: var(--blue-color-hover);
 }
+
+.edit-profile-btn {
+  font-family: 'Open Sans';
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--button-text-color);
+  text-decoration: none;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+  background-color: transparent;
+  border-radius: 100px;
+  border: 0.0625rem solid gray;
+  cursor: pointer;
+  transition: hover, 0.2s;
+}
+
+.edit-profile-btn:hover {
+  background-color: var(--button-color-hover);
+}

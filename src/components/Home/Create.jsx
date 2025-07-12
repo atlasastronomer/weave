@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Blog } from '../Blog/Blog'
-import { Gallery } from '../Gallery/Gallery'
-import { LinkPage } from '../Links/LinkPage'
+import { Blog } from '../Blog/CreateBlog'
+import { Gallery } from '../Gallery/CreatePost'
+import { LinkPage } from '../Links/CreateLink'
 import './Create.css'
 
 const CreateButton = ({icon, text, color, navigateTo}) => {

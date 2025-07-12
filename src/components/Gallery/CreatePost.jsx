@@ -80,9 +80,23 @@ const Gallery = () => {
           onChange={e => setTitle(e.target.value)}
         />
         <div className='post-btn-group'>
-          <button className='gray-btn' type='button' onClick={() => {navigate(-1)}}>Close</button>
-          <input type='file' name='image' accept='image/png, image/jpeg, image/jpg, image/avif, image/webp' onChange={handleFileInputChange} />
-          <button type='submit' className='blue-btn'>Post Image</button>
+          <div className='sub-left'>
+            <button className='gray-btn' type='button' onClick={() => navigate(-1)}>Close</button>
+          </div>
+          <div className='sub-right'>
+            <label htmlFor="image-upload" className="custom-file-upload">
+              <i className="fa-regular fa-image fa-blue"></i>
+            </label>
+            <input
+              id="image-upload"
+              type="file"
+              name="image"
+              accept="image/png, image/jpeg, image/jpg, image/avif, image/webp"
+              onChange={handleFileInputChange}
+              style={{ display: 'none' }}
+            />
+            <button type='submit' className='blue-btn'>Post Image</button>
+          </div>
         </div>
       </form>
       {previewSource && (

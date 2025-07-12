@@ -97,8 +97,44 @@
 
 .post-btn-group {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.sub-left {
+  display: flex;
+  justify-content: flex-start;
+  flex: 1;
+}
+
+.sub-right {
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  flex: 1;
+}
+
+.custom-file-upload {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Open Sans';
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--button-text-color);
+  background-color: var(--button-color);
+  padding: 0.625rem 0.9375rem;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  height: 2.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: var(--button-color-hover);
 }

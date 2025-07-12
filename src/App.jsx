@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
-import { Dashboard } from './components/Navigation/Dashboard.jsx'
+import { Dashboard } from './components/Dashboard/Dashboard.jsx'
 import { Home } from './components/Home/Home.jsx'
 import { Login } from './components/Authentication/Login.jsx'
 import { Account } from './components/Account/Account.jsx'
@@ -31,6 +31,7 @@ const App = () => {
             <Route path='/signup' element={token ? <Account/> : <Signup />}/>
 
             <Route path='/new/*' element={<></>} />
+            <Route path='/profile/*' element={<></>} />
 
             <Route path='/:username/*' element={<UserPage />}/>
           </Routes>

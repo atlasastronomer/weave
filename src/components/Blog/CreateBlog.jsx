@@ -54,7 +54,7 @@ const Blog = () => {
             value={title}
             onChange = {e => setTitle(e.target.value)}
           />
-          <input
+          <textarea
             className='blog-content-input-box'
             placeholder='Content'
             value={content}

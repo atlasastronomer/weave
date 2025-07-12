@@ -1,6 +1,6 @@
-import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
-import './UserPageNavbar.css'
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import './UserPageNavbar.css'
 
 const NavButton = ({name, style, icon}) => {
   return (

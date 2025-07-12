@@ -216,13 +216,21 @@ const UserPage = () => {
       <p className='userpage-name'>{userName}</p>
       <p className='userpage-username'>@{userUsername}</p>
       <p className='userpage-about'>{userAbout}</p>
-      {!isSelf &&
-        <div className='userpage-btn-options-container'>
-          <button
-            className={isFollowing ? 'unfollow-btn' : 'follow-btn'}
-            onClick={() => handleFollow(username)}
-          > {isFollowing ? 'Unfollow' : 'Follow'} </button>
-        </div>
+      {isSelf ?
+      <div className='userpage-btn-options-container'>
+        <button
+          className={'edit-profile-btn'}
+        >
+          Edit Profile
+        </button>
+      </div>
+      :
+      <div className='userpage-btn-options-container'>
+        <button
+          className={isFollowing ? 'unfollow-btn' : 'follow-btn'}
+          onClick={() => handleFollow(username)}
+        > {isFollowing ? 'Unfollow' : 'Follow'} </button>
+      </div>
       }
       <UserPageNavbar username={username} />
       {isHomePage && (<LinkPage />)}
