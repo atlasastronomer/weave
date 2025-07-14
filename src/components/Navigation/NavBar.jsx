@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
 import './NavBar.css'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const NavButton = ({name, style, icon}) => {
   return (
@@ -11,9 +12,10 @@ const NavButton = ({name, style, icon}) => {
   )
 }
 
-const NavBar = ({openCreate}) => {
+const NavBar = () => {
   const [token, setToken] = useState('')
   const [username, setUsername] = useState('')
+  const navigate = useNavigate()
 
   useEffect(() => {
     setToken(localStorage.getItem('token'))
@@ -29,7 +31,7 @@ const NavBar = ({openCreate}) => {
           <Link to={`/${username}`} className='span'><NavButton name='Profile' style='solid' icon='fa-user'/></Link>
           {token ? <Link to='/account' className='span'><NavButton name='Settings' style='solid' icon='fa-gear'/></Link> : <Link to='/login' className='span'><NavButton name='Settings' style='solid' icon='fa-arrow-right-to-bracket'/></Link>}
         </div>
-        <button className='create-button' onClick={openCreate}>
+        <button className='create-button' onClick={() => navigate('/new')}>
           <i className={'fa-solid fa-lg fa-pencil'}></i>
           <p className='create-button-label'>Create</p>
         </button>

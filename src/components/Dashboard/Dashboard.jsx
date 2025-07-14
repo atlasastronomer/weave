@@ -12,29 +12,20 @@ const Dashboard = () => {
   const [token, setToken] = useState(null)
   
   const location = useLocation()
-  const isOnCreateRoute = location.pathname.startsWith('/new')
+  const isCreating = location.pathname.startsWith('/new')
   const isEditingProfile = location.pathname.startsWith('/profile')
-  
-  const navigate = useNavigate()
 
   useEffect(() => {
     setToken(localStorage.getItem('token'))
   }, [])
 
-  const openCreate = () => {
-    navigate('/new')
-  }
-
-  const closeCreate = () => {
-    navigate(-1)
-  }
-
   return(
     <>
-      {(isOnCreateRoute) && <Create closeCreate={closeCreate}/>}
+      {(isCreating) && <Create/>}
+      {(isEditingProfile) && <EditProfile/>}
       
       <div className='dashboard'>
-        {token && <NavBar openCreate={openCreate}/>}
+        {token && <NavBar/>}
         <div className={token ? 'main-page' : ''}>
           <Outlet/>
         </div>

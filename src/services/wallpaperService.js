@@ -27,4 +27,4 @@ const uploadWallpaper = async (body) => {
   return res.data
 }
 
-export default { getWallpaper, uploadWallpaper, setToken, getWallpaper, getWallpaperByUsername }
+export default { getWallpaper, uploadWallpaper, setToken, getWallpaper }

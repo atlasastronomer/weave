@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
+import { useParams, useNavigate, useLocation, useNavigationType } from 'react-router-dom'
 
 import { UserPageNavbar } from '../UserPage/UserPageNavbar'
 
@@ -23,6 +22,7 @@ import '../Links/LinkPage.css'
 
 const UserPage = () => {
   const [token, setToken] = useState('')
+  const navigate = useNavigate()
   
   const { username } = useParams()
   const [isSelf, setIsSelf] = useState()
@@ -125,7 +125,7 @@ const UserPage = () => {
 
   const Gallery = () => {
     const [openMoreId, setOpenMoreId] = useState(null)
-
+    
     const toggleMore = (id) => {
       setOpenMoreId(prev => (prev === id ? null : id))
     }
@@ -220,6 +220,7 @@ const UserPage = () => {
       <div className='userpage-btn-options-container'>
         <button
           className={'edit-profile-btn'}
+          onClick={() => navigate('/profile')}
         >
           Edit Profile
         </button>

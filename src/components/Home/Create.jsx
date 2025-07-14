@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { NewBlog } from '../Blog/CreateBlog'
 import { NewPost } from '../Gallery/CreatePost'
 import { NewLink } from '../Links/CreateLink'
-
 import './Create.css'
 
 const CreateButton = ({icon, text, color, navigateTo}) => {
@@ -19,8 +18,9 @@ const CreateButton = ({icon, text, color, navigateTo}) => {
   )
 }
 
-const Create = ({closeCreate}) => {
+const Create = () => {
   const [token, setToken] = useState('')
+  const navigate = useNavigate()
 
   const location = useLocation()
   const isCreatingLink = location.pathname === '/new/link'
@@ -41,7 +41,7 @@ const Create = ({closeCreate}) => {
             <CreateButton icon={'fa-blog'} text={'Blog'} color={'#ffffff'} navigateTo={'blog'}/>
             <CreateButton icon={'fa-image'} text={'Image'} color={'#ffffff'} navigateTo={'image'}/>
           </div>
-          <button className='create-cancel-btn' onClick={(closeCreate)}>
+          <button className='create-cancel-btn' onClick={() => navigate(-1)}>
             <i className='fa-solid fa-xl fa-xmark fa-black'></i>
           </button>
         </>}

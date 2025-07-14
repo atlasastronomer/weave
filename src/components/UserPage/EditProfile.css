@@ -1,0 +1,85 @@
+.edit-profile-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: fixed;
+  overflow-y: scroll;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  gap: 1.25rem;
+}
+
+.edit-avatar-wallpaper-container {
+  width: 46.875rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.edit-profile-wallpaper {
+  width: 100%;
+  height: 23.4375rem;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.edit-profile-wallpaper:hover {
+  filter: brightness(50%);
+}
+
+.edit-profile-avatar {  
+  width: 8.5rem;
+  height: 8.5rem;
+  object-fit: cover;
+  border-radius: 0.625rem;
+  transition: all 0.1s ease;
+  cursor: pointer;
+}
+
+.edit-profile-avatar:hover {
+  filter: brightness(50%);
+}
+
+.edit-profile-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: left;
+  width: 50%;
+  max-width: 50%;
+  padding: 0.5rem;
+  border: 0.0625rem solid var(--text-color-2);
+  border-radius: 0.25rem;
+}
+
+.edit-profile-text-title {
+  color: var(--text-color-2);
+}
+
+.edit-name-about {
+  font-family: 'Open Sans';
+  font-size: 1.2rem;
+  color: var(--text-color);
+}
+
+.edit-create-cancel-btn {
+  position: relative;
+  color: var(--button-text-color);
+  padding: 0.9375rem;
+  background-color: white;
+  border-radius: 0.9375rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}

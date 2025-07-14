@@ -1,10 +1,74 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { Avatar } from '../Home/Avatar'
+import avatarService from '../../services/avatarService'
+import aboutService from '../../services/aboutService'
+import wallpaperService from '../../services/wallpaperService'
+import userService from '../../services/userService'
+import './EditProfile.css'
+import './UserPage.css'
 
 const EditProfile = () => {
+  const [username, setUsername] = useState('')
+  const [name, setName] = useState('')
+  const [avatar, setAvatar] = useState('')
+  const [about, setAbout] = useState('')
+  const [wallpaperUrl, setWallpaperUrl] = useState('')
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token')
+    const storedUsername = localStorage.getItem('username')
+    setUsername(storedUsername)
+    avatarService.setToken(storedToken)
+    aboutService.setToken(storedToken)
+    wallpaperService.setToken(storedToken)
+  })
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const user = await userService.getUser(username)
+        setName(user.name)
+        setAvatar(user.avatar)
+        setAbout(user.about?.about || 'Hello! Welcome to my space.')
+        const wallpaperId = user.wallpaper?.publicId || 'binknaxauzfs2dj7mcae'
+        setWallpaperUrl(`https://res.cloudinary.com/dxmjrqdzj/image/upload/${wallpaperId}`)
+      } catch (error) {
+        console.error('Error fetching user:', error)
+      }
+    }
+
+    fetchUser()
+  })
+
   return (
-    <div>
-      
+    <div className='edit-profile-wrapper'>
+      <div className='edit-avatar-wallpaper-container'>
+        <div className='avatar-wallpaper-wrapper'>
+          <div
+            className='edit-profile-wallpaper'
+            style={{
+              backgroundImage: wallpaperUrl
+                ? `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${wallpaperUrl})`
+                : 'none',
+            }}>
+          </div>
+          <Avatar avatar={avatar} classname={'edit-profile-avatar'}/>
+        </div>
+      </div>
+      <div className='edit-profile-text-container'>
+        <p className='edit-profile-text-title'>Name</p>
+        <p className='edit-name-about'>{name}</p>
+      </div>
+      <div className='edit-profile-text-container'>
+        <p className='edit-profile-text-title'>About</p>
+        <p className='edit-name-about'>{about}</p>
+      </div>
+      <button className='edit-create-cancel-btn' onClick={() => navigate(-1)}>
+        <i className='fa-solid fa-xl fa-xmark fa-black'></i>
+      </button>
     </div>
   )
 }
