@@ -24,9 +24,13 @@ const EditProfile = () => {
     avatarService.setToken(storedToken)
     aboutService.setToken(storedToken)
     wallpaperService.setToken(storedToken)
-  })
+  }, [])
 
   useEffect(() => {
+    if (!username) {
+      return
+    }
+
     const fetchUser = async () => {
       try {
         const user = await userService.getUser(username)
@@ -41,30 +45,56 @@ const EditProfile = () => {
     }
 
     fetchUser()
-  })
+  }, [username])
 
   return (
     <div className='edit-profile-wrapper'>
       <div className='edit-avatar-wallpaper-container'>
         <div className='avatar-wallpaper-wrapper'>
-          <div
-            className='edit-profile-wallpaper'
-            style={{
-              backgroundImage: wallpaperUrl
-                ? `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${wallpaperUrl})`
-                : 'none',
-            }}>
+          <label htmlFor='wallpaperInput'>
+            <div
+              className='edit-profile-wallpaper'
+              style={{
+                backgroundImage: wallpaperUrl
+                  ? `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${wallpaperUrl})`
+                  : 'none',
+              }}>
+            </div>
+          </label>
+          <input
+            type='file'
+            accept='image/*'
+            id='wallpaperInput'
+            style={{display: 'none'}}
+          />
+          <div className='edit-avatar-wrapper'>
+            <label htmlFor='avatarInput'>
+              <Avatar avatar={avatar} classname='edit-profile-avatar' />
+            </label>
           </div>
-          <Avatar avatar={avatar} classname={'edit-profile-avatar'}/>
+          <input
+            type='file'
+            accept='image/*'
+            id='avatarInput'
+            style={{display: 'none'}}
+          />
         </div>
       </div>
       <div className='edit-profile-text-container'>
         <p className='edit-profile-text-title'>Name</p>
-        <p className='edit-name-about'>{name}</p>
+        <input
+          className='edit-name-about'
+          value={name || ''}
+          onChange = {e => setName(e.target.value)}
+        />
       </div>
       <div className='edit-profile-text-container'>
         <p className='edit-profile-text-title'>About</p>
-        <p className='edit-name-about'>{about}</p>
+        <textarea
+          className='edit-name-about'
+          value={about || ''}
+          onChange = {e => setAbout(e.target.value)}
+        />
       </div>
       <button className='edit-create-cancel-btn' onClick={() => navigate(-1)}>
         <i className='fa-solid fa-xl fa-xmark fa-black'></i>

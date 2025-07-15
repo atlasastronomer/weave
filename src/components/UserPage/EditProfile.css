@@ -38,7 +38,13 @@
   filter: brightness(50%);
 }
 
-.edit-profile-avatar {  
+.edit-avatar-wrapper {
+  display: block;
+}
+
+.edit-profile-avatar {
+  display: block;
+  margin: 1rem auto 0 auto;
   width: 8.5rem;
   height: 8.5rem;
   object-fit: cover;
@@ -71,6 +77,18 @@
   font-family: 'Open Sans';
   font-size: 1.2rem;
   color: var(--text-color);
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  resize: vertical;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  max-height: 20rem;
+}
+
+.edit-name-about:focus {
+    outline: none;
 }
 
 .edit-create-cancel-btn {
@@ -82,4 +100,9 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease;
+}
+
+.edit-avatar-wallpaper-container label {
+  width: 100%;
+  cursor: pointer;
 }

@@ -34,6 +34,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   position: relative;
 }
 
@@ -49,6 +50,8 @@
 .avatar-wallpaper-wrapper .avatar-img {
   position: absolute;
   bottom: -3.125rem;
+  left: 50%;
+  transform: translateX(-50%);
   width: 9.375rem;
   height: 9.375rem;
   object-fit: cover;
