@@ -1,22 +1,30 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Avatar } from '../Home/Avatar'
-import avatarService from '../../services/avatarService'
-import aboutService from '../../services/aboutService'
-import wallpaperService from '../../services/wallpaperService'
 import userService from '../../services/userService'
+import aboutService from '../../services/aboutService'
+import avatarService from '../../services/avatarService'
+import wallpaperService from '../../services/wallpaperService'
 import './EditProfile.css'
 import './UserPage.css'
 
 const EditProfile = () => {
+  // Variables
   const [username, setUsername] = useState('')
   const [name, setName] = useState('')
-  const [avatar, setAvatar] = useState('')
   const [about, setAbout] = useState('')
+  
+  const [avatar, setAvatar] = useState('')
+  const [avatarFileInputState, setAvatarFileInputState] = useState('')
+  const [avatarPreviewSource, setAvatarPreviewSource] = useState('')
+
   const [wallpaperUrl, setWallpaperUrl] = useState('')
+  const [wallpaperFileInputState, setWallpaperFileInputState] = useState('')
+  const [wallpaperPreviewSource, setWallpaperPreviewSource] = useState('')
 
   const navigate = useNavigate()
 
+  // Use Effect
   useEffect(() => {
     const storedToken = localStorage.getItem('token')
     const storedUsername = localStorage.getItem('username')
@@ -47,36 +55,132 @@ const EditProfile = () => {
     fetchUser()
   }, [username])
 
+  // Avatar functions
+  const handleAvatarFileInputChange = (e) => {
+    const file = e.target.files[0]
+    previewAvatarFile(file)
+  }
+
+  const previewAvatarFile = (file) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onloadend = () => {
+      setAvatarPreviewSource(reader.result)
+    }
+  }
+
+  const handleSubmitAvatarFile = (e) => {
+    e.preventDefault()
+    if (!avatarPreviewSource) return
+
+    uploadAvatarImage(avatarPreviewSource)
+  }
+
+  const uploadAvatarImage = async(base64EncodedImage) => {
+    try {
+      const res = await avatarService.uploadAvatar({
+        data: base64EncodedImage
+      })
+
+      setAvatar(res.data)
+      setAvatarFileInputState('')
+      setAvatarPreviewSource('')
+      setShowEditAvatar(false)
+    }
+    catch (error) {
+      console.log('Error in uploading avatar:', error.message)
+    }
+  }
+
+  // Wallpaper Functions
+  const handleWallpaperFileInputChange = (e) => {
+    const file = e.target.files[0]
+    previewWallpaperFile(file)
+  }
+
+  const previewWallpaperFile = (file) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onloadend = () => {
+      setWallpaperPreviewSource(reader.result)
+    }
+  }
+
+  const handleSubmitWallpaperFile = (e) => {
+    e.preventDefault()
+    if (!wallpaperPreviewSource) return
+
+    uploadWallpaperImage(wallpaperPreviewSource)
+  }
+
+  const uploadWallpaperImage = async(base64EncodedImage) => {
+    try {
+      const res = await wallpaperService.uploadWallpaper({
+        data: base64EncodedImage
+      })
+      const uploadedWallpaperUrl = `https://res.cloudinary.com/dxmjrqdzj/image/upload/${res.data.publicId}`
+      setWallpaperUrl(uploadedWallpaperUrl)
+      setWallpaperFileInputState('')
+      setWallpaperPreviewSource('')
+      setShowEditWallpaper(false)
+    }
+    catch (error) {
+      console.log('Error in uploading wallpaper:', error.message)
+    }
+  }
+
+  // Save Profile
+  const saveProfile = () => {
+    
+  }
+
   return (
-    <div className='edit-profile-wrapper'>
+    <form onSubmit={() => {}} className='edit-profile-wrapper'>
       <div className='edit-avatar-wallpaper-container'>
         <div className='avatar-wallpaper-wrapper'>
           <label htmlFor='wallpaperInput'>
-            <div
-              className='edit-profile-wallpaper'
-              style={{
-                backgroundImage: wallpaperUrl
-                  ? `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${wallpaperUrl})`
-                  : 'none',
-              }}>
-            </div>
+            {!wallpaperPreviewSource ?
+              <div
+                className='edit-profile-wallpaper'
+                style={{
+                  backgroundImage: wallpaperUrl
+                    ? `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${wallpaperUrl})`
+                    : 'none',
+                }}>
+              </div>
+              :
+              <div
+                className='edit-profile-wallpaper'
+                style={{
+                  backgroundImage: wallpaperPreviewSource
+                    ? `url(${wallpaperPreviewSource})`
+                    : 'none',
+                }}>
+              </div>
+            }
           </label>
           <input
             type='file'
-            accept='image/*'
+            accept='image/png, image/jpeg, image/jpg, image/avif, image/webp'
             id='wallpaperInput'
             style={{display: 'none'}}
+            onChange={handleWallpaperFileInputChange}
           />
           <div className='edit-avatar-wrapper'>
             <label htmlFor='avatarInput'>
-              <Avatar avatar={avatar} classname='edit-profile-avatar' />
+              {!avatarPreviewSource ?
+                <Avatar avatar={avatar} className='edit-profile-avatar' />
+                :
+                <img src={avatarPreviewSource} alt='' className='edit-profile-avatar'/>
+              }
             </label>
           </div>
           <input
             type='file'
-            accept='image/*'
+            accept='image/png, image/jpeg, image/jpg, image/avif, image/webp'
             id='avatarInput'
             style={{display: 'none'}}
+            onChange={handleAvatarFileInputChange}
           />
         </div>
       </div>
@@ -97,10 +201,10 @@ const EditProfile = () => {
         />
       </div>
       <div className='edit-profile-btn-row'>
-        <button className='gray-btn' onClick={() => navigate(-1)}> Cancel </button>
-        <button className='blue-btn' onClick={() => {}}> Save Profile </button>
+        <button className='gray-btn' onClick={() => navigate(`/${username}`)}> Cancel </button>
+        <button type='submit' className='blue-btn' onClick={() => {}}> Save Profile </button>
       </div>
-    </div>
+    </form>
   )
 }
 
