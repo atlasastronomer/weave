@@ -96,9 +96,10 @@ const EditProfile = () => {
           onChange = {e => setAbout(e.target.value)}
         />
       </div>
-      <button className='edit-create-cancel-btn' onClick={() => navigate(-1)}>
-        <i className='fa-solid fa-xl fa-xmark fa-black'></i>
-      </button>
+      <div className='edit-profile-btn-row'>
+        <button className='gray-btn' onClick={() => navigate(-1)}> Cancel </button>
+        <button className='blue-btn' onClick={() => {}}> Save Profile </button>
+      </div>
     </div>
   )
 }
