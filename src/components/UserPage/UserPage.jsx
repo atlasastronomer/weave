@@ -207,7 +207,7 @@ const UserPage = () => {
           className='userpage-wallpaper'
           style={{
             backgroundImage: wallpaperUrl
-              ? `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${wallpaperUrl})`
+              ? `url(${wallpaperUrl})`
               : 'none',
           }}
         ></div>

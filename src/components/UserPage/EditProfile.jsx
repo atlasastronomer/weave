@@ -69,8 +69,7 @@ const EditProfile = () => {
     }
   }
 
-  const handleSubmitAvatarFile = (e) => {
-    e.preventDefault()
+  const handleSubmitAvatarFile = () => {
     if (!avatarPreviewSource) return
 
     uploadAvatarImage(avatarPreviewSource)
@@ -85,7 +84,6 @@ const EditProfile = () => {
       setAvatar(res.data)
       setAvatarFileInputState('')
       setAvatarPreviewSource('')
-      setShowEditAvatar(false)
     }
     catch (error) {
       console.log('Error in uploading avatar:', error.message)
@@ -106,8 +104,7 @@ const EditProfile = () => {
     }
   }
 
-  const handleSubmitWallpaperFile = (e) => {
-    e.preventDefault()
+  const handleSubmitWallpaperFile = () => {
     if (!wallpaperPreviewSource) return
 
     uploadWallpaperImage(wallpaperPreviewSource)
@@ -122,7 +119,6 @@ const EditProfile = () => {
       setWallpaperUrl(uploadedWallpaperUrl)
       setWallpaperFileInputState('')
       setWallpaperPreviewSource('')
-      setShowEditWallpaper(false)
     }
     catch (error) {
       console.log('Error in uploading wallpaper:', error.message)
@@ -130,12 +126,15 @@ const EditProfile = () => {
   }
 
   // Save Profile
-  const saveProfile = () => {
-    
+  const saveProfile = (e) => {
+    e.preventDefault()
+    handleSubmitAvatarFile()
+    handleSubmitWallpaperFile()
+    navigate(`/${username}`)
   }
 
   return (
-    <form onSubmit={() => {}} className='edit-profile-wrapper'>
+    <form onSubmit={saveProfile} className='edit-profile-wrapper'>
       <div className='edit-avatar-wallpaper-container'>
         <div className='avatar-wallpaper-wrapper'>
           <label htmlFor='wallpaperInput'>
@@ -202,7 +201,7 @@ const EditProfile = () => {
       </div>
       <div className='edit-profile-btn-row'>
         <button className='gray-btn' onClick={() => navigate(`/${username}`)}> Cancel </button>
-        <button type='submit' className='blue-btn' onClick={() => {}}> Save Profile </button>
+        <button type='submit' className='blue-btn'> Save Profile </button>
       </div>
     </form>
   )

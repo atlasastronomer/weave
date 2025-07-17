@@ -3,7 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Blogpost } from '../Blog/Blogpost'
 import { GalleryPost } from '../Gallery/GalleryPost'
 
-import userService from '/src/services/userService'
+import userService from '../../services/userService'
+import followService from '../../services/followService'
 import blogService from '/src/services/blogService'
 import galleryService from '/src/services/galleryService'
 
@@ -21,8 +22,10 @@ const FeedToggleButton = ({label, onClick, activeTab}) => {
 
 const Home = () => {
   const [token, setToken] = useState(null)
-  const [media, setMedia] = useState([])
   const [openMoreId, setOpenMoreId] = useState(null)
+  const [following, setFollowing] = useState([])
+  const [media, setMedia] = useState([])
+  const [followingMedia, setFollowingMedia] = useState([])
 
   const toggleMore = (id) => {
     setOpenMoreId(prev => (prev === id ? null: id))
@@ -35,7 +38,19 @@ const Home = () => {
   const onFollowingPage = location.pathname === '/following'
 
   useEffect(() => {
-    setToken(localStorage.getItem('token'))
+    const storedToken = localStorage.getItem('token')
+    setToken(storedToken)
+    followService.setToken(storedToken)
+
+    const getFollowing = async () => {
+      const payload = JSON.parse(atob(storedToken.split('.')[1]))
+      const username = payload.username
+
+      const followData = await followService.getUserFollow(username)
+      setFollowing(followData.following || [])
+    }
+
+    getFollowing()
   }, [])
 
   useEffect(() => {
@@ -47,7 +62,6 @@ const Home = () => {
       const typedPosts = posts.map(post => ({...post, type: 'post'}))
 
       const media = [...typedBlogs, ...typedPosts]
-
       media.sort((a, b) => new Date(b.date) - new Date(a.date))
 
       setMedia(media)
@@ -56,6 +70,10 @@ const Home = () => {
     fetchAllMedia()
   }, [])
 
+  useEffect(() => {
+    setFollowingMedia(media.filter(item => following.includes(item.user.id)))
+  }, [following, media])
+  
   return (
     <div className='main-page-wrapper'>
       <div className='feed-toggle-navbar' style={{ marginBottom: '1.25rem' }}>
@@ -70,32 +88,61 @@ const Home = () => {
           activeTab={onFollowingPage ? true : false}
         />
       </div>
-      <div className='media-board'>
-        {media.map(item => (
-          <div key={item.id}>
-            {item.type === 'blog' && (
-              <Blogpost
-                username={item.user.username}
-                blog={item}
-                isMoreOpen={openMoreId === item.id}
-                toggleMore={toggleMore}
-                isSelf={false}
-                handleDeleteBlog={() => {deleteBlog(item.id)}}
-              />
-            )}
-            {item.type === 'post' && (
-              <GalleryPost
-                username={item.user.username}
-                post={item}
-                isMoreOpen={openMoreId === item.id}
-                toggleMore={toggleMore}
-                isSelf={false}
-                handleDeletePost={() => deletePost(item.id)}
-              />
-            )}
-          </div>
-        ))}
-      </div>
+      {onForYouPage ?
+        <div className='media-board'>
+          {media.map(item => (
+            <div key={item.id}>
+              {item.type === 'blog' && (
+                <Blogpost
+                  username={item.user.username}
+                  blog={item}
+                  isMoreOpen={openMoreId === item.id}
+                  toggleMore={toggleMore}
+                  isSelf={false}
+                  handleDeleteBlog={() => {deleteBlog(item.id)}}
+                />
+              )}
+              {item.type === 'post' && (
+                <GalleryPost
+                  username={item.user.username}
+                  post={item}
+                  isMoreOpen={openMoreId === item.id}
+                  toggleMore={toggleMore}
+                  isSelf={false}
+                  handleDeletePost={() => deletePost(item.id)}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      :
+        <div className='media-board'>
+          {followingMedia.map(item => (
+            <div key={item.id}>
+              {item.type === 'blog' && (
+                <Blogpost
+                  username={item.user.username}
+                  blog={item}
+                  isMoreOpen={openMoreId === item.id}
+                  toggleMore={toggleMore}
+                  isSelf={false}
+                  handleDeleteBlog={() => {deleteBlog(item.id)}}
+                />
+              )}
+              {item.type === 'post' && (
+                <GalleryPost
+                  username={item.user.username}
+                  post={item}
+                  isMoreOpen={openMoreId === item.id}
+                  toggleMore={toggleMore}
+                  isSelf={false}
+                  handleDeletePost={() => deletePost(item.id)}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      }
     </div>
   )
 }

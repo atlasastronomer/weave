@@ -13,7 +13,8 @@ const Avatar = ({ avatar, classname }) => {
     .resize(scale().width(400))
     .roundCorners(byRadius(20))
     .format('png')
-    .delivery(dpr('auto'))
+    .delivery(dpr(2))
+    .quality('auto:best')
 
   return(
     <AdvancedImage cldImg={img} className={`${classname}`} />
