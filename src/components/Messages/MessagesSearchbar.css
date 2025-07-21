@@ -1,0 +1,102 @@
+.messages-page-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  top: 0;
+  left: 22.5rem;
+  right: 0;
+  height: 100vh;
+  background-color: var(--container-color);
+  z-index: 1000;
+}
+
+.messages-search-title {
+  font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.messages-search-wrapper {
+  width: 23.4375rem;
+  padding: 1rem;
+  background-color: var(--container-color);
+  box-sizing: border-box;
+  border-right: 0.0625rem #343434 solid;
+  height: 100%;
+}
+
+.messages-search-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: cover;
+  border-radius: 0.625rem;
+  margin-right: 0.625rem;
+}
+
+.messages-search-bar {
+  display: flex;
+  align-items: center;
+  background-color: var(--container-color-2);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  border: 0.0625rem solid transparent;
+  transition: box-shadow 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.messages-search-bar:has(input:focus) {
+  box-shadow: 0 0 0 0.125rem #03bbff;
+}
+
+.messages-search-field {
+  margin-left: 0.625rem;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: transparent;
+  font-size: 0.9375rem;
+  width: 100%;
+}
+
+.messages-search-results {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--container-color-2);
+  border-radius: 0.9375rem;
+}
+
+.messages-search-row {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  padding: 0.9375rem;
+  transition: hover ease 2s;
+}
+
+.messages-search-row:hover {
+  background-color: var(--container-color-2-hover);
+}
+
+.messages-search-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.messages-search-name {
+  color: var(--text-color);
+  font-size: 0.9375rem;
+}
+
+.messages-search-username {
+  color: var(--text-color-2);
+  font-size: 0.9375rem;
+}
+
+.messages-search-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: cover;
+  border-radius: 0.625rem;
+  margin-right: 0.625rem;
+}

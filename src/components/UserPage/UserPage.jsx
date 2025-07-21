@@ -43,6 +43,10 @@ const UserPage = () => {
   const isGalleryPage = location.pathname === `/${username}/gallery`
 
   useEffect(() => {
+    console.log('Username from route:', username)
+  }, [username])
+
+  useEffect(() => {
     const storedToken = localStorage.getItem('token')
     setToken(storedToken)
 

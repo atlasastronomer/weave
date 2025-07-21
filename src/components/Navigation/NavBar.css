@@ -6,7 +6,7 @@
   top: 0;
   left: 0;
   height: 100vh;
-  width: calc(50% - 23.4375rem); /* 375px to rem */
+  width: calc(50% - 23.4375rem);
   background-color: var(--container-color);
   gap: 0.9375rem;
   padding: 1.25rem;
