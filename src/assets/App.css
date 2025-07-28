@@ -70,6 +70,16 @@ body {
   color: var(--blue-color)
 }
 
+.fa-gray {
+  color: var(--text-color-2);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.fa-gray:hover {
+  color: var(--text-color);
+}
+
 input[type="file"]::file-selector-button {
   margin-top: 0.9375rem;
   font-family: 'Open Sans';
@@ -82,7 +92,7 @@ input[type="file"]::file-selector-button {
   padding-left: 0.9375rem;
   padding-right: 0.9375rem;
   background-color: var(--button-color);
-  border-radius: 100px;
+  border-radius: 100rem;
   border: none;
   cursor: pointer;
   transition: hover, 0.2s;
@@ -104,7 +114,7 @@ input[type="file"]::file-selector-button:hover {
   padding-left: 0.9375rem;
   padding-right: 0.9375rem;
   background-color: var(--button-color);
-  border-radius: 100px;
+  border-radius: 100rem;
   border: none;
   cursor: pointer;
   transition: hover, 0.2s;
@@ -126,7 +136,7 @@ input[type="file"]::file-selector-button:hover {
   padding-left: 0.9375rem;
   padding-right: 0.9375rem;
   background-color: var(--blue-color);
-  border-radius: 100px;
+  border-radius: 100rem;
   border: none;
   cursor: pointer;
   transition: hover, 0.2s;

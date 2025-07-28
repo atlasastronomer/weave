@@ -7,6 +7,8 @@ import messagesService from '../../services/messagesService'
 import './MessagesSearchbar.css'
 import './MessagesConversation.css'
 
+import formatTimestamp from '../../services/formatTimestamp'
+
 const Messages = () => {
   const [token, setToken] = useState('')
 
@@ -23,12 +25,10 @@ const Messages = () => {
   const [recipientAvatar, setRecipientAvatar] = useState()
   const [messages, setMessages] = useState([])
 
+  const [chatInput, setChatInput] = useState('')
+
   const navigate = useNavigate()
   const location = useLocation()
-
-  useEffect(() => {
-  console.log('senderID:', senderID)
-}, [senderID])
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token')
@@ -106,8 +106,28 @@ const Messages = () => {
     navigate(`/messages/${username}`)
   }
 
+  const sendMessage = async (e) => {
+    e.preventDefault()
+
+    if (chatInput.trim() === '') return
+    
+    const messageObject = {
+      content: chatInput
+    }
+    const message = await messagesService.sendMessage(username, messageObject)
+    setMessages(messages.concat(message))
+    setChatInput('')
+  }
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      sendMessage(e)
+    }
+  }
+
   return (
-    <div className='messages-page-wrapper'>
+    <form className='messages-page-wrapper' onSubmit={e => sendMessage(e)}>
       <div className='messages-search-wrapper'>
         <p className='messages-search-title'>Messages</p>
         <div className='messages-search-bar'>
@@ -140,21 +160,35 @@ const Messages = () => {
             <div className='messages-conversation-body'>
               {messages.map(msg => (
                 <div key={msg.id}>
-                  {(msg.sender === senderID ?
-                    <div className='sender-message-container'>
-                      <div className='sender-message'>
-                        {msg.content}
+                  {msg.sender === senderID ? (
+                    <div className="sender-message-container">
+                      <div className="message-bubble-wrapper">
+                        <div className="sender-message">{msg.content}</div>
+                        <div className="message-timestamp">{formatTimestamp(msg.timestamp)}</div>
                       </div>
                     </div>
-                    :
-                    <div className='recipient-message-container'>
-                      <div className='recipient-message'>
-                        {msg.content}
+                  ) : (
+                    <div className="recipient-message-container">
+                      <div className="message-bubble-wrapper">
+                        <div className="recipient-message">{msg.content}</div>
+                        <div className="message-timestamp">{formatTimestamp(msg.timestamp)}</div>
                       </div>
-                    </div>)
-                  }
+                    </div>
+                  )}
                 </div>
               ))}
+            </div>
+            <div className='messages-conversation-footer'>
+              <div className='messages-conversation-chatbox'>
+                <input
+                  className={'messages-conversation-text-input'}
+                  placeholder='Message...'
+                  value={chatInput}
+                  onChange = {e => setChatInput(e.target.value)}
+                  onKeyDown={e => handleKeyPress(e)}
+                />
+                <i className="fa-solid fa-paper-plane fa-blue fa-send-message" type='submit' onClick={e => sendMessage(e)}></i>
+              </div>
             </div>
           </>
         ) : (
@@ -164,7 +198,7 @@ const Messages = () => {
           </div>
         )}
       </div>
-    </div>
+    </form>
   )
 }
 

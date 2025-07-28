@@ -4,6 +4,8 @@ import { Avatar } from '../Home/Avatar'
 import userService from '/src/services/userService'
 import avatarService from '/src/services/avatarService'
 
+import formatTimestamp from '../../services/formatTimestamp'
+
 const Blogpost = ({username, blog, isMoreOpen, toggleMore, isSelf, handleDeleteBlog}) => {
   const [token, setToken] = useState('')
   const [avatar, setAvatar] = useState('')
@@ -33,7 +35,7 @@ const Blogpost = ({username, blog, isMoreOpen, toggleMore, isSelf, handleDeleteB
         <Avatar avatar={avatar} classname={'gallery-avatar'}/>
         <div className='blog-information'>
           <p className='blog-title'>{blog.title} </p>
-          <p className='blog-date'> {blog.author} &#x2022; {blog.date.split(' ').slice(0, 4).join(' ')} </p>
+          <p className='blog-date'> {blog.author} &#x2022; {formatTimestamp(blog.timestamp)} </p>
         </div>
         <div className='more-wrapper'>
           <button className='more-button' onClick={() => toggleMore(blog.id)}>
@@ -53,6 +55,12 @@ const Blogpost = ({username, blog, isMoreOpen, toggleMore, isSelf, handleDeleteB
       </div>
       <div className='blog-body'>
         <p> {blog.content} </p>
+      </div>
+      <div className='blog-footer'>
+        <div className='blog-likes-display'>
+          100 Likes
+        </div>
+        <i className='fa-regular fa-heart fa-xl fa-gray'></i>
       </div>
     </div>
   )

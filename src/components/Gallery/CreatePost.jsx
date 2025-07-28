@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import galleryService from '/src/services/galleryService'
-
 import './Gallery.css'
 
 const NewPost = () => {
-
   const [token, setToken] = useState('')
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
@@ -29,7 +27,6 @@ const NewPost = () => {
     }
   }, [])
 
-
   const handleFileInputChange = (e) => {
     const file = e.target.files[0]
     previewFile(file)
@@ -47,25 +44,21 @@ const NewPost = () => {
     e.preventDefault()
     if (!previewSource) return
 
-    const date = String(new Date())
-    await uploadImage(previewSource, title, date, author)
+    await uploadImage(previewSource, title, author)
     navigate(`${username}/gallery`)
   }
 
-  const uploadImage = async (base64EncodedImage, title, date, author) => {
+  const uploadImage = async (base64EncodedImage, title, author) => {
     try {
-      const res = await galleryService.uploadToGallery({
+      await galleryService.uploadToGallery({
         data: base64EncodedImage,
         title,
-        date,
-        author
+        author,
       })
       setTitle('')
       setFileInputState('')
       setPreviewSource('')
-      setShow(false)
-    }
-    catch (error) {
+    } catch (error) {
       console.log('Error in uploading image:', error.message)
     }
   }

@@ -8,6 +8,8 @@ import { Avatar } from '../Home/Avatar'
 import userService from '/src/services/userService'
 import avatarService from '/src/services/avatarService'
 
+import formatTimestamp from '../../services/formatTimestamp'
+
 const GalleryPost = ({username, post, isMoreOpen, toggleMore, isSelf, handleDeletePost}) => {
   const [token, setToken] = useState('')
   const [avatar, setAvatar] = useState('')
@@ -43,7 +45,7 @@ const GalleryPost = ({username, post, isMoreOpen, toggleMore, isSelf, handleDele
         <Avatar avatar={avatar} classname={'gallery-avatar'}/>
         <div className='post-information'>
           <p className='post-title'>{post.title} </p>
-          <p className='post-date'> {post.author} &#x2022; {post.date.split(' ').slice(0, 4).join(' ')} </p>
+          <p className='post-date'> {post.author} &#x2022; {formatTimestamp(post.timestamp)} </p>
         </div>
         <div className='more-wrapper'>
           <button className='more-button' onClick={() => toggleMore(post.id)}>
@@ -68,6 +70,12 @@ const GalleryPost = ({username, post, isMoreOpen, toggleMore, isSelf, handleDele
           .delivery(dpr('auto'))
         }
       />
+      <div className='gallery-footer'>
+        <div className='gallery-likes-display'>
+          100 Likes
+        </div>
+        <i className='fa-regular fa-heart fa-xl fa-gray'></i>
+      </div>
     </div>
   )
 }

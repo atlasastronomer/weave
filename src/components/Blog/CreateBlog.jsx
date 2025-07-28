@@ -31,7 +31,6 @@ const NewBlog = () => {
     e.preventDefault()
 
     const blogObject = {
-      date: String(new Date()),
       title: title,
       author: author,
       content: content,

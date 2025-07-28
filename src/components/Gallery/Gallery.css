@@ -138,3 +138,29 @@
 .custom-file-upload:hover {
   background-color: var(--button-color-hover);
 }
+
+.gallery-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 1.6rem;
+  margin-bottom: 0.7rem;
+  gap: 1rem;
+}
+
+.gallery-likes-display {
+  font-family: 'Open Sans';
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--button-text-color);
+  text-decoration: none;
+  padding-top: 0.325rem;
+  padding-bottom: 0.325rem;
+  padding-left: 0.8375rem;
+  padding-right: 0.8375rem;
+  background-color: transparent;
+  border-radius: 0.6rem;
+  border: 1.5px solid gray;
+}

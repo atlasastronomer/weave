@@ -62,8 +62,7 @@ const Home = () => {
       const typedPosts = posts.map(post => ({...post, type: 'post'}))
 
       const media = [...typedBlogs, ...typedPosts]
-      media.sort((a, b) => new Date(b.date) - new Date(a.date))
-
+      media.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
       setMedia(media)
     }
 

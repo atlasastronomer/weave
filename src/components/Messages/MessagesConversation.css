@@ -24,7 +24,7 @@
 }
 
 .messages-conversation-header:hover {
-  background-color: var(--container-color-2)
+  background-color: var(--container-color-2);
 }
 
 .messages-conversation-header-avatar {
@@ -77,21 +77,34 @@
   height: 100%;
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
-  column-gap: 0.625rem;
+  gap: 1rem;
+  overflow-y: scroll;
 }
 
 .sender-message-container {
   display: flex;
   flex-direction: row;
-  align-items: right;
-  justify-content: right;
+  justify-content: flex-end;
 }
 
 .recipient-message-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: left;
+  justify-content: flex-start;
+}
+
+.message-bubble-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.sender-message-container .message-bubble-wrapper {
+  align-items: flex-end;
+}
+
+.recipient-message-container .message-bubble-wrapper {
+  align-items: flex-start;
 }
 
 .sender-message {
@@ -99,8 +112,10 @@
   color: white;
   background-color: var(--blue-color);
   font-size: 1rem;
-  border-radius: 1000rem;
+  border-radius: 0.9rem;
   position: relative;
+  max-width: 30rem;
+  word-wrap: break-word;
 }
 
 .recipient-message {
@@ -108,11 +123,66 @@
   color: white;
   background-color: var(--container-color-2);
   font-size: 1rem;
-  border-radius: 1000rem;
+  border-radius: 0.9rem;
   position: relative;
+  max-width: 30rem;
+  word-wrap: break-word;
+}
+
+.message-timestamp {
+  font-size: 0.75rem;
+  color: var(--text-color-2);
+  margin-bottom: 0.1rem;
+  padding: 0 0.2rem;
 }
 
 /* Chatbox */
-.messages-conversation-chatbar {
+.messages-conversation-footer {
   display: flex;
+  width: 100%;
+}
+
+.messages-conversation-chatbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--container-color-2);
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.9rem;
+  overflow-y: auto;
+}
+
+.messages-conversation-text-placeholder,
+.messages-conversation-text-input {
+  width: 100%;
+  font-size: 1rem;
+  text-align: left;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  resize: none;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  max-height: 20rem;
+  overflow-y: auto;
+}
+
+.messages-conversation-text-placeholder {
+  color: var(--text-color-2);
+}
+
+.messages-conversation-text-input {
+  color: var(--text-color);
+}
+
+.fa-send-message {
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
+.fa-send-message:hover {
+  background-color: var(--container-color-2-hover);
+  border-radius: 0.1rem;
 }

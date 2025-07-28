@@ -100,7 +100,7 @@
   padding-bottom: 0.59375rem;
   padding-left: 0.90625rem;
   padding-right: 0.90625rem;
-  border-radius: 100px;
+  border-radius: 100rem;
   background-color: var(--button-color);
   border: 0.0625rem solid var(--button-color);
   cursor: pointer;
@@ -122,7 +122,7 @@
   padding-left: 0.9375rem;
   padding-right: 0.9375rem;
   background-color: var(--blue-color);
-  border-radius: 100px;
+  border-radius: 100rem;
   border: none;
   cursor: pointer;
   transition: hover, 0.2s;
@@ -143,7 +143,7 @@
   padding-left: 0.9375rem;
   padding-right: 0.9375rem;
   background-color: transparent;
-  border-radius: 100px;
+  border-radius: 100rem;
   border: 0.0625rem solid gray;
   cursor: pointer;
   transition: hover, 0.2s;
