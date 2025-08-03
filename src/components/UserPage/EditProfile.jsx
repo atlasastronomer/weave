@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Avatar } from '../Home/Avatar'
 import userService from '../../services/userService'
-import aboutService from '../../services/aboutService'
+import profileService from '../../services/profileService'
 import avatarService from '../../services/avatarService'
 import wallpaperService from '../../services/wallpaperService'
 import './EditProfile.css'
@@ -30,7 +30,7 @@ const EditProfile = () => {
     const storedUsername = localStorage.getItem('username')
     setUsername(storedUsername)
     avatarService.setToken(storedToken)
-    aboutService.setToken(storedToken)
+    profileService.setToken(storedToken)
     wallpaperService.setToken(storedToken)
   }, [])
 
@@ -126,8 +126,13 @@ const EditProfile = () => {
   }
 
   // Save Profile
-  const saveProfile = (e) => {
+  const saveProfile = async (e) => {
     e.preventDefault()
+
+    const res = await profileService.updateProfile({name: name, about: about})
+    setAbout(res.about)
+    setName(res.name)
+
     handleSubmitAvatarFile()
     handleSubmitWallpaperFile()
     navigate(`/${username}`)

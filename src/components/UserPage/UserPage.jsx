@@ -10,7 +10,7 @@ import { GalleryPost } from '../Gallery/GalleryPost'
 
 import userService from '/src/services/userService'
 import avatarService from '/src/services/avatarService'
-import aboutService from '/src/services/aboutService'
+import profileService from '/src/services/profileService'
 import blogService from '/src/services/blogService'
 import galleryService from '/src/services/galleryService'
 import followService from '../../services/followService'
@@ -43,16 +43,12 @@ const UserPage = () => {
   const isGalleryPage = location.pathname === `/${username}/gallery`
 
   useEffect(() => {
-    console.log('Username from route:', username)
-  }, [username])
-
-  useEffect(() => {
     const storedToken = localStorage.getItem('token')
     setToken(storedToken)
 
     if (storedToken) {
       avatarService.setToken(storedToken)
-      aboutService.setToken(storedToken)
+      profileService.setToken(storedToken)
       userService.setToken(storedToken)
       followService.setToken(storedToken)
     }

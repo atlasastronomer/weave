@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useLocation, useParams } from 'react-router-dom'
 import { SearchEntry } from './SearchEntry'
 import { Avatar } from '../Home/Avatar'
+
 import userService from '/src/services/userService'
 import messagesService from '../../services/messagesService'
+import formatTimestamp from '../../services/formatTimestamp'
+import socket from '../../socket'
+
 import './MessagesSearchbar.css'
 import './MessagesConversation.css'
 
-import formatTimestamp from '../../services/formatTimestamp'
 
 const Messages = () => {
   const [token, setToken] = useState('')
@@ -17,6 +20,7 @@ const Messages = () => {
   const [filteredUsers, setFilteredUsers] = useState([])
   
   const [senderID, setSenderID] = useState()
+  const [recipientID, setRecipientID] = useState()
   
   const { username } = useParams()
   const [recipientName, setRecipientName] = useState()
@@ -44,6 +48,7 @@ const Messages = () => {
       const payload = JSON.parse(atob(storedToken.split('.')[1]))
       const userID = payload.id
       setSenderID(userID)
+      socket.emit('join', userID)
     }
 
     const loadUsers = async () => {
@@ -58,6 +63,17 @@ const Messages = () => {
     getToken()
     getID()
     loadUsers()
+  }, [])
+
+  useEffect(() => {
+    const handleReceiveMessage = (incomingMessage) => {
+      setMessages(prev => [...prev, incomingMessage])
+    }
+    socket.on('receive_message', handleReceiveMessage)
+    
+    return () => {
+      socket.off('receive_message', handleReceiveMessage)
+    }
   }, [])
 
   useEffect(() => {
@@ -83,6 +99,7 @@ const Messages = () => {
     const fetchData = async () => {
       try {
         const user = await userService.getUser(username)
+        setRecipientID(user.id) 
         setRecipientAvatar(user.avatar)
         setRecipientName(user.name)
         setRecipientUsername(user.username)
@@ -110,12 +127,13 @@ const Messages = () => {
     e.preventDefault()
 
     if (chatInput.trim() === '') return
-    
-    const messageObject = {
-      content: chatInput
-    }
-    const message = await messagesService.sendMessage(username, messageObject)
-    setMessages(messages.concat(message))
+
+    socket.emit('send_message', {
+      token: token,
+      recipientUsername: username,
+      content: chatInput,
+    })
+
     setChatInput('')
   }
 

@@ -17,13 +17,4 @@ const getMessagesWith = async (username) => {
   return res.data
 }
 
-const sendMessage = async (username, newObject) => {
-  const config = {
-    headers: {Authorization: token},
-  }
-
-  const res = await axios.post(`${baseUrl}/${username}`, newObject, config)
-  return res.data
-}
-
-export default { setToken, getMessagesWith, sendMessage }
+export default { setToken, getMessagesWith }

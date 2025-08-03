@@ -3,10 +3,10 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Blogpost } from '../Blog/Blogpost'
 import { GalleryPost } from '../Gallery/GalleryPost'
 
-import userService from '../../services/userService'
 import followService from '../../services/followService'
 import blogService from '/src/services/blogService'
 import galleryService from '/src/services/galleryService'
+import likesService from '../../services/likesService'
 
 import './Home.css'
 
@@ -72,7 +72,7 @@ const Home = () => {
   useEffect(() => {
     setFollowingMedia(media.filter(item => following.includes(item.user.id)))
   }, [following, media])
-  
+
   return (
     <div className='main-page-wrapper'>
       <div className='feed-toggle-navbar' style={{ marginBottom: '1.25rem' }}>

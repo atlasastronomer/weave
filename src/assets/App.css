@@ -70,14 +70,24 @@ body {
   color: var(--blue-color)
 }
 
-.fa-gray {
+.fa-gray-heart {
   color: var(--text-color-2);
   cursor: pointer;
   transition: color 0.2s ease;
 }
 
-.fa-gray:hover {
+.fa-gray-heart:hover {
   color: var(--text-color);
+}
+
+.fa-red-heart {
+  color: red;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.fa-red-heart:hover {
+  color: rgb(255, 101, 101);
 }
 
 input[type="file"]::file-selector-button {

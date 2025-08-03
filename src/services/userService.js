@@ -23,7 +23,7 @@ const verifyIsSelf = async (username) => {
     headers: {Authorization: token},
   }
 
-  const url = `http://localhost:${VITE_PORT}/api/is-self`
+  const url = `http://localhost:${VITE_PORT}/api/authentication/is-self`
   const res = await axios.post(url, {username: username}, config)
   return res.data
 }

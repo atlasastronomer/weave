@@ -7,19 +7,23 @@ import { Avatar } from '../Home/Avatar'
 
 import userService from '/src/services/userService'
 import avatarService from '/src/services/avatarService'
+import likesService from '../../services/likesService'
 
 import formatTimestamp from '../../services/formatTimestamp'
 
-const GalleryPost = ({username, post, isMoreOpen, toggleMore, isSelf, handleDeletePost}) => {
+const GalleryPost = ({ username, post, isMoreOpen, toggleMore, isSelf, handleDeletePost }) => {
   const [token, setToken] = useState('')
   const [avatar, setAvatar] = useState('')
+
+  const [likeCount, setLikeCount] = useState(post.likes.length)
+  const [liked, setLiked] = useState(false)
 
   const cld = new Cloudinary({
     cloud: {
       cloudName: 'dxmjrqdzj'
     }
   })
-  
+
   useEffect(() => {
     const storedToken = localStorage.getItem('token')
     setToken(storedToken)
@@ -27,8 +31,16 @@ const GalleryPost = ({username, post, isMoreOpen, toggleMore, isSelf, handleDele
     if (storedToken) {
       userService.setToken(storedToken)
       avatarService.setToken(storedToken)
+      likesService.setToken(storedToken)
     }
-  })
+  }, [])
+
+  useEffect(() => {
+    if (token) {
+      const userId = JSON.parse(atob(token.split('.')[1])).id
+      setLiked(post.likes.includes(userId))
+    }
+  }, [token, post.likes])
 
   useEffect(() => {
     const fetchAvatar = async () => {
@@ -39,17 +51,28 @@ const GalleryPost = ({username, post, isMoreOpen, toggleMore, isSelf, handleDele
     fetchAvatar()
   }, [])
 
-  return(
+  const likePost = async (postId) => {
+    await likesService.postImageLike(postId)
+
+    if (liked) {
+      setLikeCount(prev => prev - 1)
+    } else {
+      setLikeCount(prev => prev + 1)
+    }
+    setLiked(prev => !prev)
+  }
+
+  return (
     <div className='post-container'>
       <div className='post-header'>
-        <Avatar avatar={avatar} classname={'gallery-avatar'}/>
+        <Avatar avatar={avatar} classname={'gallery-avatar'} />
         <div className='post-information'>
-          <p className='post-title'>{post.title} </p>
-          <p className='post-date'> {post.author} &#x2022; {formatTimestamp(post.timestamp)} </p>
+          <p className='post-title'>{post.title}</p>
+          <p className='post-date'>{post.author} &#x2022; {formatTimestamp(post.timestamp)}</p>
         </div>
         <div className='more-wrapper'>
           <button className='more-button' onClick={() => toggleMore(post.id)}>
-            <i className={`fa-solid fa-2x fa-icon fa-ellipsis`}></i>
+            <i className='fa-solid fa-2x fa-icon fa-ellipsis'></i>
           </button>
           {isMoreOpen && (
             <div className='more-container'>
@@ -72,9 +95,12 @@ const GalleryPost = ({username, post, isMoreOpen, toggleMore, isSelf, handleDele
       />
       <div className='gallery-footer'>
         <div className='gallery-likes-display'>
-          100 Likes
+          {likeCount} {likeCount === 1 ? 'Like' : 'Likes'}
         </div>
-        <i className='fa-regular fa-heart fa-xl fa-gray'></i>
+        <i
+          className={`fa-heart fa-xl ${liked ? 'fa-solid fa-red-heart' : 'fa-regular fa-gray-heart'}`}
+          onClick={() => likePost(post.id)}
+        ></i>
       </div>
     </div>
   )

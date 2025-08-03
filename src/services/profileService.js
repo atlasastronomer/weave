@@ -1,6 +1,6 @@
 import axios from 'axios'
 const VITE_PORT = import.meta.env.VITE_PORT || 3001
-const baseUrl = `http://localhost:${VITE_PORT}/api/about`
+const baseUrl = `http://localhost:${VITE_PORT}/api/profile`
 
 let token = null
 
@@ -8,7 +8,7 @@ const setToken = (newToken) => {
   token = `Bearer ${newToken}`
 }
 
-const changeAbout = async (newObject) => {
+const updateProfile = async (newObject) => {
   const config = {
     headers: {Authorization: token},
   }
@@ -17,4 +17,4 @@ const changeAbout = async (newObject) => {
   return res.data
 }
 
-export default { changeAbout, setToken }
+export default { updateProfile, setToken }

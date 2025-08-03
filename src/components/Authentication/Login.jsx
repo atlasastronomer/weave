@@ -23,7 +23,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const user = await authService.login('http://localhost:3001/api/login', {username, password})
+      const user = await authService.login({username, password})
       localStorage.setItem("token", user.token)
       localStorage.setItem("username",user.username)
       localStorage.setItem("name",user.name)
