@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Avatar } from '../Home/Avatar'
+import { CommentThread } from '../Comments/CommentThread'
 
 import userService from '/src/services/userService'
 import avatarService from '/src/services/avatarService'
 import likesService from '../../services/likesService'
+import commentService from '../../services/commentService'
 
 import formatTimestamp from '../../services/formatTimestamp'
 
@@ -11,10 +13,11 @@ const Blogpost = ({username, blog, isMoreOpen, toggleMore, isSelf, handleDeleteB
   const [token, setToken] = useState('')
   const [avatar, setAvatar] = useState('')
 
-
   const [likeCount, setLikeCount] = useState(blog.likes.length)
   const [liked, setLiked] = useState(false)
-  
+
+  const [comments, setComments] = useState([])
+  const [displayComments, setDisplayComments] = useState(false)
   useEffect(() => {
     const storedToken = localStorage.getItem('token')
     setToken(storedToken)
@@ -26,6 +29,7 @@ const Blogpost = ({username, blog, isMoreOpen, toggleMore, isSelf, handleDeleteB
     }
   })
 
+  
   useEffect(() => {
     if (token) {
       const userId = JSON.parse(atob(token.split('.')[1])).id
@@ -40,6 +44,14 @@ const Blogpost = ({username, blog, isMoreOpen, toggleMore, isSelf, handleDeleteB
     }
 
     fetchAvatar()
+  }, [])
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      const res = await commentService.fetchComments(blog.id)
+      setComments(res.thread)
+    }
+    fetchComments()
   }, [])
 
   const likeBlog = async (blogId) => {
@@ -84,11 +96,19 @@ const Blogpost = ({username, blog, isMoreOpen, toggleMore, isSelf, handleDeleteB
         <div className='blog-likes-display'>
           {likeCount} {likeCount === 1 ? 'Like' : 'Likes'}
         </div>
-      <i
-        className={`fa-heart fa-xl ${liked ? 'fa-solid fa-red-heart' : 'fa-regular fa-gray-heart'}`}
-        onClick={() => likeBlog(blog.id)}
-      ></i>
+        <i
+          className={`fa-heart fa-xl ${liked ? 'fa-solid fa-red-heart' : 'fa-regular fa-gray-heart'}`}
+          onClick={() => likeBlog(blog.id)}
+        ></i>
+        <i
+          className={`fa-comment fa-xl ${displayComments ? 'fa-solid fa-blue-comment': 'fa-regular fa-gray-comment'}`}
+          onClick={() => {setDisplayComments(prev => !prev)}}
+        ></i>
       </div>
+      {displayComments &&
+      (<div className='blog-comments'>
+        <CommentThread comments={comments} />
+      </div>)}
     </div>
   )
 }

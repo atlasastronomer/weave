@@ -27,7 +27,7 @@
   --nav-btn-hover-color: #3b3b3b
 }
 
-/* General */
+/* HTML */
 html, body {
   height: 100%;
   margin: 0;
@@ -54,6 +54,21 @@ body {
   margin-bottom: 1.5625rem;
 }
 
+.main-page-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 46.875rem;
+  height: auto;
+  background-color: var(--container-color);
+  z-index: 1000;
+}
+
+/* FontAwesome Icons*/
 .fa-icon {
   color: var(--button-text-color);
 }
@@ -67,7 +82,7 @@ body {
 }
 
 .fa-blue {
-  color: var(--blue-color)
+  color: var(--blue-color);
 }
 
 .fa-gray-heart {
@@ -90,6 +105,27 @@ body {
   color: rgb(255, 101, 101);
 }
 
+.fa-gray-comment {
+  color: var(--text-color-2);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.fa-gray-comment:hover {
+  color: var(--text-color);
+}
+
+.fa-blue-comment {
+  color: var(--blue-color);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.fa-blue-comment:hover {
+  color: var(--blue-color-hover);
+}
+
+/* General */
 input[type="file"]::file-selector-button {
   margin-top: 0.9375rem;
   font-family: 'Open Sans';
@@ -154,20 +190,6 @@ input[type="file"]::file-selector-button:hover {
 
 .blue-btn:hover {
   background-color: var(--blue-color-hover);
-}
-
-.main-page-wrapper {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 46.875rem;
-  height: auto;
-  background-color: var(--container-color);
-  z-index: 1000;
 }
 
 .page-title {
