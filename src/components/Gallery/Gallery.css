@@ -52,18 +52,22 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  width: 20rem;
 }
 
 .post-title-input-box {
   font-family: 'Open Sans';
-  font-size: 1.875rem;
+  font-size: 1.5625rem;
   text-align: center;
-  margin-top: 0.3125rem;
-  margin-bottom: 0.3125rem;
+  margin-bottom: 1rem;
   border: none;
   outline: none;
   background-color: transparent;
   color: var(--text-color);
+  resize: none;
+  overflow: hidden;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 .gallery-avatar {

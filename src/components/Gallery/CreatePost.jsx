@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import galleryService from '/src/services/galleryService'
 import './Gallery.css'
@@ -11,6 +11,7 @@ const NewPost = () => {
   const [fileInputState, setFileInputState] = useState('')
   const [previewSource, setPreviewSource] = useState('')
 
+  const titleRef = useRef(null)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -26,6 +27,18 @@ const NewPost = () => {
       galleryService.setToken(storedToken)
     }
   }, [])
+
+  const autoResize = (ref) => {
+    if (ref?.current) {
+      ref.current.style.height = 'auto'
+      ref.current.style.height = ref.current.scrollHeight + 'px'
+    }
+  }
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value)
+    autoResize(titleRef)
+  }
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0]
@@ -66,11 +79,13 @@ const NewPost = () => {
   return (
     <div className='gallery-upload-container'>
       <form onSubmit={handleSubmitFile} className='gallery-form-container'>
-        <input
+        <textarea
+          ref={titleRef}
           className='post-title-input-box'
           placeholder='Title'
           value={title}
-          onChange={e => setTitle(e.target.value)}
+          onChange={handleTitleChange}
+          rows={1}
         />
         <div className='post-btn-group'>
           <div className='sub-left'>

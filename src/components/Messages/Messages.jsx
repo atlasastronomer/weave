@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useLocation, useParams } from 'react-router-dom'
 import { SearchEntry } from './SearchEntry'
 import { Avatar } from '../Home/Avatar'
@@ -11,17 +11,13 @@ import socket from '../../socket'
 import './MessagesSearchbar.css'
 import './MessagesConversation.css'
 
-
 const Messages = () => {
   const [token, setToken] = useState('')
-
   const [searchValue, setSearchValue] = useState('')
   const [users, setUsers] = useState([])
   const [filteredUsers, setFilteredUsers] = useState([])
-  
   const [senderID, setSenderID] = useState()
   const [recipientID, setRecipientID] = useState()
-  
   const { username } = useParams()
   const [recipientName, setRecipientName] = useState()
   const [recipientUsername, setRecipientUsername] = useState()
@@ -30,6 +26,7 @@ const Messages = () => {
   const [messages, setMessages] = useState([])
 
   const [chatInput, setChatInput] = useState('')
+  const textareaRef = useRef(null)
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -86,7 +83,6 @@ const Messages = () => {
       setFilteredUsers([])
       return
     }
-
     const filtered = users.filter(user =>
       user.username.toLowerCase().includes(searchValue.toLowerCase())
     )
@@ -95,7 +91,6 @@ const Messages = () => {
 
   useEffect(() => {
     if (!token || !username) return
-
     const fetchData = async () => {
       try {
         const user = await userService.getUser(username)
@@ -107,7 +102,6 @@ const Messages = () => {
       } catch (error) {
         console.error('Error fetching user:', error)
       }
-
       try {
         const fetchedMessages = await messagesService.getMessagesWith(username)
         setMessages(fetchedMessages)
@@ -115,7 +109,6 @@ const Messages = () => {
         console.error('Error fetching messages:', error)
       }
     }
-
     fetchData()
   }, [token, username])
 
@@ -125,23 +118,27 @@ const Messages = () => {
 
   const sendMessage = async (e) => {
     e.preventDefault()
-
     if (chatInput.trim() === '') return
-
     socket.emit('send_message', {
       token: token,
       recipientUsername: username,
       content: chatInput,
     })
-
     setChatInput('')
+    textareaRef.current.style.height = "auto"
   }
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       sendMessage(e)
     }
+  }
+
+  const handleChange = (e) => {
+    setChatInput(e.target.value)
+    textareaRef.current.style.height = "auto"
+    textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
   }
 
   return (
@@ -198,12 +195,14 @@ const Messages = () => {
             </div>
             <div className='messages-conversation-footer'>
               <div className='messages-conversation-chatbox'>
-                <input
-                  className={'messages-conversation-text-input'}
+                <textarea
+                  ref={textareaRef}
+                  className='messages-conversation-text-input'
                   placeholder='Message...'
                   value={chatInput}
-                  onChange = {e => setChatInput(e.target.value)}
-                  onKeyDown={e => handleKeyPress(e)}
+                  onChange={handleChange}
+                  onKeyDown={handleKeyPress}
+                  rows={1}
                 />
                 <i className="fa-solid fa-paper-plane fa-blue fa-send-message" type='submit' onClick={e => sendMessage(e)}></i>
               </div>

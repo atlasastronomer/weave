@@ -66,6 +66,13 @@
   margin-bottom: 1.25rem;
 }
 
+.blog-title-input-box, .blog-content-input-box {
+  resize: none;
+  overflow: hidden;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
 .blog-title-input-box {
   font-family: 'Open Sans';
   font-size: 1.5625rem;
@@ -80,20 +87,18 @@
 .blog-content-input-box {
   font-family: 'Open Sans';
   font-size: 0.9375rem;
-  text-align: center;
   width: 31.25rem;
   border: none;
   outline: none;
   margin-bottom: 0.925rem;
   background-color: transparent;
   color: var(--text-color);
-  resize: vertical;
+  resize: none;
   white-space: pre-wrap;
   overflow-wrap: break-word;
   text-align: left;
-  min-height: 8rem;
-  max-height: 20rem;
-  overflow-y: auto;
+  min-height: 2rem;
+  overflow-y: hidden;
 }
 
 .blog-post-btn-group {
