@@ -24,4 +24,12 @@ const postImageLike = async (imageId) => {
   const res = await axios.post(`${baseUrl}/posts/${imageId}`, null, config)
 }
 
-export default { postBlogLike, postImageLike, setToken }
+const postCommentLike = async (commentId) => {
+  const config = {
+    headers: {Authorization: token},
+  }
+
+  const res = await axios.post(`${baseUrl}/comments/${commentId}`, null, config)
+}
+
+export default { postBlogLike, postImageLike, postCommentLike, setToken }

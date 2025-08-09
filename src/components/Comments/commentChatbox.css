@@ -1,0 +1,16 @@
+.comment-input-box {
+  font-family: 'Open Sans';
+  font-size: 0.9375rem;
+  width: 31.25rem;
+  border: none;
+  outline: none;
+  margin-bottom: 0.925rem;
+  background-color: transparent;
+  color: var(--text-color);
+  resize: none;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  text-align: left;
+  min-height: 2rem;
+  overflow-y: hidden;
+}

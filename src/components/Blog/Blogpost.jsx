@@ -18,6 +18,7 @@ const Blogpost = ({username, blog, isMoreOpen, toggleMore, isSelf, handleDeleteB
 
   const [comments, setComments] = useState([])
   const [displayComments, setDisplayComments] = useState(false)
+  
   useEffect(() => {
     const storedToken = localStorage.getItem('token')
     setToken(storedToken)
@@ -28,7 +29,6 @@ const Blogpost = ({username, blog, isMoreOpen, toggleMore, isSelf, handleDeleteB
       likesService.setToken(storedToken)
     }
   })
-
   
   useEffect(() => {
     if (token) {
@@ -105,10 +105,7 @@ const Blogpost = ({username, blog, isMoreOpen, toggleMore, isSelf, handleDeleteB
           onClick={() => {setDisplayComments(prev => !prev)}}
         ></i>
       </div>
-      {displayComments &&
-      (<div className='blog-comments'>
-        <CommentThread comments={comments} />
-      </div>)}
+      {displayComments && <CommentThread comments={comments} />}
     </div>
   )
 }
