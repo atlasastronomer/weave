@@ -1,4 +1,5 @@
-import { useState, useEffect, useMemo, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Avatar } from '../Home/Avatar'
 
 import commentsUtil from './commentsUtil'
@@ -8,9 +9,11 @@ import likesService from '../../services/likesService'
 import './comment.css'
 import './commentChatbox.css'
 
-const CommentChatbox = (parentId) => {
+const CommentChatbox = ({ replyingTo, setReplyingTo }) => {
   const [token, setToken] = useState('')
   const [input, setInput] = useState('')
+  const [username, setUsername] = useState('')
+
   const textareaRef = useRef(null)
 
   useEffect(() => {
@@ -22,29 +25,82 @@ const CommentChatbox = (parentId) => {
     }
   }, [])
 
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username')
+    if (storedUsername) {
+      setUsername(storedUsername)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto'
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
+    }
+  }, [input])
+
   const handleChange = (e) => {
     setInput(e.target.value)
+  }
 
-    const textarea = textareaRef.current
-    textarea.style.height = "2rem"
-    textarea.style.height = `${textarea.scrollHeight}px`
+  const handleSend = () => {
+    if (!input.trim()) return
+    console.log("Sending:", input)
+    setInput('')
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      handleSend()
+    }
   }
 
   return (
-    <textarea
-      ref={textareaRef}
-      className='comment-input-box'
-      placeholder='Message'
-      value={input}
-      onChange={handleChange}
-    />
+    <>
+      {replyingTo && (
+        <div className='comment-replying-to-container'>
+          <p className='comment-replying-to-label'>
+            Replying to&nbsp;
+            <span className='comment-replying-to-username'>@{replyingTo}</span>
+          </p>
+          <i
+            className='fa-solid fa-circle-xmark fa-xl comment-cancel-label'
+            onClick={() => setReplyingTo('')}
+          ></i>
+        </div>
+      )}
+      <div className="comment-input-wrapper">
+        <textarea
+          ref={textareaRef}
+          className='comment-input-box'
+          placeholder={`Reply as @${username}`}
+          value={input}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          rows={1}
+        />
+        {input.trim() ? 
+          <i
+            className='fa-solid fa-paper-plane comment-send-btn'
+            type='button'
+            onClick={handleSend}
+          ></i>
+          :
+          <i
+            className='fa-solid fa-paper-plane comment-unsent-btn'
+            type='button'
+          ></i>
+        }
+      </div>
+    </>
   )
 }
 
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, setReplyingTo }) => {
   const [token, setToken] = useState('')
-  const [userId, setUserId] = useState('')
+  const navigate = useNavigate()
 
   const [likeCount, setLikeCount] = useState(comment.likes.length)
   const [liked, setLiked] = useState(false)
@@ -81,12 +137,20 @@ const Comment = ({ comment }) => {
       <div className='comment-header'>
         <Avatar avatar={comment.user.avatar} classname={'gallery-avatar'} />
         <div className='comment-header-info'>
-          <p className='comment-username'>@{comment.user.username}</p>
+          <p
+            className='comment-username'
+            onClick={() => navigate(`/${comment.user.username}`)}
+          >@{comment.user.username}</p>
           <p className='comment-date'>{formatTimestamp(comment.timestamp)}</p>
         </div>
       </div>
       <p className='comment-content'>
-        {comment.parentUsername && <span className='comment-reply'>@{comment.parentUsername} </span>}
+        {comment.parentUsername && 
+          <span 
+            className='comment-replying-to-username'
+            onClick={() => navigate(`/${comment.parentUsername}`)}
+          > @{comment.parentUsername} </span>
+        }
         {comment.content}
       </p>
       <div className='comment-footer'>
@@ -98,18 +162,31 @@ const Comment = ({ comment }) => {
           ></i>
          {likeCount}
         </div>
+        <p
+          className='comment-reply-label'
+          onClick={() => setReplyingTo(comment.user.username)}
+        >Reply</p>
       </div>
     </div>
   )
 }
 
 const CommentThread = ({ comments }) => {
+  const [replyingTo, setReplyingTo] = useState('')
   const flatComments = useMemo(() => commentsUtil.createThread(comments), [comments])
+
   return (
     <div>
-      <CommentChatbox />
+      <CommentChatbox
+        replyingTo={replyingTo}
+        setReplyingTo={setReplyingTo}
+      />
       {flatComments.map(comment => (
-        <Comment key={comment._id} comment={comment} />
+        <Comment
+          key={comment._id}
+          comment={comment}
+          setReplyingTo={setReplyingTo}
+        />
       ))}
     </div>
   )

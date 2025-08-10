@@ -33,6 +33,11 @@
 .comment-username {
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.comment-username:hover {
+  text-decoration: underline;
 }
 
 .comment-date {
@@ -43,10 +48,6 @@
 .comment-content {
   color: var(--text-color);
   margin-bottom: 0.5rem;
-}
-
-.comment-reply {
-  color: var(--blue-color)
 }
 
 .comment-footer {
