@@ -7,7 +7,7 @@ import avatarService from '/src/services/avatarService'
 import likesService from '../../services/likesService'
 import commentService from '../../services/commentService'
 
-import formatTimestamp from '../../services/formatTimestamp'
+import formatTimestamp from '../../utils/formatTimestamp'
 
 const Blogpost = ({username, blog, isMoreOpen, toggleMore, isSelf, handleDeleteBlog}) => {
   const [token, setToken] = useState('')
@@ -105,7 +105,7 @@ const Blogpost = ({username, blog, isMoreOpen, toggleMore, isSelf, handleDeleteB
           onClick={() => {setDisplayComments(prev => !prev)}}
         ></i>
       </div>
-      {displayComments && <CommentThread comments={comments} />}
+      {displayComments && <CommentThread comments={comments} postId={blog.id} onModel='Blog' />}
     </div>
   )
 }

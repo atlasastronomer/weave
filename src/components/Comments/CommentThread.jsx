@@ -2,14 +2,15 @@ import { useState, useEffect, useRef, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Avatar } from '../Home/Avatar'
 
-import commentsUtil from './commentsUtil'
-import formatTimestamp from '../../services/formatTimestamp'
+import commentsUtil from '../../utils/commentsUtil'
+import formatTimestamp from '../../utils/formatTimestamp'
 import likesService from '../../services/likesService'
+import commentService from '../../services/commentService'
 
 import './comment.css'
 import './commentChatbox.css'
 
-const CommentChatbox = ({ replyingTo, setReplyingTo }) => {
+const CommentChatbox = ({ replyingTo, setReplyingTo, postId, onModel, onCommentPosted }) => {
   const [token, setToken] = useState('')
   const [input, setInput] = useState('')
   const [username, setUsername] = useState('')
@@ -22,6 +23,7 @@ const CommentChatbox = ({ replyingTo, setReplyingTo }) => {
 
     if (storedToken) {
       likesService.setToken(storedToken)
+      commentService.setToken(storedToken)
     }
   }, [])
 
@@ -43,10 +45,24 @@ const CommentChatbox = ({ replyingTo, setReplyingTo }) => {
     setInput(e.target.value)
   }
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!input.trim()) return
-    console.log("Sending:", input)
-    setInput('')
+
+    const commentObject = {
+      content: input,
+      parent: replyingTo?.id || null,
+      onModel: onModel,
+    }
+
+    try {
+      const newComment = await commentService.postComment(postId, commentObject)
+      onCommentPosted(newComment)
+      setInput('')
+      setReplyingTo(null)
+    }
+    catch (err) {
+      console.error('Error posting comment', err)
+    }
   }
 
   const handleKeyDown = (e) => {
@@ -62,11 +78,11 @@ const CommentChatbox = ({ replyingTo, setReplyingTo }) => {
         <div className='comment-replying-to-container'>
           <p className='comment-replying-to-label'>
             Replying to&nbsp;
-            <span className='comment-replying-to-username'>@{replyingTo}</span>
+            <span className='comment-replying-to-username'>@{replyingTo.user.username}</span>
           </p>
           <i
             className='fa-solid fa-circle-xmark fa-xl comment-cancel-label'
-            onClick={() => setReplyingTo('')}
+            onClick={() => setReplyingTo()}
           ></i>
         </div>
       )}
@@ -164,26 +180,38 @@ const Comment = ({ comment, setReplyingTo }) => {
         </div>
         <p
           className='comment-reply-label'
-          onClick={() => setReplyingTo(comment.user.username)}
+          onClick={() => setReplyingTo(comment)}
         >Reply</p>
       </div>
     </div>
   )
 }
 
-const CommentThread = ({ comments }) => {
-  const [replyingTo, setReplyingTo] = useState('')
-  const flatComments = useMemo(() => commentsUtil.createThread(comments), [comments])
+const CommentThread = ({ comments, postId, onModel }) => {
+  const [replyingTo, setReplyingTo] = useState()
+  const [localComments, setLocalComments] = useState(comments)
+
+  const flatComments = useMemo(() =>
+    commentsUtil.createThread(localComments),
+    [localComments]
+  )
+
+  const handleNewComment = (newComment) => {
+    setLocalComments(prev => [...prev, newComment])
+  }
 
   return (
-    <div>
+    <div style={{width: '100%'}}>
       <CommentChatbox
         replyingTo={replyingTo}
         setReplyingTo={setReplyingTo}
+        postId={postId}
+        onModel={onModel}
+        onCommentPosted={handleNewComment}
       />
       {flatComments.map(comment => (
         <Comment
-          key={comment._id}
+          key={comment.id}
           comment={comment}
           setReplyingTo={setReplyingTo}
         />

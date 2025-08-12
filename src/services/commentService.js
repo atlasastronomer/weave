@@ -13,4 +13,13 @@ const fetchComments = async (postId) => {
   return res.data
 }
 
-export default { fetchComments, setToken }
+const postComment = async (postId, newObject) => {
+  const config = {
+    headers: { Authorization: token }
+  }
+
+  const res = await axios.post(`${baseUrl}/${postId}`, newObject, config)
+  return res.data
+}
+
+export default { fetchComments, postComment, setToken }

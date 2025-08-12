@@ -1,3 +1,8 @@
+.comment-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
 .comment-input-box {
   display: flex;
   flex-direction: row;
@@ -19,11 +24,7 @@
   max-height: 20rem;
   overflow-y: hidden;
   padding: 0.4rem 0.5rem;
-}
-
-.comment-input-wrapper {
-  position: relative;
-  width: 100%;
+  box-sizing: border-box;
 }
 
 .comment-replying-to-container {
@@ -39,21 +40,19 @@
   cursor: pointer;
 }
 
-.comment-replying-to-label {
-  color: var(--text-color-2);
-}
-
-.comment-reply-label {
-  color: var(--text-color-2);
-  cursor: pointer;
-}
-
+.comment-replying-to-label,
+.comment-reply-label,
 .comment-cancel-label {
   color: var(--text-color-2);
+}
+
+.comment-reply-label,
+.comment-cancel-label {
   cursor: pointer;
 }
 
-.comment-unsent-btn, .comment-send-btn {
+.comment-unsent-btn,
+.comment-send-btn {
   position: absolute;
   right: 8px;
   bottom: 8px;
@@ -64,7 +63,7 @@
 }
 
 .comment-unsent-btn {
-  color: var(--text-color-2)
+  color: var(--text-color-2);
 }
 
 .comment-send-btn {

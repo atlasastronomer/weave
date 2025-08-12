@@ -9,7 +9,7 @@ import userService from '/src/services/userService'
 import avatarService from '/src/services/avatarService'
 import likesService from '../../services/likesService'
 
-import formatTimestamp from '../../services/formatTimestamp'
+import formatTimestamp from '../../utils/formatTimestamp'
 
 const GalleryPost = ({ username, post, isMoreOpen, toggleMore, isSelf, handleDeletePost }) => {
   const [token, setToken] = useState('')

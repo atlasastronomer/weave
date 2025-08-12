@@ -5,8 +5,8 @@ import { Avatar } from '../Home/Avatar'
 
 import userService from '/src/services/userService'
 import messagesService from '../../services/messagesService'
-import formatTimestamp from '../../services/formatTimestamp'
-import socket from '../../socket'
+import formatTimestamp from '../../utils/formatTimestamp'
+import socket from '../../utils/socket'
 
 import './MessagesSearchbar.css'
 import './MessagesConversation.css'
@@ -17,7 +17,6 @@ const Messages = () => {
   const [users, setUsers] = useState([])
   const [filteredUsers, setFilteredUsers] = useState([])
   const [senderID, setSenderID] = useState()
-  const [recipientID, setRecipientID] = useState()
   const { username } = useParams()
   const [recipientName, setRecipientName] = useState()
   const [recipientUsername, setRecipientUsername] = useState()
@@ -94,7 +93,6 @@ const Messages = () => {
     const fetchData = async () => {
       try {
         const user = await userService.getUser(username)
-        setRecipientID(user.id) 
         setRecipientAvatar(user.avatar)
         setRecipientName(user.name)
         setRecipientUsername(user.username)
@@ -198,13 +196,19 @@ const Messages = () => {
                 <textarea
                   ref={textareaRef}
                   className='messages-conversation-text-input'
-                  placeholder='Message...'
+                  placeholder='Weave your message...'
                   value={chatInput}
                   onChange={handleChange}
                   onKeyDown={handleKeyPress}
                   rows={1}
                 />
-                <i className="fa-solid fa-paper-plane fa-blue fa-send-message" type='submit' onClick={e => sendMessage(e)}></i>
+                <i
+                  className={`fa-solid fa-paper-plane ${
+                    chatInput.trim() ? 'message-send-btn' : 'message-unsent-btn'
+                  }`}
+                  type='submit'
+                  onClick={e => sendMessage(e)}
+                ></i>
               </div>
             </div>
           </>

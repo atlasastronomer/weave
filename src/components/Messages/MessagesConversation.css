@@ -116,6 +116,8 @@
   position: relative;
   max-width: 30rem;
   word-wrap: break-word;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 .recipient-message {
@@ -127,6 +129,8 @@
   position: relative;
   max-width: 30rem;
   word-wrap: break-word;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 .message-timestamp {
@@ -177,12 +181,15 @@
   color: var(--text-color);
 }
 
-.fa-send-message {
-  padding: 0.2rem;
+.message-unsent-btn {
+  color: var(--text-color-2)
+}
+
+.message-send-btn {
+  color: var(--blue-color);
   cursor: pointer;
 }
 
-.fa-send-message:hover {
-  background-color: var(--container-color-2-hover);
-  border-radius: 0.1rem;
+.message-send-btn:hover {
+  color: var(--blue-color-hover);
 }
