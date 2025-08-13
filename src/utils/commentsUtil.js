@@ -12,7 +12,14 @@ const buildCommentMap = (comments) => {
 
 const createThread = (comments) => {
   const commentMap = buildCommentMap(comments)
+
+  // Sort top-level comments newest-first
+  const sortedTopLevel = [...comments]
+    .filter(c => !c.parent)
+    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+
   const thread = []
+
   const traverse = (comment, isReply = false) => {
     const parentUsername = isReply && comment.parent
       ? commentMap[comment.parent]?.user?.username || null
@@ -25,12 +32,14 @@ const createThread = (comments) => {
     })
 
     if (comment.children?.length) {
-      comment.children.forEach((child) => traverse(child, true))
+      // Sort children newest-first before traversing
+      const sortedChildren = [...comment.children]
+        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+      sortedChildren.forEach((child) => traverse(child, true))
     }
   }
-  comments.forEach((comment) => {
-    if (!comment.parent) traverse(comment)
-  })
+
+  sortedTopLevel.forEach((comment) => traverse(comment))
   return thread
 }
 

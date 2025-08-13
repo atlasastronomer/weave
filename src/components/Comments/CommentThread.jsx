@@ -56,7 +56,7 @@ const CommentChatbox = ({ replyingTo, setReplyingTo, postId, onModel, onCommentP
 
     try {
       const newComment = await commentService.postComment(postId, commentObject)
-      onCommentPosted(newComment)
+      onCommentPosted(newComment) // Notify parent (CommentThread) of the new comment
       setInput('')
       setReplyingTo(null)
     }
@@ -112,7 +112,6 @@ const CommentChatbox = ({ replyingTo, setReplyingTo, postId, onModel, onCommentP
     </>
   )
 }
-
 
 const Comment = ({ comment, setReplyingTo }) => {
   const [token, setToken] = useState('')
@@ -196,8 +195,37 @@ const CommentThread = ({ comments, postId, onModel }) => {
     [localComments]
   )
 
+  // UPDATED: handleNewComment now inserts replies into parent's children array
   const handleNewComment = (newComment) => {
-    setLocalComments(prev => [...prev, newComment])
+    setLocalComments(prevComments => {
+      const updatedComments = [...prevComments]
+
+      if (newComment.parent) {
+        // Function recursively finds the parent comment and appends the new reply
+        const addReplyToParent = (commentsList) => {
+          return commentsList.map(comment => {
+            if (comment.id === newComment.parent) {
+              const updatedComment = {
+                ...comment,
+                children: comment.children ? [...comment.children, newComment] : [newComment]
+              }
+              return updatedComment
+            }
+            if (comment.children && comment.children.length) {
+              return {
+                ...comment,
+                children: addReplyToParent(comment.children)
+              }
+            }
+            return comment
+          })
+        }
+        return addReplyToParent(updatedComments)
+      }
+
+      // Top-level comments remain appended to the root array
+      return [...updatedComments, newComment]
+    })
   }
 
   return (
