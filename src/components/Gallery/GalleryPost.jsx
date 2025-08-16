@@ -4,10 +4,12 @@ import { Cloudinary } from '@cloudinary/url-gen'
 import { dpr } from '@cloudinary/url-gen/actions/delivery'
 import { byRadius } from '@cloudinary/url-gen/actions/roundCorners'
 import { Avatar } from '../Home/Avatar'
+import { CommentThread } from '../Comments/CommentThread'
 
 import userService from '/src/services/userService'
 import avatarService from '/src/services/avatarService'
 import likesService from '../../services/likesService'
+import commentService from '../../services/commentService'
 
 import formatTimestamp from '../../utils/formatTimestamp'
 
@@ -17,6 +19,9 @@ const GalleryPost = ({ username, post, isMoreOpen, toggleMore, isSelf, handleDel
 
   const [likeCount, setLikeCount] = useState(post.likes.length)
   const [liked, setLiked] = useState(false)
+
+  const [comments, setComments] = useState([])
+  const [displayComments, setDisplayComments] = useState(false)
 
   const cld = new Cloudinary({
     cloud: {
@@ -50,6 +55,14 @@ const GalleryPost = ({ username, post, isMoreOpen, toggleMore, isSelf, handleDel
 
     fetchAvatar()
   }, [])
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      const res = await commentService.fetchComments(post.id)
+      setComments(res.thread)
+    }
+    fetchComments()
+  }, [post.id])
 
   const likePost = async (postId) => {
     await likesService.postImageLike(postId)
@@ -101,7 +114,12 @@ const GalleryPost = ({ username, post, isMoreOpen, toggleMore, isSelf, handleDel
           className={`fa-heart fa-xl ${liked ? 'fa-solid fa-red-heart' : 'fa-regular fa-gray-heart'}`}
           onClick={() => likePost(post.id)}
         ></i>
+        <i
+          className={`fa-comment fa-xl ${displayComments ? 'fa-solid fa-blue-comment': 'fa-regular fa-gray-comment'}`}
+          onClick={() => {setDisplayComments(prev => !prev)}}
+        ></i>
       </div>
+      {displayComments && <CommentThread comments={comments} postId={post.id} onModel='Post' />}
     </div>
   )
 }

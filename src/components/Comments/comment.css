@@ -66,3 +66,20 @@
   color: var(--text-color-2);
   text-decoration: none;
 }
+
+.comment-thread-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.comment-scroll-container {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 60vh;
+  padding-right: 0.5rem;
+  padding-top: 0.625rem;
+}
+
+

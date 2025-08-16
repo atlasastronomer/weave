@@ -56,7 +56,7 @@ const CommentChatbox = ({ replyingTo, setReplyingTo, postId, onModel, onCommentP
 
     try {
       const newComment = await commentService.postComment(postId, commentObject)
-      onCommentPosted(newComment) // Notify parent (CommentThread) of the new comment
+      onCommentPosted(newComment)
       setInput('')
       setReplyingTo(null)
     }
@@ -78,15 +78,17 @@ const CommentChatbox = ({ replyingTo, setReplyingTo, postId, onModel, onCommentP
         <div className='comment-replying-to-container'>
           <p className='comment-replying-to-label'>
             Replying to&nbsp;
-            <span className='comment-replying-to-username'>@{replyingTo.user.username}</span>
+            <span className='comment-replying-to-username'>@{replyingTo.user.username} </span>
+            <span className='comment-replying-to-preview'>&nbsp;— {replyingTo.content} </span>
+            <i
+              className='fa-solid fa-circle-xmark fa-xl comment-cancel-label'
+              onClick={() => setReplyingTo()}
+            ></i>
           </p>
-          <i
-            className='fa-solid fa-circle-xmark fa-xl comment-cancel-label'
-            onClick={() => setReplyingTo()}
-          ></i>
         </div>
       )}
-      <div className="comment-input-wrapper">
+
+      <div className='comment-input-wrapper'>
         <textarea
           ref={textareaRef}
           className='comment-input-box'
@@ -148,7 +150,11 @@ const Comment = ({ comment, setReplyingTo }) => {
   }
 
   return (
-    <div className='comment-wrapper' style={{ marginLeft: comment.isReply ? 20 : 0 }}>
+    <div
+      id={`comment-${comment.id}`}
+      className='comment-wrapper'
+      style={{ marginLeft: comment.isReply ? 20 : 0 }}
+    >
       <div className='comment-header'>
         <Avatar avatar={comment.user.avatar} classname={'gallery-avatar'} />
         <div className='comment-header-info'>
@@ -190,26 +196,50 @@ const CommentThread = ({ comments, postId, onModel }) => {
   const [replyingTo, setReplyingTo] = useState()
   const [localComments, setLocalComments] = useState(comments)
 
+  const scrollRef = useRef(null)
+
   const flatComments = useMemo(() =>
     commentsUtil.createThread(localComments),
     [localComments]
   )
 
-  // UPDATED: handleNewComment now inserts replies into parent's children array
+  const findById = (list, targetId) => {
+    if (!targetId) return null
+    const target = targetId.toString()
+    for (const c of list) {
+      if (c.id && c.id.toString() === target) return c
+      if (c.children?.length) {
+        const found = findById(c.children, target)
+        if (found) return found
+      }
+    }
+    return null
+  }
+
   const handleNewComment = (newComment) => {
     setLocalComments(prevComments => {
       const updatedComments = [...prevComments]
 
       if (newComment.parent) {
-        // Function recursively finds the parent comment and appends the new reply
+        const parent = findById(updatedComments, newComment.parent)
+        const enrichedReply = parent
+          ? { ...newComment, parentUsername: parent.user?.username || null }
+          : newComment
+
         const addReplyToParent = (commentsList) => {
           return commentsList.map(comment => {
-            if (comment.id === newComment.parent) {
-              const updatedComment = {
+            const cid = comment.id ? comment.id.toString() : null
+            const pid = enrichedReply.parent
+              ? enrichedReply.parent.toString()
+              : null
+
+            if (cid && pid && cid === pid) {
+              return {
                 ...comment,
-                children: comment.children ? [...comment.children, newComment] : [newComment]
+                children: comment.children
+                  ? [...comment.children, enrichedReply]
+                  : [enrichedReply]
               }
-              return updatedComment
             }
             if (comment.children && comment.children.length) {
               return {
@@ -223,13 +253,19 @@ const CommentThread = ({ comments, postId, onModel }) => {
         return addReplyToParent(updatedComments)
       }
 
-      // Top-level comments remain appended to the root array
       return [...updatedComments, newComment]
     })
+
+    setTimeout(() => {
+      const el = document.getElementById(`comment-${newComment.id}`)
+      if (el && scrollRef.current) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' })
+      }
+    }, 50)
   }
 
   return (
-    <div style={{width: '100%'}}>
+    <div className='comment-thread-wrapper'>
       <CommentChatbox
         replyingTo={replyingTo}
         setReplyingTo={setReplyingTo}
@@ -237,13 +273,15 @@ const CommentThread = ({ comments, postId, onModel }) => {
         onModel={onModel}
         onCommentPosted={handleNewComment}
       />
-      {flatComments.map(comment => (
-        <Comment
-          key={comment.id}
-          comment={comment}
-          setReplyingTo={setReplyingTo}
-        />
-      ))}
+      <div className='comment-scroll-container' ref={scrollRef}>
+        {flatComments.map(comment => (
+          <Comment
+            key={comment.id}
+            comment={comment}
+            setReplyingTo={setReplyingTo}
+          />
+        ))}
+      </div>
     </div>
   )
 }

@@ -24,9 +24,9 @@ const Login = () => {
     e.preventDefault()
     try {
       const user = await authService.login({username, password})
-      localStorage.setItem("token", user.token)
-      localStorage.setItem("username",user.username)
-      localStorage.setItem("name",user.name)
+      localStorage.setItem('token', user.token)
+      localStorage.setItem('username',user.username)
+      localStorage.setItem('name',user.name)
       navigate('/')
       window.location.reload()
     }

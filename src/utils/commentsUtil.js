@@ -1,7 +1,10 @@
 const buildCommentMap = (comments) => {
   const map = {}
   const addToMap = (comment) => {
-    map[comment._id] = comment
+    if (comment.id) {
+      map[comment.id.toString()] = comment
+    }
+
     if (comment.children?.length) {
       comment.children.forEach(addToMap)
     }
@@ -12,34 +15,38 @@ const buildCommentMap = (comments) => {
 
 const createThread = (comments) => {
   const commentMap = buildCommentMap(comments)
-
-  // Sort top-level comments newest-first
-  const sortedTopLevel = [...comments]
-    .filter(c => !c.parent)
-    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-
   const thread = []
 
-  const traverse = (comment, isReply = false) => {
-    const parentUsername = isReply && comment.parent
-      ? commentMap[comment.parent]?.user?.username || null
-      : null
+  const traverse = (commentList, isReply = false) => {
+    commentList
+      .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))
+      .forEach(comment => {
 
-    thread.push({
-      ...comment,
-      isReply,
-      parentUsername,
-    })
+        const parentId = comment.parent ? comment.parent.toString() : null
 
-    if (comment.children?.length) {
-      // Sort children newest-first before traversing
-      const sortedChildren = [...comment.children]
-        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-      sortedChildren.forEach((child) => traverse(child, true))
-    }
+        const computedParentUsername =
+          isReply && parentId
+            ? commentMap[parentId]?.user?.username || null
+            : null
+
+        const parentUsername = comment.parentUsername || computedParentUsername
+
+        thread.push({
+          ...comment,
+          isReply,
+          parentUsername,
+        })
+
+        if (comment.children?.length) {
+          traverse(comment.children, true)
+        }
+      })
   }
 
-  sortedTopLevel.forEach((comment) => traverse(comment))
+  comments
+    .filter(c => !c.parent)
+    .forEach(root => traverse([root]))
+
   return thread
 }
 

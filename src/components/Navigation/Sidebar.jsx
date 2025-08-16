@@ -52,7 +52,7 @@ const SideBar = () => {
   return (
     <div className='side-bar'>
       <div className='search-bar'>
-        <i className="fa-solid fa-search fa-lg fa-icon"></i>
+        <i className='fa-solid fa-search fa-lg fa-icon'></i>
         <input
           className='search-field'
           placeholder='Search Weave'

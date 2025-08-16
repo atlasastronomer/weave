@@ -123,7 +123,7 @@ const Messages = () => {
       content: chatInput,
     })
     setChatInput('')
-    textareaRef.current.style.height = "auto"
+    textareaRef.current.style.height = 'auto'
   }
 
   const handleKeyPress = (e) => {
@@ -135,7 +135,7 @@ const Messages = () => {
 
   const handleChange = (e) => {
     setChatInput(e.target.value)
-    textareaRef.current.style.height = "auto"
+    textareaRef.current.style.height = 'auto'
     textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
   }
 
@@ -144,7 +144,7 @@ const Messages = () => {
       <div className='messages-search-wrapper'>
         <p className='messages-search-title'>Messages</p>
         <div className='messages-search-bar'>
-          <i className="fa-solid fa-search fa-lg fa-icon"></i>
+          <i className='fa-solid fa-search fa-lg fa-icon'></i>
           <input
             className='messages-search-field'
             placeholder='Search Direct Messages'
@@ -174,17 +174,17 @@ const Messages = () => {
               {messages.map(msg => (
                 <div key={msg.id}>
                   {msg.sender === senderID ? (
-                    <div className="sender-message-container">
-                      <div className="message-bubble-wrapper">
-                        <div className="sender-message">{msg.content}</div>
-                        <div className="message-timestamp">{formatTimestamp(msg.timestamp)}</div>
+                    <div className='sender-message-container'>
+                      <div className='message-bubble-wrapper'>
+                        <div className='sender-message'>{msg.content}</div>
+                        <div className='message-timestamp'>{formatTimestamp(msg.timestamp)}</div>
                       </div>
                     </div>
                   ) : (
-                    <div className="recipient-message-container">
-                      <div className="message-bubble-wrapper">
-                        <div className="recipient-message">{msg.content}</div>
-                        <div className="message-timestamp">{formatTimestamp(msg.timestamp)}</div>
+                    <div className='recipient-message-container'>
+                      <div className='message-bubble-wrapper'>
+                        <div className='recipient-message'>{msg.content}</div>
+                        <div className='message-timestamp'>{formatTimestamp(msg.timestamp)}</div>
                       </div>
                     </div>
                   )}

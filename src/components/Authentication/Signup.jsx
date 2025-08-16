@@ -45,9 +45,9 @@ const Signup = () => {
 
     try {
       const newUser = await authService.signup({name, username, password})
-      localStorage.setItem("token", newUser.token)
-      localStorage.setItem("username",newUser.username)
-      localStorage.setItem("name",newUser.name)
+      localStorage.setItem('token', newUser.token)
+      localStorage.setItem('username',newUser.username)
+      localStorage.setItem('name',newUser.name)
       navigate(`/${username}`)
       window.location.reload()
     }

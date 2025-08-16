@@ -1,19 +1,21 @@
 .comment-input-wrapper {
   position: relative;
   width: 100%;
+  border: 1px solid var(--text-color-2);
+  border-radius: 0.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  box-sizing: border-box;
 }
 
 .comment-input-box {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex: 1;
   font-family: 'Open Sans';
   font-size: 0.9375rem;
-  width: 100%;
-  border: 1px solid var(--text-color-2);
-  border-radius: 0.25rem;
+  border: none;
   outline: none;
-  margin-bottom: 1.5rem;
   background-color: transparent;
   color: var(--text-color);
   resize: none;
@@ -23,32 +25,58 @@
   min-height: 2rem;
   max-height: 20rem;
   overflow-y: hidden;
-  padding: 0.4rem 0.5rem;
+  padding: 0.4rem 2rem 0.4rem 0.5rem;
   box-sizing: border-box;
 }
 
 .comment-replying-to-container {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  margin-bottom: 0.5rem;
   justify-content: space-between;
+  margin-bottom: 0.5rem;
+  gap: 0.5rem;
+}
+
+.comment-replying-to-label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  color: var(--text-color-2);
+  overflow: hidden;
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
 }
 
 .comment-replying-to-username {
   color: var(--blue-color);
   cursor: pointer;
+  margin-right: 0.25rem;
+  flex-shrink: 0;
 }
 
-.comment-replying-to-label,
-.comment-reply-label,
+.comment-replying-to-preview {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-color-2);
+  font-style: italic;
+}
+
+.comment-reply-label {
+  color: var(--text-color-2);
+  cursor: pointer;
+}
+
 .comment-cancel-label {
   color: var(--text-color-2);
+  cursor: pointer;
 }
 
-.comment-reply-label,
-.comment-cancel-label {
-  cursor: pointer;
+.comment-cancel-label:hover {
+  color: #ccd1db;
 }
 
 .comment-unsent-btn,
@@ -72,8 +100,4 @@
 
 .comment-send-btn:hover {
   color: var(--blue-color-hover);
-}
-
-.comment-cancel-label:hover {
-  color: #ccd1db;
 }

@@ -92,14 +92,14 @@ const NewPost = () => {
             <button className='gray-btn' type='button' onClick={() => navigate(-1)}>Close</button>
           </div>
           <div className='sub-right'>
-            <label htmlFor="image-upload" className="custom-file-upload">
-              <i className="fa-regular fa-image fa-blue"></i>
+            <label htmlFor='image-upload' className='custom-file-upload'>
+              <i className='fa-regular fa-image fa-blue'></i>
             </label>
             <input
-              id="image-upload"
-              type="file"
-              name="image"
-              accept="image/png, image/jpeg, image/jpg, image/avif, image/webp"
+              id='image-upload'
+              type='file'
+              name='image'
+              accept='image/png, image/jpeg, image/jpg, image/avif, image/webp'
               onChange={handleFileInputChange}
               style={{ display: 'none' }}
             />
@@ -110,7 +110,7 @@ const NewPost = () => {
       {previewSource && (
         <img
           src={previewSource}
-          alt="chosen"
+          alt='chosen'
           style={{ width: '300px', margin: '20px auto 0 auto', borderRadius: '15px' }}
           className='gallery-preview-image'
         />

@@ -17,7 +17,6 @@ const postComment = async (postId, newObject) => {
   const config = {
     headers: { Authorization: token }
   }
-
   const res = await axios.post(`${baseUrl}/${postId}`, newObject, config)
   return res.data
 }
