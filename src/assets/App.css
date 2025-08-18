@@ -69,6 +69,46 @@ body {
 }
 
 /* FontAwesome Icons*/
+.fa-red-heart {
+  color: red;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.fa-red-heart:hover {
+  color: rgb(255, 101, 101);
+}
+
+.fa-blue-comment {
+  color: var(--blue-color);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.fa-blue-comment:hover {
+  color: var(--blue-color-hover);
+}
+
+.fa-gold-star {
+  color: gold;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.fa-gold-star:hover {
+  color: rgb(255, 232, 101);
+}
+
+.fa-gray-heart, .fa-gray-comment, .fa-gray-star {
+  color: var(--text-color-2);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.fa-gray-heart:hover, .fa-gray-comment:hover, .fa-gray-star:hover {
+  color: var(--text-color);
+}
+
 .fa-icon {
   color: var(--button-text-color);
 }
@@ -84,47 +124,6 @@ body {
 .fa-blue {
   color: var(--blue-color);
 }
-
-.fa-gray-heart {
-  color: var(--text-color-2);
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.fa-gray-heart:hover {
-  color: var(--text-color);
-}
-
-.fa-red-heart {
-  color: red;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.fa-red-heart:hover {
-  color: rgb(255, 101, 101);
-}
-
-.fa-gray-comment {
-  color: var(--text-color-2);
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.fa-gray-comment:hover {
-  color: var(--text-color);
-}
-
-.fa-blue-comment {
-  color: var(--blue-color);
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.fa-blue-comment:hover {
-  color: var(--blue-color-hover);
-}
-
 /* General */
 input[type="file"]::file-selector-button {
   margin-top: 0.9375rem;

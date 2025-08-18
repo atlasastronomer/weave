@@ -10,6 +10,7 @@ import userService from '/src/services/userService'
 import avatarService from '/src/services/avatarService'
 import likesService from '../../services/likesService'
 import commentService from '../../services/commentService'
+import favoritesService from '../../services/favoritesService'
 
 import formatTimestamp from '../../utils/formatTimestamp'
 
@@ -22,6 +23,8 @@ const GalleryPost = ({ username, post, isMoreOpen, toggleMore, isSelf, handleDel
 
   const [comments, setComments] = useState([])
   const [displayComments, setDisplayComments] = useState(false)
+
+  const [favorited, setFavorited] = useState(false)
 
   const cld = new Cloudinary({
     cloud: {
@@ -37,6 +40,7 @@ const GalleryPost = ({ username, post, isMoreOpen, toggleMore, isSelf, handleDel
       userService.setToken(storedToken)
       avatarService.setToken(storedToken)
       likesService.setToken(storedToken)
+      favoritesService.setToken(storedToken)
     }
   }, [])
 
@@ -44,8 +48,19 @@ const GalleryPost = ({ username, post, isMoreOpen, toggleMore, isSelf, handleDel
     if (token) {
       const userId = JSON.parse(atob(token.split('.')[1])).id
       setLiked(post.likes.includes(userId))
+
+      const fetchFavorites = async () => {
+        try {
+          const res = await favoritesService.getFavorites()
+          const isFavorited = res.some(fav => fav.item.id === post.id)
+          setFavorited(isFavorited)
+        } catch (err) {
+          console.error('Error fetching favorites', err)
+        }
+      }
+      fetchFavorites()
     }
-  }, [token, post.likes])
+  }, [token, post.likes, post.id])
 
   useEffect(() => {
     const fetchAvatar = async () => {
@@ -54,7 +69,7 @@ const GalleryPost = ({ username, post, isMoreOpen, toggleMore, isSelf, handleDel
     }
 
     fetchAvatar()
-  }, [])
+  }, [username])
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -65,14 +80,26 @@ const GalleryPost = ({ username, post, isMoreOpen, toggleMore, isSelf, handleDel
   }, [post.id])
 
   const likePost = async (postId) => {
-    await likesService.postImageLike(postId)
-
-    if (liked) {
-      setLikeCount(prev => prev - 1)
-    } else {
-      setLikeCount(prev => prev + 1)
+    try {
+      await likesService.postImageLike(postId)
+      if (liked) {
+        setLikeCount(prev => prev - 1)
+      } else {
+        setLikeCount(prev => prev + 1)
+      }
+      setLiked(prev => !prev)
+    } catch (err) {
+      console.error('Error liking post', err)
     }
-    setLiked(prev => !prev)
+  }
+
+  const favoritePost = async (postId) => {
+    try {
+      await favoritesService.toggleFavorite('Post', postId)
+      setFavorited(prev => !prev)
+    } catch (err) {
+      console.error('Error toggling favorite', err)
+    }
   }
 
   return (
@@ -117,6 +144,10 @@ const GalleryPost = ({ username, post, isMoreOpen, toggleMore, isSelf, handleDel
         <i
           className={`fa-comment fa-xl ${displayComments ? 'fa-solid fa-blue-comment': 'fa-regular fa-gray-comment'}`}
           onClick={() => {setDisplayComments(prev => !prev)}}
+        ></i>
+        <i
+          className={`fa-star fa-xl ${favorited ? 'fa-solid fa-gold-star': 'fa-regular fa-gray-star'}`}
+          onClick={() => favoritePost(post.id)}
         ></i>
       </div>
       {displayComments && <CommentThread comments={comments} postId={post.id} onModel='Post' />}

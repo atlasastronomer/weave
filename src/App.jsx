@@ -26,7 +26,7 @@ const App = () => {
             <Route path='/for_you' element={<Home />}/>
             <Route path='/following' element={<Home />}/>
 
-            <Route path='/explore/*' element={<></>}/>
+            {/* <Route path='/explore/*' element={<></>}/> */}
             <Route path='/account' element={token ? <Account/> : <Login />}/>
             <Route path='/login' element={token ? <Account/> : <Login />}/>
             <Route path='/signup' element={token ? <Account/> : <Signup />}/>

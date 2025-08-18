@@ -14,6 +14,7 @@ const postBlogLike = async (blogId) => {
   }
 
   const res = await axios.post(`${baseUrl}/blogs/${blogId}`, null, config)
+  return res.data
 }
 
 const postImageLike = async (imageId) => {
@@ -22,6 +23,7 @@ const postImageLike = async (imageId) => {
   }
 
   const res = await axios.post(`${baseUrl}/posts/${imageId}`, null, config)
+  return res.data
 }
 
 const postCommentLike = async (commentId) => {
@@ -30,6 +32,7 @@ const postCommentLike = async (commentId) => {
   }
 
   const res = await axios.post(`${baseUrl}/comments/${commentId}`, null, config)
+  return res.data
 }
 
 export default { postBlogLike, postImageLike, postCommentLike, setToken }
